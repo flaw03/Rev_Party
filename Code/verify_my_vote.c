@@ -101,9 +101,9 @@ int main(int argc, char** argv) {
 
 	const char* filename;
 	if (num[0] == '1')
-		filename = "../Lecture_CSV/jugement.csv";
+		filename = "../Data/jugement.csv";
 	else if (num[0] == '2')
-		filename = "../Lecture_CSV/VoteCondorcet.csv";
+		filename = "../Data/VoteCondorcet.csv";
 
 	int bufferSize = SHA256_BLOCK_SIZE;
 	char hashRes[bufferSize * 2 + 1];
