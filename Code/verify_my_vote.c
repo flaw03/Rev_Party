@@ -111,5 +111,6 @@ int main(int argc, char** argv) {
 	CSVData data = createCSV();
 	lireCSV(filename, data);
 	verify_my_vote(data,  hashRes);
+	libererCSV(data);
 	exit (0);
 }
