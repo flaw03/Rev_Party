@@ -11,7 +11,7 @@
 
 /*
 *     On compile avec gcc verify_my_vote.c sha256.c sha256_utils.c -o verify_my_vote
-*     Et on lance le programme avec le fichier avec les votes en argv[1] et la clé secrète en argv[2], sinon ca va faire nimp
+*     Et on lance le programme avec juste ./verify_my_vote
 */
 
 /*
@@ -64,9 +64,9 @@ void verify_my_vote(CSVData filename, char* hashRes) {
 */
 int main(int argc, char** argv) {
 
-	if (argc != 2) {
-		fprintf(stderr,"Usage %s : fillname.csv\n",argv[0]);
-		exit(1);
+	if (argc != 1) {
+		fprintf(stderr, "Erreur, essayez avec ./verify_my_vote \n");
+		exit (1);
 	}
 	char nom[100];
 	printf("Entrez votre nom : ");
@@ -80,10 +80,6 @@ int main(int argc, char** argv) {
 	printf("Entrez votre prenom : ");
 	scanf("%s", prenom);
 
-	char cle[100];
-	printf("Entrez votre clé : ");
-	scanf("%s", cle);
-
 	// Convertir en majuscule la première lettre
 	for (int i = 0; prenom[i] != '\0'; i++) {
 		if (prenom[i] >= 'A' && prenom[i] <= 'Z')
@@ -91,10 +87,27 @@ int main(int argc, char** argv) {
 	}
 	prenom[0] = toupper(prenom[0]);
 
+	char cle[100];
+	printf("Entrez votre cle : ");
+	scanf("%s", cle);
+
+	printf("Saisissez un numéro correspondant au fichier dans lequel vous voulez vérifier votre vote : 1 pour jugement.csv ou 2 pour VoteCondorcet.csv ");
+	char num[100];
+	scanf("%s", num);
+	while (num[0] != '1' && num[0] != '2') {
+		printf("1 ou 2 j'ai dit\n");
+		scanf("%s", num);
+	}
+
+	const char* filename;
+	if (num[0] == '1')
+		filename = "../Lecture_CSV/jugement.csv";
+	else if (num[0] == '2')
+		filename = "../Lecture_CSV/VoteCondorcet.csv";
+
 	int bufferSize = SHA256_BLOCK_SIZE;
 	char hashRes[bufferSize * 2 + 1];
 	concatAndHash(nom, prenom, cle, hashRes);
-	const char* filename = argv[1];
 	CSVData data = createCSV();
 	lireCSV(filename, data);
 	verify_my_vote(data,  hashRes);
