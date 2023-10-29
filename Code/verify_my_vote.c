@@ -19,19 +19,26 @@
 */
 
 /*
-*    Cette fonction permet de mettre sous le bonne forme le ou les prénoms du votant
+*    Cette fonction permet de mettre sous la bonne forme le ou les prénoms du votant 
+*    (La première lettre du/des prénom(s) en majuscule et les autres en minuscule)
 *    En effet, on a pu constater que pour Wilkens, il était plus compliqué d'avoir le bon format, d'où l'existence de cette fonction
+*    Une fonction comme celle ci est inutile, étant donné que le nom doit être entièrement en majuscules
 */
 
-void convertionPrenom(char* prenom) {
+void conversionPrenom(char* prenom) {
+	// Mise en majuscule de la première lettre
 	prenom[0] = toupper(prenom[0]);
-	for (int i = 1; i < strlen(prenom); i++) {
+	for (int i = 1; prenom[i] != '\0'; i++) {
 		if (prenom[i] == ' ') {
+			// Mise en majuscule de la première lettre de chaque nouveau prénom
 			i++;
 			prenom[i] = toupper(prenom[i]);
 		}
 		else
+		{
+			// Mise en minuscule des autres lettres
 			prenom[i] = tolower(prenom[i]);
+		}
 	}
 }
 
@@ -51,9 +58,9 @@ void concatAndHash(char* nom, char* prenom, char* cle, char* hashRes) {
 
 void verify_my_vote(CSVData filename, char* hashRes) {
 	/*
-	*     On initialise les lignes pour i et les colonnes pour j
+	*     On initialise i pour les lignes et j pour les colonnes
 	*/
-	int i = 1;
+ 	int i = 1;
 	int j = 3;
 
 	/*
@@ -65,12 +72,13 @@ void verify_my_vote(CSVData filename, char* hashRes) {
 	*    Condition si aucun hash n'est trouvé
 	*/
 	if (i == filename->ligne) {
-		fprintf(stderr,"Ya pas de hash correspondant à ce que vous avez saisi\n");
+		fprintf(stderr,"Il n'y a pas de hash correspondant à ce que vous avez saisi\n");
 		exit(2);
 	}
 	/*
 	*    On affiche la ligne puis les votes de cette ligne
 	*/
+
 	for (int x = 0; x < filename->colonne; x++)
 		printf("%s \t", filename->data[i][x]);
 	
@@ -91,7 +99,7 @@ int main(int argc, char** argv) {
 	}
 	
 	const char* filename = argv[1];
-	int c;
+
 	// On vérifie que le fichier passé en paramètre est bien en csv
 	if (!isCSV(filename)){
 		fprintf(stderr, "Erreur, le fichier en paramètre n'est pas un csv \n");
@@ -100,13 +108,14 @@ int main(int argc, char** argv) {
 
 	char nom[100];
 	printf("Entrez votre nom : ");
-	scanf("%s", nom);
+	fgets(nom, sizeof(nom), stdin);
+
+	// Supprimer le caractère de nouvelle ligne du dernier nom saisi
+	nom[strcspn(nom, "\n")] = 0;
 
 	// Convertir en majuscules
 	for (int i = 0; nom[i] != '\0'; i++)
 		nom[i] = toupper(nom[i]);
-
-	while ((c = getchar()) != '\n' && c != EOF) {}
 
 	char prenom[100];
 	printf("Entrez votre prenom : ");
@@ -115,11 +124,7 @@ int main(int argc, char** argv) {
 	// Supprimer le caractère de nouvelle ligne du dernier prénom saisi
 	prenom[strcspn(prenom, "\n")] = 0;
 
-	printf("Vous avez saisi : %s\n", prenom);
-
-	// Convertir en majuscule la première lettre
-	convertionPrenom(prenom);
-	printf("%s\n", prenom);
+	conversionPrenom(prenom);
 
 	char cle[100];
 	printf("Entrez votre cle : ");
