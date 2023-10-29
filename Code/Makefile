@@ -1,3 +1,4 @@
+
 # Répertoire de destination pour les fichiers objet (.o)
 OBJ_DIR=obj
 
@@ -24,7 +25,6 @@ OBJ= $(SRC:%.c=$(OBJ_DIR)/%.o) $(SHA256_SRC:%.c=$(OBJ_DIR)/%.o)
 # Règle par défaut pour tout compiler
 all: 
 ifeq ($(DEBUG),yes)
-	CFLAGS += -DDEBUG
 	@echo "Generating in debug mode"
 else
 	@echo "Generating in release mode"
@@ -48,6 +48,3 @@ $(BIN_DIR)/verify_my_vote: $(OBJ_DIR)/verify_my_vote.o
 clean:
 	@rm -rf $(OBJ_DIR)/*.o
 	@rm -rf $(BIN_DIR)/$(EXEC) documentation/TP2
-
-doc: lecture_csv.h verify_my_vote.h 
-	@doxygen documentation/TP2

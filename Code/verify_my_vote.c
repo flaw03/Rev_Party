@@ -7,15 +7,20 @@
 #include "lecture_csv.h"
 #include "sha256.h"
 #include "sha256_utils.h"
-#define STRLONG 30
+#define STRLONG 100
 
 /*
-*    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
+*    Equipe 17 : 
+				NDOYE Assane 22100318
+				SMETS Yoann  22100213 
+				JOSEPH Wilkens Marc Johnley 22112190  
+				MORELLATO Adrian 22000859
+
 */
 
 /*
-*     On compile avec gcc verify_my_vote.c lecture_csv.c sha256.c sha256_utils.c -o verify_my_vote
-*     Et on lance le programme avec juste ./verify_my_vote jugement.csv ou ./verify_my_vote VoteCondorcet.csv
+*     On compile avec la commande make
+*     Et on lance le programme avec bin/verify_my_vote nom_fichier.csv
 */
 
 /*
@@ -28,7 +33,7 @@
 void conversionPrenom(char* prenom) {
 	// Mise en majuscule de la première lettre
 	prenom[0] = toupper(prenom[0]);
-	for (int i = 1; i < strlen(prenom); i++) {
+	for (int i = 1; i < (int)strlen(prenom); i++) {
 		if (prenom[i] == ' ') {
 			// Mise en majuscule de la première lettre de chaque nouveau prénom
 			i++;
@@ -46,47 +51,14 @@ void conversionPrenom(char* prenom) {
 *    Fonction qui concatène nom, prénom et clé et en fait un sha256
 */
 void concatAndHash(char* nom, char* prenom, char* cle, char* hashRes) {
-	char* resultat = (char*)malloc(sizeof(nom) + sizeof(prenom) + sizeof(cle) + 3);
-	sprintf(resultat, "%s %s%s", nom, prenom, cle);
 	char* item = malloc(STRLONG * sizeof(char));
-	strcpy(item, resultat);
+	strcpy(item,nom);
+	strcat(item,prenom);
+	strcat(item,cle);
 	sha256ofString((BYTE*)item, hashRes);
 	free(item);
-	free(resultat);
-
 }
 
-void verify_my_vote(CSVData filename, char* hashRes) {
-	/*
-	*     On initialise i pour les lignes et j pour les colonnes
-	*/
- 	int i = 1;
-	int j = 3;
-
-	/*
-	*    On trouve le sha dans le sha correspondant
-	*/
-	while ((strcmp(filename->data[i][j], hashRes) != 0) && i < filename->ligne)
-		i++;
-	/*
-	*    Condition si aucun hash n'est trouvé
-	*/
-	if (i == filename->ligne) {
-		fprintf(stderr,"Il n'y a pas de hash correspondant à ce que vous avez saisi\n");
-		exit(2);
-	}
-	/*
-	*    On affiche la ligne puis les votes de cette ligne
-	*/
-
-	for (int x = 0; x < filename->colonne; x++)
-		printf("%s \t", filename->data[i][x]);
-	
-	while (j < filename->colonne-1) {
-		j++;
-		printf("\n%s : %s", filename->data[0][j], filename->data[i][j]);
-	}
-}
 
 /*
 *    Fonction main
@@ -94,7 +66,7 @@ void verify_my_vote(CSVData filename, char* hashRes) {
 int main(int argc, char** argv) {
 
 	if (argc != 2) {
-		fprintf(stderr, "Erreur, essayez avec ./verify_my_vote jugement.csv ou ./verify_my_vote VoteCondorcet.csv \n");
+		fprintf(stderr, "Erreur : %s fillname\n",argv[0]);
 		exit (1);
 	}
 	
@@ -133,8 +105,12 @@ int main(int argc, char** argv) {
 	int bufferSize = SHA256_BLOCK_SIZE;
 	char hashRes[bufferSize * 2 + 1];
 	concatAndHash(nom, prenom, cle, hashRes);
-	CSVData data = createCSV();
-	lireCSV(filename, data);
-	verify_my_vote(data,  hashRes);
+	int index = indice_sha(hashRes,argv[1]);
+	if (index > 0){
+		afficher_vote(argv[1], index);
+	}
+	else{
+		printf("Électeur non trouvé dans la liste.\n");
+	}
 	exit (0);
 }

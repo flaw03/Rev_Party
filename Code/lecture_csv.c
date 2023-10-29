@@ -7,16 +7,6 @@
 *    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
 */
 
-/*
-*     Fonction création d'un CSV
-*/
-
-CSVData createCSV() {
-    CSVData csvData = malloc(sizeof(struct s_CSVData));
-    csvData->ligne = 0;
-    csvData->colonne = 0;
-    return csvData;
-}
 
 /*
 *   Fonction pour tester que le fichier en paramètre est bien un csv
@@ -33,49 +23,76 @@ int isCSV(const char* filename) {
 }
 
 /*
-*    Fonction pour lire le fichier CSV
+*    Fonction qui renvoie une ligne d'un hash doné
 */
 
-void lireCSV(const char* filename, CSVData csvData) {
-    FILE* file = fopen(filename, "r");
-    if (!file) {
-        fprintf(stderr, "Impossible d'ouvrir le fichier %s\n", filename);
-        exit(1);
+int indice_sha(char* chaine,char* fichier){
+    FILE* file = fopen(fichier,"r");
+    if (file == NULL) {
+        perror("Impossible d'ouvrir le fichier\n");
+        exit(28);
     }
-
     char line[MAX_LINE_LENGTH];
+    int colonne = 3;
+	int indice =1;
+    // Lire chaque ligne du fichier CSV
+    while (fgets(line, MAX_LINE_LENGTH, file)) {
 
-    /*
-    *     Lecture de chaque ligne du fichier csv
-    */
-    while (fgets(line, sizeof(line), file) && csvData->ligne < MAX_LIGNES) {
         char* token = strtok(line, ",");
-        int colonne_actuelle = 0;
-        while (token != NULL && colonne_actuelle < MAX_COLONNES) {
-            /*
-            *    On écrit chaque token au même emplacement dans csvData
-            *    Puis on accède au prochain token
-            *    Et ce sur toute les colonnes de la ligne
-            */
-            strcpy(csvData->data[csvData->ligne][colonne_actuelle], token);
-            token = strtok(NULL, ",");
-            colonne_actuelle++;
-        }
-        /*
-        *    On met à jour les pointeurs
-        */
-        if (csvData->colonne < colonne_actuelle) {
-            csvData->colonne = colonne_actuelle;
-        }
-        csvData->ligne++;
-    }   
+        int colonneActuelle = 0;
 
+        // Parcourir les tokens (colonnes)
+        while (token != NULL) {
+            // Si nous avons atteint la colonne souhaitée
+            if (colonneActuelle == colonne) { //Colonne 3 = colonne des SHA
+				if(strcmp(chaine,token) == 0){// HASH trouvé 
+					fclose(file); 
+					return indice;
+				}
+				indice++;   
+            }
+            // Obtenir le prochain token
+            token = strtok(NULL, ",");
+            colonneActuelle++;
+        }
+    }
     fclose(file);
+	return -1; //Valeur non trouvée
 }
 
 /*
-*     Fonction pour libérer la mémoire allouée
-*/ 
-void libererCSV(CSVData csvData) {
-    free(csvData);
+*    Fonction qui affiche le vote 
+*/
+void afficher_vote(const char *filename, int lineNumber) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return;
+    }
+	printf("Vos vote : \n\n");
+
+    char line[1024];
+    int currentLine = 0;
+    int fin = 0;
+
+    while (!fin && fgets(line, sizeof(line), file)) { //concatène dans line les valeurs lues
+        currentLine++;
+        
+        if (currentLine == lineNumber) {
+            char *token = strtok(line, ",");
+            int columnNumber = 1;
+			int cpt = 1;
+            while (token != NULL) {
+                if (columnNumber >4) { // Les votes commencent à partir de la colonne 5
+                    printf("Vote n°%d : %s\n", cpt, token);
+					cpt++;
+                }
+                token = strtok(NULL, ",");
+                columnNumber++;
+            }
+            fin = 1; // Sortir de la boucle après avoir trouvé la ligne souhaitée
+        }
+    }
+    fclose(file);
 }
+
