@@ -28,7 +28,7 @@
 void conversionPrenom(char* prenom) {
 	// Mise en majuscule de la première lettre
 	prenom[0] = toupper(prenom[0]);
-	for (int i = 1; prenom[i] != '\0'; i++) {
+	for (int i = 1; i < strlen(prenom); i++) {
 		if (prenom[i] == ' ') {
 			// Mise en majuscule de la première lettre de chaque nouveau prénom
 			i++;
