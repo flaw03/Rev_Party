@@ -4,6 +4,10 @@
 #include "lecture_csv.h"
 
 /*
+*    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
+*/
+
+/*
 *     Fonction création d'un CSV
 */
 
@@ -12,6 +16,20 @@ CSVData createCSV() {
     csvData->ligne = 0;
     csvData->colonne = 0;
     return csvData;
+}
+
+/*
+*   Fonction pour tester que le fichier en paramètre est bien un csv
+*/
+
+int isCSV(const char* filename) {
+    const char* extension = strrchr(filename, '.');
+    if (extension != NULL) {
+        if (strcmp(extension, ".csv") == 0) {
+            return 1; // Le fichier est .csv
+        }
+    }
+    return 0; // Le fichier n'est pas .csv
 }
 
 /*
