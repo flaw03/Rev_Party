@@ -20,6 +20,7 @@ struct s_CSVData {
 };
 CSVData createCSV();
 
+int isCSV(const char* filename);
 
 void lireCSV(const char* filename, CSVData csvData);
 
