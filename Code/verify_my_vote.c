@@ -10,9 +10,30 @@
 #define STRLONG 30
 
 /*
-*     On compile avec gcc verify_my_vote.c sha256.c sha256_utils.c -o verify_my_vote
-*     Et on lance le programme avec juste ./verify_my_vote
+*    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
 */
+
+/*
+*     On compile avec gcc verify_my_vote.c lecture_csv.c sha256.c sha256_utils.c -o verify_my_vote
+*     Et on lance le programme avec juste ./verify_my_vote jugement.csv ou ./verify_my_vote VoteCondorcet.csv
+*/
+
+/*
+*    Cette fonction permet de mettre sous le bonne forme le ou les prénoms du votant
+*    En effet, on a pu constater que pour Wilkens, il était plus compliqué d'avoir le bon format, d'où l'existence de cette fonction
+*/
+
+void convertionPrenom(char* prenom) {
+	prenom[0] = toupper(prenom[0]);
+	for (int i = 1; i < strlen(prenom); i++) {
+		if (prenom[i] == ' ') {
+			i++;
+			prenom[i] = toupper(prenom[i]);
+		}
+		else
+			prenom[i] = tolower(prenom[i]);
+	}
+}
 
 /*
 *    Fonction qui concatène nom, prénom et clé et en fait un sha256
@@ -60,14 +81,23 @@ void verify_my_vote(CSVData filename, char* hashRes) {
 }
 
 /*
-*    main pour tester
+*    Fonction main
 */
 int main(int argc, char** argv) {
 
-	if (argc != 1) {
-		fprintf(stderr, "Erreur, essayez avec ./verify_my_vote \n");
+	if (argc != 2) {
+		fprintf(stderr, "Erreur, essayez avec ./verify_my_vote jugement.csv ou ./verify_my_vote VoteCondorcet.csv \n");
 		exit (1);
 	}
+	
+	const char* filename = argv[1];
+	int c;
+	// On vérifie que le fichier passé en paramètre est bien en csv
+	if (!isCSV(filename)){
+		fprintf(stderr, "Erreur, le fichier en paramètre n'est pas un csv \n");
+		exit(2);
+	}
+
 	char nom[100];
 	printf("Entrez votre nom : ");
 	scanf("%s", nom);
@@ -76,34 +106,24 @@ int main(int argc, char** argv) {
 	for (int i = 0; nom[i] != '\0'; i++)
 		nom[i] = toupper(nom[i]);
 
+	while ((c = getchar()) != '\n' && c != EOF) {}
+
 	char prenom[100];
 	printf("Entrez votre prenom : ");
-	scanf("%s", prenom);
+	fgets(prenom, sizeof(prenom), stdin);
+
+	// Supprimer le caractère de nouvelle ligne du dernier prénom saisi
+	prenom[strcspn(prenom, "\n")] = 0;
+
+	printf("Vous avez saisi : %s\n", prenom);
 
 	// Convertir en majuscule la première lettre
-	for (int i = 0; prenom[i] != '\0'; i++) {
-		if (prenom[i] >= 'A' && prenom[i] <= 'Z')
-			prenom[i] = tolower(prenom[i]);
-	}
-	prenom[0] = toupper(prenom[0]);
+	convertionPrenom(prenom);
+	printf("%s\n", prenom);
 
 	char cle[100];
 	printf("Entrez votre cle : ");
 	scanf("%s", cle);
-
-	printf("Saisissez un numéro correspondant au fichier dans lequel vous voulez vérifier votre vote : 1 pour jugement.csv ou 2 pour VoteCondorcet.csv ");
-	char num[100];
-	scanf("%s", num);
-	while (num[0] != '1' && num[0] != '2') {
-		printf("1 ou 2 j'ai dit\n");
-		scanf("%s", num);
-	}
-
-	const char* filename;
-	if (num[0] == '1')
-		filename = "../Data/jugement.csv";
-	else if (num[0] == '2')
-		filename = "../Data/VoteCondorcet.csv";
 
 	int bufferSize = SHA256_BLOCK_SIZE;
 	char hashRes[bufferSize * 2 + 1];
@@ -111,6 +131,5 @@ int main(int argc, char** argv) {
 	CSVData data = createCSV();
 	lireCSV(filename, data);
 	verify_my_vote(data,  hashRes);
-	libererCSV(data);
 	exit (0);
 }
