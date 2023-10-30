@@ -53,6 +53,7 @@ void conversionPrenom(char* prenom) {
 void concatAndHash(char* nom, char* prenom, char* cle, char* hashRes) {
 	char* item = malloc(STRLONG * sizeof(char));
 	strcpy(item,nom);
+	strcat(item," ");
 	strcat(item,prenom);
 	strcat(item,cle);
 	sha256ofString((BYTE*)item, hashRes);
