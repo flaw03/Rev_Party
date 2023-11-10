@@ -1,52 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "utils_tab.h"
 
-int* create_tab1D(int nb_colonne){
+
+typedef int* Colonne;
+typedef Colonne * Tableau;
+
+struct t_Matrice {
+  int nb_ligne;
+  int nb_colone;
+  Tableau tableau;
+};
+
+
+
+Colonne create_tab1D(int nb_colonne){
   int* tab;
-  tab=malloc(nb_colonne*sizeof(int));
+  tab = malloc(nb_colonne*sizeof(int));
   return tab;
 }
 
-int** create_tab2D(int nb_ligne, int nb_colonne){
-  int** tab=malloc(nb_ligne*sizeof(int));
+Tableau create_tab2D(int nb_ligne, int nb_colonne){
+  Tableau tab = malloc(nb_ligne*sizeof(int));
   for(int i=0; i<nb_ligne;i++){
     tab[i]= malloc(nb_colonne*sizeof(int));
   }
   return tab;
 }
 
-void delete_tab1D(int* tableau){
-  free(tableau);
+Matrice create_Matrice(int nb_ligne, int nb_colonne){
+  Matrice matrice = malloc(sizeof(struct t_Matrice));
+  matrice->nb_colone = nb_colonne;
+  matrice->nb_ligne = nb_ligne;
+  matrice->tableau = create_tab2D(nb_ligne,nb_colonne);
 }
 
-void deleteTableau2D(int** tableau, int nb_ligne) {
+void delete_colone(Colonne colone){
+  free(colone);
+}
+
+void deleteTableau(Tableau Tableau,int nb_ligne) {
     for (int i = 0; i < nb_ligne; i++) {
-        free(tableau[i]);
+        delete_colone(Tableau[i]);
     }
-    free(tableau);
+    free(Tableau);
 }
 
-int main() {
-  //Test tab
-  int* tab1d;
-  int** tab2d;
-  tab1d=create_tab1D(3);
-  tab2d=create_tab2D(3,3);
-  printf("mat1d : ");
-  for (int i=0;i<3;i++){
-    printf("%d ",tab1d[i]);
-  }
-
-  printf("\nmat2d : ");
-
-  for (int i=0;i<3;i++){
-    printf("\n      ");
-    for(int j=0; j<3;j++){
-      printf("%d",tab2d[i][j]);
-    }
-  }
-delete_tab1D(tab1d);
-deleteTableau2D(tab2d,3);
-printf("\n");
-  return 0;
+void delete_Matrice(Matrice matrice){
+  deleteTableau (matrice->tableau,matrice->nb_ligne);
+  free(matrice);
 }
