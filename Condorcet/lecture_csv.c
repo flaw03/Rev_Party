@@ -29,7 +29,7 @@ int isCSV(const char* filename) {
 */
 
 
-void obtenir_nom_Candidat(const char *filename,int numCandidat,char * nom_Candidat){
+void obtenir_nom_Candidat(const char *filename,int numColonne,char * nom_Candidat){
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -41,13 +41,12 @@ void obtenir_nom_Candidat(const char *filename,int numCandidat,char * nom_Candid
     fgets(line, MAX_LINE_LENGTH, file);
     char* token = strtok(line, ",");
     int nb_colonne = 0;
-    while (token != NULL && nb_colonne != numCandidat + COLONNE_SHA ){
+    while (token != NULL && nb_colonne != numColonne){
         token = strtok(NULL, ",");
         nb_colonne ++;
     }
     if (token != NULL){
-    char *positionTiret = strstr(token, "-");
-    positionTiret = strstr(token, "- ");
+    char *positionTiret = strstr(token, ">");
         if (positionTiret != NULL ) {
             // Déplacer le pointeur au caractère après le tiret
             positionTiret++; 
@@ -66,10 +65,11 @@ void obtenir_nom_Candidat(const char *filename,int numCandidat,char * nom_Candid
 }
 
 
+
 /*
 *    Fonction qui renvoie une ligne d'un hash doné
 */
-void AffiherVote(const char* filename,char* hash){
+void afficher_vote(const char* filename,char* hash){
     FILE* file = fopen(filename,"r"); 
     if (file == NULL) {
         perror("Impossible d'ouvrir le fichier\n");
@@ -79,9 +79,8 @@ void AffiherVote(const char* filename,char* hash){
     // Lire chaque ligne du fichier CSV
     while (fgets(line, MAX_LINE_LENGTH, file)) {
 
-        char *saveptr; 
         char* token ;
-        token = strtok_r(line, ",",&saveptr);
+        token = strtok(line, ",");
         int colonne = 0;
         // Parcourir les tokens (colonnes)
         while (token != NULL && colonne <= COLONNE_SHA) {
@@ -89,19 +88,22 @@ void AffiherVote(const char* filename,char* hash){
             if (colonne == COLONNE_SHA) { //Colonne 3 = colonne des SHA
 				if(strcmp(token,hash) == 0){// HASH trouvé 
                     char nomCandidat[BUFFER_SIZE];
-                    int cpt = 1;
-                    token = strtok_r(NULL, ",", &saveptr);                    while (token != NULL){
-                        obtenir_nom_Candidat(filename,atoi(token),nomCandidat);
-                        printf("Vote n°%-2d : %s\n", cpt,nomCandidat);
-					    cpt++;
-                        token = strtok_r(NULL, ",", &saveptr);
+                    strcpy(nomCandidat,"Candidat");
+                    colonne ++;
+                    token = strtok(NULL, ",");   
+                    printf("%-30s|Vote\n",nomCandidat);                 
+                    while (token != NULL){
+                        obtenir_nom_Candidat(filename,colonne,nomCandidat);
+                        printf("%-30s|%s\n",nomCandidat,token);
+                        token = strtok(NULL, ",");
+					    colonne++;
                     }
 					return;
 				}
 
             }
             // Obtenir le prochain token
-             token = strtok_r(NULL, ",", &saveptr);
+             token = strtok(NULL, ",");
             colonne++;
         }
     }
@@ -109,7 +111,6 @@ void AffiherVote(const char* filename,char* hash){
     fclose(file);
 
 }
-
 
 
 
@@ -132,23 +133,21 @@ Matrice lireCSVCondorcet(char* filename){
     }
     nb_colonne -= MARGE;
     Matrice matrice = create_Matrice(nb_colonne,nb_colonne);
+    Matrice ligne = create_Matrice (1,nb_colonne);
     init_Matrice(matrice,0);
-    afficher_Matrice(matrice);
     while (fgets(line, MAX_LINE_LENGTH, file)) {
         char* token = strtok(line, ",");
         int colonne = 0;
-        int vote;
         while (token != NULL) {
-            if (colonne > MARGE - 1 ) { //Colonne 3 = colonne des SHA
-                vote = atoi(token);
-                if (vote > 0){
-                    matrice->tableau[vote - 1][colonne - MARGE] += 1;
-                }
+            if (colonne > MARGE - 1 ) { //Colonne 3 = colonne des SHA 
+                ligne->tableau[ligne->nb_ligne - 1][colonne - MARGE] = atoi(token);
             }
             token = strtok(NULL, ",");
             colonne++;
         }
+        remplire_Matrice_Duel(matrice,ligne);
     }
+    delete_Matrice(ligne);
     fclose(file);
     return matrice;
 }

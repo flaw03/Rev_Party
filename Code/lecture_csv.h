@@ -2,7 +2,6 @@
 #ifndef __LECTURE_CSV_H__
 #define __LECTURE_CSV_H__
 
-#include "utils_tab.h"
 
 #define MAX_LIGNES 1024
 #define MAX_COLONNES 1024

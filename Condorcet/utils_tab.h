@@ -6,7 +6,7 @@ typedef Colonne * Tableau;
 
 struct t_Matrice {
   int nb_ligne;
-  int nb_colone;
+  int nb_colonne;
   Tableau tableau;
 };
 
@@ -18,6 +18,11 @@ Matrice create_Matrice(int nb_ligne, int nb_colonne);
 void delete_Matrice(Matrice matrice);
 
 void init_Matrice(Matrice matrice,int valeur);
+
+void min_Matrice(Matrice matrice, int * ligne , int * colonne , int * valeur);
+
+void remplire_Matrice_Duel(Matrice matrice,Matrice ligne);
+
 
 void afficher_Matrice(Matrice matrice);
 

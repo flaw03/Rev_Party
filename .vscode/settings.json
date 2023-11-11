@@ -2,6 +2,8 @@
     "files.associations": {
         "*.c": "c",
         "sha256.h": "c",
-        "sha256_utils.h": "c"
+        "sha256_utils.h": "c",
+        "lecture_csv.h": "c",
+        "utils_tab.h": "c"
     }
 }

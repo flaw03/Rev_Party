@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
 	int bufferSize = SHA256_BLOCK_SIZE;
 	char hashRes[bufferSize * 2 + 1];
 	concatAndHash(nom, prenom, cle, hashRes);
-	AffiherVote(filename,hashRes);
+	afficher_vote(filename,hashRes);
 	exit (0);
 
 }

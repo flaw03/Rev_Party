@@ -12,47 +12,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "utils_tab.h"
+#include "lecture_csv.h"
 
 
-int main(int argc, char const *argv[])
+int main(void)
 {
-    FILE *file = fopen("../Data/VoteCondorcet.csv", "r");
-    if (file == NULL) {
-        perror("Erreur lors de l'ouverture du fichier");
-        exit(28);
-    }
-    char line[MAX_LINE_LENGTH];
 
-    // lit la premier ligne 
-    fgets(line, MAX_LINE_LENGTH, file);
-    char* token = strtok(line, ",");
-    int nb_colonne = 0;
-    while (token != NULL){
-        token = strtok(NULL, ",");
-        nb_colonne ++;
-    }
-    nb_colonne -= MARGE;
-    Matrice matrice = create_Matrice(nb_colonne,nb_colonne);
-    init_Matrice(matrice,0);
-    while (fgets(line, MAX_LINE_LENGTH, file)) {
-        char* token = strtok(line, ",");
-        int colonne = 0;
-        int vote;
-        while (token != NULL) {
-            if (colonne > MARGE - 1 ) { //Colonne 3 = colonne des SHA
-                vote = atoi(token);
-                if (vote > 0){
-                    matrice->tableau[vote - 1][colonne - MARGE] += 1;
-                }
-            }
-            token = strtok(NULL, ",");
-            colonne++;
-        }
-    }
+    Matrice matrice = lireCSVCondorcet("../Data/VoteCondorcet.csv");
     afficher_Matrice(matrice);
     delete_Matrice(matrice);
-    fclose(file);
-	
     
     
     // Matrice matrice = create_Matrice(10,10);

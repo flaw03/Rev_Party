@@ -23,7 +23,7 @@ int isCSV(const char* filename) {
 }
 
 
-void obtenir_nom_Candidat(const char *filename,int numCandidat,char * nom_Candidat){
+void obtenir_nom_Candidat(const char *filename,int numColonne,char * nom_Candidat){
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -35,13 +35,12 @@ void obtenir_nom_Candidat(const char *filename,int numCandidat,char * nom_Candid
     fgets(line, MAX_LINE_LENGTH, file);
     char* token = strtok(line, ",");
     int nb_colonne = 0;
-    while (token != NULL && nb_colonne != numCandidat + COLONNE_SHA ){
+    while (token != NULL && nb_colonne != numColonne){
         token = strtok(NULL, ",");
         nb_colonne ++;
     }
     if (token != NULL){
-    char *positionTiret = strstr(token, "-");
-    positionTiret = strstr(token, "- ");
+    char *positionTiret = strstr(token, ">");
         if (positionTiret != NULL ) {
             // Déplacer le pointeur au caractère après le tiret
             positionTiret++; 
@@ -63,7 +62,7 @@ void obtenir_nom_Candidat(const char *filename,int numCandidat,char * nom_Candid
 /*
 *    Fonction qui renvoie une ligne d'un hash doné
 */
-void AffiherVote(const char* filename,char* hash){
+void afficher_vote(const char* filename,char* hash){
     FILE* file = fopen(filename,"r"); 
     if (file == NULL) {
         perror("Impossible d'ouvrir le fichier\n");
@@ -83,12 +82,15 @@ void AffiherVote(const char* filename,char* hash){
             if (colonne == COLONNE_SHA) { //Colonne 3 = colonne des SHA
 				if(strcmp(token,hash) == 0){// HASH trouvé 
                     char nomCandidat[BUFFER_SIZE];
-                    int cpt = 1;
-                    token = strtok_r(NULL, ",", &saveptr);                    while (token != NULL){
-                        obtenir_nom_Candidat(filename,atoi(token),nomCandidat);
-                        printf("Vote n°%-2d : %s\n", cpt,nomCandidat);
-					    cpt++;
+                    strcpy(nomCandidat,"Candidat");
+                    colonne ++;
+                    token = strtok_r(NULL, ",", &saveptr);   
+                    printf("%-30s|Vote\n",nomCandidat);                 
+                    while (token != NULL){
+                        obtenir_nom_Candidat(filename,colonne,nomCandidat);
+                        printf("%-30s|%s\n",nomCandidat,token);
                         token = strtok_r(NULL, ",", &saveptr);
+					    colonne++;
                     }
 					return;
 				}
