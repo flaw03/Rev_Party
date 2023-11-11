@@ -18,7 +18,7 @@ void obtenir_Vote(const char *filename,int numCandidat,char * nom_Candidat);
 
 void afficher_vote(const char *filename, char *  hash);
 
-
+Matrice lireCSVCondorcet(char* filename);
 
 
 

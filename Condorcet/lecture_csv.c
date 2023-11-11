@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "lecture_csv.h"
+#include "utils_tab.h"
 
 /*
 *    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
@@ -21,6 +23,10 @@ int isCSV(const char* filename) {
     }
     return 0; // Le fichier n'est pas .csv
 }
+
+/*
+*    Fonction qui renvoie le nom d'un candidat
+*/
 
 
 void obtenir_nom_Candidat(const char *filename,int numCandidat,char * nom_Candidat){
@@ -104,3 +110,45 @@ void AffiherVote(const char* filename,char* hash){
 
 }
 
+
+
+
+
+Matrice lireCSVCondorcet(char* filename){
+    FILE *file = fopen(filename, "r");
+     if (file == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(28);
+    }
+    char line[MAX_LINE_LENGTH];
+
+    // lit la premier ligne 
+    fgets(line, MAX_LINE_LENGTH, file);
+    char* token = strtok(line, ",");
+    int nb_colonne = 0;
+    while (token != NULL){
+        token = strtok(NULL, ",");
+        nb_colonne ++;
+    }
+    nb_colonne -= MARGE;
+    Matrice matrice = create_Matrice(nb_colonne,nb_colonne);
+    init_Matrice(matrice,0);
+    afficher_Matrice(matrice);
+    while (fgets(line, MAX_LINE_LENGTH, file)) {
+        char* token = strtok(line, ",");
+        int colonne = 0;
+        int vote;
+        while (token != NULL) {
+            if (colonne > MARGE - 1 ) { //Colonne 3 = colonne des SHA
+                vote = atoi(token);
+                if (vote > 0){
+                    matrice->tableau[vote - 1][colonne - MARGE] += 1;
+                }
+            }
+            token = strtok(NULL, ",");
+            colonne++;
+        }
+    }
+    fclose(file);
+    return matrice;
+}

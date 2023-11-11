@@ -67,7 +67,7 @@ void concatAndHash(char* nom, char* prenom, char* cle, char* hashRes) {
 int main(int argc, char** argv) {
 
 	if (argc != 2) {
-		fprintf(stderr, "Erreur : %s fillname\n",argv[0]);
+		fprintf(stderr, "Usage : %s fillname\n",argv[0]);
 		exit (1);
 	}
 	
@@ -106,12 +106,7 @@ int main(int argc, char** argv) {
 	int bufferSize = SHA256_BLOCK_SIZE;
 	char hashRes[bufferSize * 2 + 1];
 	concatAndHash(nom, prenom, cle, hashRes);
-	int index = indice_sha(hashRes,argv[1]);
-	if (index > 0){
-		afficher_vote(argv[1], index);
-	}
-	else{
-		printf("Électeur non trouvé dans la liste.\n");
-	}
+	AffiherVote(filename,hashRes);
 	exit (0);
+
 }

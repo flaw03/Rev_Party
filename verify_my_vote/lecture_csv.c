@@ -23,44 +23,6 @@ int isCSV(const char* filename) {
 }
 
 /*
-*    Fonction qui renvoie une ligne d'un hash doné
-*/
-
-int indice_sha(char* chaine,char* fichier){
-    FILE* file = fopen(fichier,"r");
-    if (file == NULL) {
-        perror("Impossible d'ouvrir le fichier\n");
-        exit(28);
-    }
-    char line[MAX_LINE_LENGTH];
-    int colonne = 3;
-	int indice =1;
-    // Lire chaque ligne du fichier CSV
-    while (fgets(line, MAX_LINE_LENGTH, file)) {
-
-        char* token = strtok(line, ",");
-        int colonneActuelle = 0;
-
-        // Parcourir les tokens (colonnes)
-        while (token != NULL) {
-            // Si nous avons atteint la colonne souhaitée
-            if (colonneActuelle == colonne) { //Colonne 3 = colonne des SHA
-				if(strcmp(chaine,token) == 0){// HASH trouvé 
-					fclose(file); 
-					return indice;
-				}
-				indice++;   
-            }
-            // Obtenir le prochain token
-            token = strtok(NULL, ",");
-            colonneActuelle++;
-        }
-    }
-    fclose(file);
-	return -1; //Valeur non trouvée
-}
-
-/*
 *    Fonction qui affiche le vote 
 */
 void afficher_vote(const char *filename, int lineNumber) {
