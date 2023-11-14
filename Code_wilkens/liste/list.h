@@ -68,7 +68,7 @@ List *list_create();
  @note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
 
  */
-List *list_push_back(List *l, int p, char* candidat1, char* candidat2);
+List *list_push_back(List *l, int p, int candidat1, int candidat2);
 
 /** Destructor.
 	Added by the implementation. Free ressources allocated by constructors.
@@ -92,7 +92,7 @@ void list_delete(ptrList *l);
  	@return The modified list
  	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
  */
-List *list_push_front(List *l, int p, char* candidat1, char* candidat2);
+List *list_push_front(List *l, int p, int candidat1, int candidat2);
 
 /** Acces to the element at begining of the list.
  	@return the value of the front element of l.
@@ -137,7 +137,7 @@ List *list_pop_back(List *l);
  	@pre 0 <= p <= list_size(l)
  	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
  */
-List *list_insert_at(List *l, int pos, int p, char* candidat1, char* candidat2);
+List *list_insert_at(List *l, int pos, int p, int candidat1, int candidat2);
 /** Remove an element at a given position.
 	 @param l The list to modify.
 	 @param p The position of the element to be removed.

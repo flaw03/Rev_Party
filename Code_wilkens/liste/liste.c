@@ -10,8 +10,8 @@
 #include "list.h"
 typedef struct s_LinkedElement {
 	int poids;
-	char* a;
-	char* b;
+	int a;
+	int b;
 	struct s_LinkedElement *previous;
 	struct s_LinkedElement *next;
 } LinkedElement;
@@ -34,7 +34,7 @@ List *list_create() {
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_back(List *l, int p, char* candidat1, char* candidat2) {
+List *list_push_back(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
   new->poids=p;
   new->a=candidat1;
@@ -50,13 +50,16 @@ List *list_push_back(List *l, int p, char* candidat1, char* candidat2) {
 /*-----------------------------------------------------------------*/
 
 void list_delete(ptrList *l) {
+  while(!list_is_empty(*l)){
+    list_pop_back(*l);
+  }
   free(*l);
 	*l=NULL;
 }
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_front(List *l, int p, char* candidat1, char* candidat2) {
+List *list_push_front(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
   new->poids=p;
   new->a=candidat1;
@@ -111,7 +114,7 @@ List *list_pop_back(List *l){
 
 /*-----------------------------------------------------------------*/
 
-List *list_insert_at(List *l, int pos, int p, char* candidat1, char* candidat2) {
+List *list_insert_at(List *l, int pos, int p, int candidat1, int candidat2) {
   assert(pos>=0 && pos<=l->size);
 	LinkedElement *new=malloc(sizeof(LinkedElement));
   LinkedElement *e=l->sentinel->next;
@@ -192,10 +195,11 @@ List *list_reduce(List *l, ReduceFunctor f, void *userData) {
 	return l;
 }*/
 
+
 int main(void)
 {
   List* l=list_create();
-  l=list_push_back(l,1,"aa","bb");
+  l=list_push_back(l,1,12,2);
   printf("size %d\n", list_size(l));
   l=list_pop_back(l);
   printf("size %d\n", list_size(l));
