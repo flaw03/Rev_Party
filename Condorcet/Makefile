@@ -11,8 +11,9 @@ EXEC=test
 # Compilateur
 CC=gcc
 
+
 # Options de compilation
-CFLAGS=-std=c99 -Werror -Wextra -Wall -pedantic 
+CFLAGS=-std=c99 -Wextra -Wall -pedantic -Werror -Wunused-parameter
 # Options de l'édition de liens
 LDFLAGS=-lm
 

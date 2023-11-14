@@ -8,10 +8,11 @@
 #include <assert.h>
 
 #include "list.h"
+#include "utils_tab.h"
 typedef struct s_LinkedElement {
 	int poids;
-	char* a;
-	char* b;
+	int a;
+	int b;
 	struct s_LinkedElement *previous;
 	struct s_LinkedElement *next;
 } LinkedElement;
@@ -34,7 +35,7 @@ List *list_create(void) {
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_back(List *l, int p, char* candidat1, char* candidat2) {
+List *list_push_back(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
   new->poids=p;
   new->a=candidat1;
@@ -56,7 +57,7 @@ void list_delete(ptrList *l) {
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_front(List *l, int p, char* candidat1, char* candidat2) {
+List *list_push_front(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
   new->poids=p;
   new->a=candidat1;
@@ -111,7 +112,7 @@ List *list_pop_back(List *l){
 
 /*-----------------------------------------------------------------*/
 
-List *list_insert_at(List *l, int pos, int p, char* candidat1, char* candidat2) {
+List *list_insert_at(List *l, int pos, int p, int candidat1, int candidat2) {
   assert(pos>=0 && pos<=l->size);
 	LinkedElement *new=malloc(sizeof(LinkedElement));
   LinkedElement *e=l->sentinel->next;
@@ -151,7 +152,7 @@ List *list_remove_at(List *l, int p) {
 
 /*-----------------------------------------------------------------*/
 
-int list_at(List *l, int p) {
+/*int list_at(List *l, int p) {
   assert(p>=0 && p<l->size);
   int val;
   LinkedElement *e=l->sentinel->next;
@@ -159,9 +160,9 @@ int list_at(List *l, int p) {
     e=e->next;
   }
 
-  val=e->poids;
+  val=e->value;
 	return val;
-}
+}*/
 
 /*-----------------------------------------------------------------*/
 
@@ -177,18 +178,43 @@ int list_size(List *l) {
 
 /*-----------------------------------------------------------------*/
 
-/*List * list_map(List *l, SimpleFunctor f) {
+/*
+List * list_map(List *l, SimpleFunctor f) {
 	for (LinkedElement *e=l->sentinel->next; e!=l->sentinel; e=e->next){
     e->value=f(e->value);
   }
 	return l;
 }
 
-
-List *list_reduce(List *l, ReduceFunctor f, void *userData) {
+*/
+List *list_reduce(List *l, ReduceFunctor f) {
   for (LinkedElement *e=l->sentinel->next; e!=l->sentinel; e=e->next){
-    f(e->value,userData);
+    f(e->a,e->b,e->poids);
   }
 	return l;
-}*/
+}
 
+List * matriceCombatToGraphe(Matrice matrice){    
+    List *list = list_create();
+    for (int i = 0; i < matrice->nb_ligne;i++){
+        for (int j = 0; j < matrice->nb_colonne;j++){
+            if (i != j){
+                if (matrice->tableau[i][j] >= matrice->tableau[j][i]){
+                    list_push_front(list,matrice->tableau[i][j],i,j);
+                }
+            }
+        }
+    }
+    return list;
+}
+
+int Vainqueur(List * list,Matrice matrice){
+    int i = 0;
+    for (LinkedElement *e = list->sentinel->next; e != list->sentinel; e = e->next){
+      matrice->tableau[0][e->a]++;
+      if(matrice->tableau[0][e->a]++ >matrice->tableau[0][i]){
+        i = e->a;
+      }
+    }
+    return i;
+}
