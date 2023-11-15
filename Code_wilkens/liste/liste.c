@@ -24,7 +24,7 @@ struct s_List {
 
 /*-----------------------------------------------------------------*/
 
-List *list_create(void) {
+List *list_create() {
 	List *l = malloc(sizeof(struct s_List));
   l->sentinel=malloc(sizeof(LinkedElement));
   l->sentinel->next=l->sentinel->previous=l->sentinel;
@@ -151,7 +151,7 @@ List *list_remove_at(List *l, int p) {
 
 /*-----------------------------------------------------------------*/
 
-int list_at(List *l, int p) {
+/*int list_at(List *l, int p) {
   assert(p>=0 && p<l->size);
   int val;
   LinkedElement *e=l->sentinel->next;
@@ -159,9 +159,9 @@ int list_at(List *l, int p) {
     e=e->next;
   }
 
-  val=e->poids;
+  val=e->value;
 	return val;
-}
+}*/
 
 /*-----------------------------------------------------------------*/
 
@@ -192,3 +192,12 @@ List *list_reduce(List *l, ReduceFunctor f, void *userData) {
 	return l;
 }*/
 
+int main(void)
+{
+  List* l=list_create();
+  l=list_push_back(l,1,"aa","bb");
+  printf("size %d\n", list_size(l));
+  l=list_pop_back(l);
+  printf("size %d\n", list_size(l));
+  return 0;
+}
