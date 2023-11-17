@@ -199,5 +199,57 @@ int list_size(List *l);
 
 /** @} */
 
+/* iterator*/
+
+/// Iterator from the begining to the end
+#define FORWARD_ITERATOR 1
+/// Iterator from the end to the beginning
+#define BACKWARD_ITERATOR 0
+
+
+/**
+ *	@brief Opaque definition of the ListIterator abstract data type.
+ */
+typedef struct s_ListIterator *ListIterator;
+
+
+/**
+ *	@brief Constructor of an iterator.
+ * @param d the List to iterate
+ * @param w the way the iterator will go (FORWARD_ITERATOR or BACKWARD_ITERATOR)
+ * @return the correcly initialized iterator
+ */
+ListIterator list_iterator_create(List* d, unsigned char w);
+
+/**
+ *	@brief Destructor of an iterator.
+ *  @param it the iterator to delete
+ */
+void list_iterator_delete(ListIterator it);
+
+/**
+ *	@brief Increment the iterator to the next position according to its direction.
+ *  @param it the iterator to modify
+ *	@return the modified iterator
+ *	@note the parameter it is modified by side effect and is returned by the function
+ */
+ListIterator list_iterator_next(ListIterator it);
+
+/**
+ *	@brief Acces to the value of the iterator.
+ *  @param it the iterator to delete
+ *  @return the value designed by the iterator
+ */
+int list_iterator_value(ListIterator it);
+
+
+
+/** @} */
+
+
+
+/** @} */
+
+
 #endif
 

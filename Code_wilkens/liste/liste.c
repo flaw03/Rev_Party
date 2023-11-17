@@ -17,7 +17,7 @@ typedef struct s_LinkedElement {
 } LinkedElement;
 
 struct s_List {
-	LinkedElement *sentinel;
+	LinkedElement* sentinel;
 	int size;
 };
 
@@ -194,6 +194,58 @@ List *list_reduce(List *l, ReduceFunctor f, void *userData) {
   }
 	return l;
 }*/
+// iterator
+struct s_ListIterator{
+  List* collection;
+  LinkedElement* begin;
+  LinkedElement* current;
+  LinkedElement* (*next)(LinkedElement*);
+};
+
+LinkedElement* goto_next(LinkedElement* e){
+  return e->next;
+}
+
+LinkedElement* goto_previous(LinkedElement* e){
+  return e->previous;
+}
+
+ListIterator list_iterator_create(List* d, unsigned char w){
+  ListIterator it= malloc(sizeof(struct s_ListIterator));
+  it->collection=d;
+  if(w==FORWARD_ITERATOR){
+    it->begin=d->sentinel->next;
+    it->next=goto_next;
+  }else{
+    it->begin=d->sentinel->previous;
+    it->next=goto_previous;
+  }
+  it->current=it->begin;
+  return it;
+}
+
+void list_iterator_delete(ListIterator it){
+  free(it);
+}
+
+ListIterator list_iterator_begin(ListIterator it){
+  it->current=it->begin;
+  return it;
+}
+
+bool list_iterator_end(ListIterator it){
+  return it->current==it->collection->sentinel;
+}
+
+ListIterator list_iterator_next(ListIterator it){
+  it->current=it->next(it->current);
+  return it;
+}
+
+int list_iterator_value(ListIterator it){
+  return it->current->a;
+}
+
 
 
 int main(void)
