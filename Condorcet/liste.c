@@ -8,23 +8,24 @@
 #include <assert.h>
 
 #include "list.h"
+#include "utils_tab.h"
 typedef struct s_LinkedElement {
 	int poids;
-	char* a;
-	char* b;
+	int a;
+	int b;
 	struct s_LinkedElement *previous;
 	struct s_LinkedElement *next;
 } LinkedElement;
 
 struct s_List {
-	LinkedElement* sentinel;
+	LinkedElement *sentinel;
 	int size;
 };
 
 
 /*-----------------------------------------------------------------*/
 
-List *list_create() {
+List *list_create(void) {
 	List *l = malloc(sizeof(struct s_List));
   l->sentinel=malloc(sizeof(LinkedElement));
   l->sentinel->next=l->sentinel->previous=l->sentinel;
@@ -34,7 +35,7 @@ List *list_create() {
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_back(List *l, int p, char* candidat1, char* candidat2) {
+List *list_push_back(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
   new->poids=p;
   new->a=candidat1;
@@ -56,7 +57,7 @@ void list_delete(ptrList *l) {
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_front(List *l, int p, char* candidat1, char* candidat2) {
+List *list_push_front(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
   new->poids=p;
   new->a=candidat1;
@@ -111,7 +112,7 @@ List *list_pop_back(List *l){
 
 /*-----------------------------------------------------------------*/
 
-List *list_insert_at(List *l, int pos, int p, char* candidat1, char* candidat2) {
+List *list_insert_at(List *l, int pos, int p, int candidat1, int candidat2) {
   assert(pos>=0 && pos<=l->size);
 	LinkedElement *new=malloc(sizeof(LinkedElement));
   LinkedElement *e=l->sentinel->next;
@@ -177,79 +178,43 @@ int list_size(List *l) {
 
 /*-----------------------------------------------------------------*/
 
-/*List * list_map(List *l, SimpleFunctor f) {
+/*
+List * list_map(List *l, SimpleFunctor f) {
 	for (LinkedElement *e=l->sentinel->next; e!=l->sentinel; e=e->next){
     e->value=f(e->value);
   }
 	return l;
 }
 
-
-List *list_reduce(List *l, ReduceFunctor f, void *userData) {
+*/
+List *list_reduce(List *l, ReduceFunctor f) {
   for (LinkedElement *e=l->sentinel->next; e!=l->sentinel; e=e->next){
-    f(e->value,userData);
+    f(e->a,e->b,e->poids);
   }
 	return l;
-}*/
-// iterator
-struct s_ListIterator{
-  List* collection;
-  LinkedElement* begin;
-  LinkedElement* current;
-  LinkedElement* (*next)(LinkedElement*);
-};
-
-LinkedElement* goto_next(LinkedElement* e){
-  return e->next;
 }
 
-LinkedElement* goto_previous(LinkedElement* e){
-  return e->previous;
+List * matriceCombatToGraphe(Matrice matrice){    
+    List *list = list_create();
+    for (int i = 0; i < matrice->nb_ligne;i++){
+        for (int j = 0; j < matrice->nb_colonne;j++){
+            if (i != j){
+                if (matrice->tableau[i][j] >= matrice->tableau[j][i]){
+                    list_push_front(list,matrice->tableau[i][j],i,j);
+                }
+            }
+        }
+    }
+    return list;
 }
 
-ListIterator list_iterator_create(List* d, unsigned char w){
-  ListIterator it= malloc(sizeof(struct s_ListIterator));
-  it->collection=d;
-  if(w==FORWARD_ITERATOR){
-    it->begin=d->sentinel->next;
-    it->next=goto_next;
-  }else{
-    it->begin=d->sentinel->previous;
-    it->next=goto_previous;
-  }
-  it->current=it->begin;
-  return it;
-}
-
-void list_iterator_delete(ListIterator it){
-  free(it);
-}
-
-ListIterator list_iterator_begin(ListIterator it){
-  it->current=it->begin;
-  return it;
-}
-
-bool list_iterator_end(ListIterator it){
-  return it->current==it->collection->sentinel;
-}
-
-ListIterator list_iterator_next(ListIterator it){
-  it->current=it->next(it->current);
-  return it;
-}
-
-int list_iterator_value(ListIterator it){
-  return it->current->a;
-}
-
-
-int main(void)
-{
-  List* l=list_create();
-  l=list_push_back(l,1,"aa","bb");
-  printf("size %d\n", list_size(l));
-  l=list_pop_back(l);
-  printf("size %d\n", list_size(l));
-  return 0;
+int Vainqueur(List * list,Matrice matrice){
+    int i = 0;
+    for (LinkedElement *e = list->sentinel->next; e != list->sentinel; e = e->next){
+      matrice->tableau[0][e->a]++;
+      if(matrice->tableau[0][e->a]++ >matrice->tableau[0][i]){
+        i = e->a;
+      }
+    }
+    return i;
 }

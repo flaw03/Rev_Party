@@ -9,7 +9,7 @@
 #define __LIST_H__
 
 #include <stdbool.h>
-
+#include "utils_tab.h"
 /*-----------------------------------------------------------------*/
 
 /** \defgroup ADTList List
@@ -36,12 +36,12 @@ typedef List * ptrList;
 /** Simple functor to be used with the list_map function.
  This functor receive as argument the value of a list element and must return the eventually modified value of the element.
  */
-typedef int(*SimpleFunctor)(int);
+typedef int(*SimpleFunctor)(int,int,int);
 
 /** Functor with user data to be used with the list_reduce operator.
   This functor receive as argument the value of a list element and an opaque pointer to user provided data and must return the eventually modified value of the element.
  */
-typedef int(*ReduceFunctor)(int, void *);
+typedef int (*ReduceFunctor)(int, int, int);
 
 /** Functor to be used with the list_sort operator.
    This functor must implement a total ordering function (comp). When calling this functor with two list elements a and b, this functor must return true if (a comp b).
@@ -91,8 +91,10 @@ void list_delete(ptrList *l);
  	@param candidat2 The value of the candidate b.
  	@return The modified list
  	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
- */
+*/
 List *list_push_front(List *l, int p, int candidat1, int candidat2);
+
+
 
 /** Acces to the element at begining of the list.
  	@return the value of the front element of l.
@@ -137,7 +139,7 @@ List *list_pop_back(List *l);
  	@pre 0 <= p <= list_size(l)
  	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
  */
-List *list_insert_at(List *l, int pos, int p, int candidat1, int candidat2);
+List *list_insert_at(List *l, int pos, int p, int candidat1,int candidat2);
 /** Remove an element at a given position.
 	 @param l The list to modify.
 	 @param p The position of the element to be removed.
@@ -177,18 +179,16 @@ int list_size(List *l);
 */
 //List * list_map(List *l, SimpleFunctor f);
 
+
 /** Apply the same operator on each element of the list gieven a user define environment.
  @param l The list to process.
  @param f The operator (function) to apply to each element
  @see ReduceFunctor
- @param userData The environment used to call the operator f together with each list element.
  @return The eventually modified list
  @note If the elements are modified by the operator f, this function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified bye the function.
  This function sequentially apply the operator f on each element of the list with the user supplied environment defined by the abstract pointer userData. The operator is applied starting from the beginning of the list until the end. The value reurned by the operator when called on an element will replace the element.
- */
-//List *list_reduce(List *l, ReduceFunctor f, void *userData);
 
-/** Sort the list according to the provided ordering functor.
+Sort the list according to the provided ordering functor.
  @param l The list to sort.
  @param f The order to use
  @return The sorted list.
@@ -197,59 +197,12 @@ int list_size(List *l);
 //List *list_sort(List *l, OrderFunctor f);
 /** @} */
 
+List *list_reduce(List *l, ReduceFunctor f);
 /** @} */
 
-/* iterator*/
-
-/// Iterator from the begining to the end
-#define FORWARD_ITERATOR 1
-/// Iterator from the end to the beginning
-#define BACKWARD_ITERATOR 0
+List *matriceCombatToGraphe(Matrice matrice);
 
 
-/**
- *	@brief Opaque definition of the ListIterator abstract data type.
- */
-typedef struct s_ListIterator *ListIterator;
-
-
-/**
- *	@brief Constructor of an iterator.
- * @param d the List to iterate
- * @param w the way the iterator will go (FORWARD_ITERATOR or BACKWARD_ITERATOR)
- * @return the correcly initialized iterator
- */
-ListIterator list_iterator_create(List* d, unsigned char w);
-
-/**
- *	@brief Destructor of an iterator.
- *  @param it the iterator to delete
- */
-void list_iterator_delete(ListIterator it);
-
-/**
- *	@brief Increment the iterator to the next position according to its direction.
- *  @param it the iterator to modify
- *	@return the modified iterator
- *	@note the parameter it is modified by side effect and is returned by the function
- */
-ListIterator list_iterator_next(ListIterator it);
-
-/**
- *	@brief Acces to the value of the iterator.
- *  @param it the iterator to delete
- *  @return the value designed by the iterator
- */
-int list_iterator_value(ListIterator it);
-
-
-
-/** @} */
-
-
-
-/** @} */
-
-
+int Vainqueur(List * list,Matrice matrice);
 #endif
 

@@ -13,15 +13,28 @@
 #include <stdlib.h>
 #include "utils_tab.h"
 #include "lecture_csv.h"
+#include "list.h"
+
+int f(int a , int  b,int p){
+    printf(" Candidat %d --[%d]--> candidat %d\n",a,p,b);
+    return 1;
+}
 
 
 int main(void)
 {
 
-    Matrice matrice = lireCSVCondorcet("../Data/VoteCondorcet.csv");
+    Matrice matrice = lireCSVCondorcet("../Data/testCondorcet.csv");
     afficher_Matrice(matrice);
+    List *liste = matriceCombatToGraphe(matrice);
+    list_reduce(liste,&f);
+    Matrice m2 = create_Matrice(1,matrice->nb_colonne);
+    init_Matrice(m2,0);
+    int v = Vainqueur(liste,m2);
+    printf("Le vainqueur du vote de Condorcet est %d\n",v);
+    list_delete(&liste);
     delete_Matrice(matrice);
-    
+
     
     // Matrice matrice = create_Matrice(10,10);
     // printf("creation ok\n");

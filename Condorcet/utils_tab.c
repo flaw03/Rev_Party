@@ -78,7 +78,7 @@ void init_Matrice(Matrice matrice, int valeur) {
     // Parcours de la matrice pour initialiser chaque élément avec la valeur spécifiée
     for (int i = 0; i < matrice->nb_ligne; i++) {
         for (int j = 0; j < matrice->nb_colonne; j++) {
-            matrice->tableau[j][i] = valeur;
+            matrice->tableau[i][j] = valeur;
         }
     }
 }
@@ -162,3 +162,4 @@ void remplire_Matrice_Duel(Matrice matrice, Matrice matriceLigne) {
         min_Matrice(matriceLigne, &ligne, &colonne, &valeur);
     }
 }
+
