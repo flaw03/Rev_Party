@@ -29,7 +29,7 @@ int isCSV(const char* filename) {
 */
 
 
-void obtenir_nom_Candidat(const char *filename,int numColonne,char * nom_Candidat){
+char * obtenir_nom_Candidat(const char *filename,int numColonne){
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -37,30 +37,41 @@ void obtenir_nom_Candidat(const char *filename,int numColonne,char * nom_Candida
     }
     char line[MAX_LINE_LENGTH];
 
+
     // lit la premier ligne 
     fgets(line, MAX_LINE_LENGTH, file);
+    fclose(file);
     char* token = strtok(line, ",");
-    int nb_colonne = 0;
-    while (token != NULL && nb_colonne != numColonne){
+    for (int  i = 0 ; i < MARGE + numColonne; i++){
         token = strtok(NULL, ",");
-        nb_colonne ++;
     }
-    if (token != NULL){
-    char *positionTiret = strstr(token, ">");
-        if (positionTiret != NULL ) {
-            // Déplacer le pointeur au caractère après le tiret
-            positionTiret++; 
-            }
-
-        char *sautDeLigne = strchr(positionTiret, '\n');
-        while (sautDeLigne != NULL) {
-            *sautDeLigne = '\0'; // Remplacer le saut de ligne par un caractère nul
-            sautDeLigne = strchr(sautDeLigne + 1, '\n'); // Trouver le prochain saut de ligne
+    if (token != NULL) {
+        // Allouer de la mémoire pour la chaîne et la copier
+        size_t len = strcspn(token, "\n");
+        if (len > 0 && token[len - 1] == '\r') {
+            // Pour les fichiers texte Windows, enlever également le caractère de retour de chariot (\r)
+            len--;
         }
-        strcpy(nom_Candidat, positionTiret);
-    }
-    else{
-        strcpy(nom_Candidat, "Candidat Introuvable ");
+
+        // Allouer de la mémoire pour la chaîne et la copier
+        char *result = (char *)malloc(len + 1);
+        if (result == NULL) {
+            perror("Erreur lors de l'allocation de mémoire");
+            exit(28);
+        }
+
+        strncpy(result, token, len);
+        result[len] = '\0';  // Ajouter le caractère de fin de chaîne
+        return result;
+    } else {
+        // Allouer de la mémoire pour la chaîne et la copier
+        char *result = (char *)malloc(strlen("Candidat Introuvable") + 1);
+        if (result == NULL) {
+            perror("Erreur lors de l'allocation de mémoire");
+            exit(28);
+        }
+        strcpy(result, "Candidat Introuvable");
+        return result;
     }
 }
 
@@ -87,16 +98,15 @@ void afficher_vote(const char* filename,char* hash){
             // Si nous avons atteint la colonne souhaitée
             if (colonne == COLONNE_SHA) { //Colonne 3 = colonne des SHA
 				if(strcmp(token,hash) == 0){// HASH trouvé 
-                    char nomCandidat[BUFFER_SIZE];
-                    strcpy(nomCandidat,"Candidat");
                     colonne ++;
                     token = strtok(NULL, ",");   
-                    printf("%-30s|Vote\n",nomCandidat);                 
+                    printf("Candidat |Vote\n");                 
                     while (token != NULL){
-                        obtenir_nom_Candidat(filename,colonne,nomCandidat);
+                        char * nomCandidat = obtenir_nom_Candidat(filename,colonne);
                         printf("%-30s|%s\n",nomCandidat,token);
                         token = strtok(NULL, ",");
 					    colonne++;
+                        free(nomCandidat);
                     }
 					return;
 				}
@@ -115,7 +125,7 @@ void afficher_vote(const char* filename,char* hash){
 
 
 
-Matrice lireCSVCondorcet(char* filename){
+int lireCSVCondorcet(char* filename,Matrice * matrice){
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -132,12 +142,14 @@ Matrice lireCSVCondorcet(char* filename){
         nb_colonne ++;
     }
     nb_colonne -= MARGE;
-    Matrice matrice = create_Matrice(nb_colonne,nb_colonne);
+    int nombreVotant = 0;
+    *matrice = create_Matrice(nb_colonne,nb_colonne);
     Matrice ligne = create_Matrice (1,nb_colonne);
-    init_Matrice(matrice,0);
+    init_Matrice(*matrice,0);
     while (fgets(line, MAX_LINE_LENGTH, file)) {
         char* token = strtok(line, ",");
         int colonne = 0;
+        nombreVotant++;
         while (token != NULL) {
             if (colonne > MARGE - 1 ) { //Colonne 3 = colonne des SHA 
                 ligne->tableau[ligne->nb_ligne - 1][colonne - MARGE] = atoi(token);
@@ -145,9 +157,9 @@ Matrice lireCSVCondorcet(char* filename){
             token = strtok(NULL, ",");
             colonne++;
         }
-        remplire_Matrice_Duel(matrice,ligne);
+        remplire_Matrice_Duel(*matrice,ligne);
     }
     delete_Matrice(ligne);
     fclose(file);
-    return matrice;
+    return nombreVotant;
 }

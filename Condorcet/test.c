@@ -20,21 +20,46 @@ int f(int a , int  b,int p){
     return 1;
 }
 
+int Condorcet(char *filenmae,Matrice *matriceCombat,List **graphe,int * nombreElecteur){   
+    *nombreElecteur = lireCSVCondorcet(filenmae,&matriceCombat);
+    afficher_Matrice(matriceCombat);
+    printf("df\n");
+    int colonne;
+    int valeur;
+    Matrice m2 = create_Matrice(1,(*matriceCombat)->nb_colonne);
+    graphe = matriceCombatToGraphe(matriceCombat);
+    list_reduce(graphe,&f);
+    init_Matrice(m2,0);
+    Vainquqeur(graphe,m2);
+    afficher_Matrice(m2);
+    if (max_Matrice_Ligne(m2,&colonne,&valeur) == 0){
+       return colonne;
+    }
+    else{
+        return -1;
+    }
+}
+
+
+void methode_minmax(char *filenmae){
+    Matrice matriceCombat = NULL;
+    List *graphe = NULL;
+    int nombreElecteur;
+    int vainqueur = Condorcet(filenmae,matriceCombat,graphe,&nombreElecteur);
+    if (vainqueur == -1){
+        Matrice pireScore = obtenirPiresScores(matriceCombat);
+        afficher_Matrice(pireScore);
+        int ligne,valeur;
+        min_Matrice(pireScore,&ligne ,&vainqueur,&valeur);
+    }
+    printf("Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s",matriceCombat->nb_colonne,
+    nombreElecteur,obtenir_nom_Candidat(filenmae,vainqueur));
+}
+
 
 int main(void)
 {
-
-    Matrice matrice = lireCSVCondorcet("../Data/testCondorcet.csv");
-    afficher_Matrice(matrice);
-    List *liste = matriceCombatToGraphe(matrice);
-    list_reduce(liste,&f);
-    Matrice m2 = create_Matrice(1,matrice->nb_colonne);
-    init_Matrice(m2,0);
-    int v = Vainqueur(liste,m2);
-    printf("Le vainqueur du vote de Condorcet est %d\n",v);
-    list_delete(&liste);
-    delete_Matrice(matrice);
-
+    methode_minmax("../Data/VoteCondorcet.csv");
     
     // Matrice matrice = create_Matrice(10,10);
     // printf("creation ok\n");

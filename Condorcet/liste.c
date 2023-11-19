@@ -208,13 +208,9 @@ List * matriceCombatToGraphe(Matrice matrice){
     return list;
 }
 
-int Vainqueur(List * list,Matrice matrice){
-    int i = 0;
+// Fait la somme des de chaque sommet 
+void Vainquqeur(List * list,Matrice matrice){
     for (LinkedElement *e = list->sentinel->next; e != list->sentinel; e = e->next){
       matrice->tableau[0][e->a]++;
-      if(matrice->tableau[0][e->a]++ >matrice->tableau[0][i]){
-        i = e->a;
-      }
     }
-    return i;
 }

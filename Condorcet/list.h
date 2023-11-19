@@ -203,6 +203,6 @@ List *list_reduce(List *l, ReduceFunctor f);
 List *matriceCombatToGraphe(Matrice matrice);
 
 
-int Vainqueur(List * list,Matrice matrice);
+void Vainquqeur(List * list,Matrice matrice);
 #endif
 

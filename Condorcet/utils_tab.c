@@ -43,6 +43,7 @@ void delete_Matrice(Matrice matrice){
 }
 
 void afficher_Matrice(Matrice matrice){
+    printf("\nAfficher la matrice %d %d\n",matrice->nb_ligne,matrice->nb_ligne);
 	printf("I/I|");
 	for(int j = 0; j <  matrice->nb_colonne;j++){
 		printf("%-4d|",j);
@@ -83,18 +84,7 @@ void init_Matrice(Matrice matrice, int valeur) {
     }
 }
 
-/**
- * @brief Trouve le minimum dans une matrice.
- *
- * Cette fonction recherche le minimum dans une matrice et retourne ses coordonnées
- * (ligne et colonne) ainsi que sa valeur. Si aucun minimum n'est trouvé, la valeur est
- * mise à jour à -1.
- *
- * @param matrice La matrice dans laquelle rechercher le minimum.
- * @param ligne Variable pour stocker la ligne du minimum.
- * @param colonne Variable pour stocker la colonne du minimum.
- * @param valeur Variable pour stocker la valeur minimale.
- */
+
 void min_Matrice(Matrice matrice, int *ligne, int *colonne, int *valeur) {
     // Initialisation des valeurs minimales avec des valeurs arbitraires
     *valeur = INT_MAX;  // Utilisation de INT_MAX de <limits.h> pour une valeur initiale maximale
@@ -123,17 +113,36 @@ void min_Matrice(Matrice matrice, int *ligne, int *colonne, int *valeur) {
 }
 
 
-/**
- * @brief Remplit la matrice en duel en fonction des valeurs de matriceLigne.
- *
- * @param matrice La matrice à remplir.
- * @param matriceLigne La matrice contenant les valeurs à utiliser.
- */
+int max_Matrice_Ligne(Matrice matrice, int *colonne,int * valeur) {
+    // Initialisation des valeurs minimales avec des valeurs arbitraires
+    int doublon = 0;    // Initialisation avec une valeur non valide
+    *valeur = INT_MIN;  // Utilisation de INT_MAX de <limits.h> pour une valeur initiale maximale
+    *colonne = -1;      // Initialisation avec une valeur non valide
+
+    // Parcours de la matrice pour trouver le minimum
+    for (int i = 0; i < matrice->nb_colonne; i++) {
+        int element = matrice->tableau[0][i];
+        // Vérification si l'élément est un candidat pour être le minimum
+        if (element > *valeur) {
+            // Mise à jour des valeurs minimales
+            doublon = 0;
+            *valeur = element;
+            *colonne = i;
+        }
+        else if (element == *valeur){
+            doublon = 1;
+        }   
+    }
+    // Si aucun minimum n'a été trouvé, la valeur minimale est définie sur -1
+    return doublon;
+}
+
+
+
 void remplire_Matrice_Duel(Matrice matrice, Matrice matriceLigne) {
     int colonne;
     int ligne;
     int valeur;
-
     // Trouver le minimum dans matriceLigne
     min_Matrice(matriceLigne, &ligne, &colonne, &valeur);
 
@@ -141,7 +150,6 @@ void remplire_Matrice_Duel(Matrice matrice, Matrice matriceLigne) {
     while (valeur != -1) {
         // Marquer la valeur comme traitée
         matriceLigne->tableau[ligne][colonne] = -1;
-
         // Parcourir les lignes de matrice
         for (int i = 0; i < matrice->nb_ligne; i++) {
             // Vérifier si la valeur n'est pas déjà marquée comme traitée
@@ -163,3 +171,16 @@ void remplire_Matrice_Duel(Matrice matrice, Matrice matriceLigne) {
     }
 }
 
+Matrice obtenirPiresScores(Matrice matriceCombat) {
+    Matrice piresScores = create_Matrice(1, matriceCombat->nb_colonne);
+    init_Matrice(piresScores, INT_MIN);
+
+    for (int i = 0; i < matriceCombat->nb_ligne; i++) {
+        for (int j = 0; j < matriceCombat->nb_colonne; j++) {
+            if (matriceCombat->tableau[i][j] > piresScores->tableau[0][i]) {
+                piresScores->tableau[0][i] = matriceCombat->tableau[i][j];
+            }
+        }
+    }
+    return piresScores;
+}

@@ -17,11 +17,21 @@ CFLAGS=-std=c99 -Wextra -Wall -pedantic -Werror -Wunused-parameter
 # Options de l'édition de liens
 LDFLAGS=-lm
 
+ifeq ($(DEBUG),yes)
+	CFLAGS += -g
+	LDFLAGS +=
+else
+	CFLAGS += -O3 -DNDEBUG
+	LDFLAGS +=
+endif
+
 # Liste des fichiers source (.c)
 SRC= $(wildcard *.c)
 
 # Liste des fichiers objets (.o)
 OBJ= $(SRC:%.c=$(OBJ_DIR)/%.o) $(SHA256_SRC:%.c=$(OBJ_DIR)/%.o)
+
+
 
 # Règle par défaut pour tout compiler
 all: 

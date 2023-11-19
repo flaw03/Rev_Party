@@ -14,12 +14,11 @@
 
 int isCSV(const char* filename);
 
-void obtenir_Vote(const char *filename,int numCandidat,char * nom_Candidat);
 
-void afficher_vote(const char *filename, char *  hash);
+char * obtenir_nom_Candidat(const char *filename,int numColonne);
 
-Matrice lireCSVCondorcet(char* filename);
+void afficher_vote(const char* filename,char* hash);
 
-
+int lireCSVCondorcet(char* filename,Matrice *Matrice);
 
 #endif
