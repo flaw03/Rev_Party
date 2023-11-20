@@ -1,0 +1,26 @@
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur : Abcde1 a vote pour Tarte à la fraise
+Electeur : Abcde2 a vote pour Quatre quart
+Electeur : Abcde3 a vote pour Charlotte aux poires
+Electeur : Abcde4 a vote pour Clafouti
+Electeur : Abcde5 a vote pour Charlotte aux poires
+Electeur : Abcde6 a vote pour Charlotte aux poires
+Electeur : Abcde7 a vote pour Charlotte aux poires
+Electeur : Abcde8 a vote pour Baba au rhum
+Electeur : Abcde9 a vote pour Charlotte aux poires
+Electeur : Abcde10 a vote pour Tarte à la fraise
+
+
+ VERIFICATION UNINOMINAL DEUX TOURS 
+-Candidat : Charlotte aux poires Charlotte aux poires , nombre de votes : 5
+Candidat : Clafouti Clafouti , nombre de votes : 1
+Candidat : Quatre quart Quatre quart , nombre de votes : 1
+Candidat : Baba au rhum Baba au rhum , nombre de votes : 1
+Candidat : Tarte à la fraise Tarte à la fraise , nombre de votes : 2
+
+
+VERIF 2ND TOURS : 
+-Candidat Charlotte aux poires Charlotte aux poires a 7 votes
+ Candidat Tarte à la fraise Tarte à la fraise a 3 votes
