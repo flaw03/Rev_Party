@@ -13,6 +13,24 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Erreur USAGE[%s], veuillez insérer un fichier.csv puis choisir 'un' ou 'deux'\n", argv[0]);
         exit(1);
     }
+
+
+    // FILE* logfile; //RENDRE FONCTIONNEL DèS QU'ON A LE GETOPT.H
+
+    // if (argc > 1) {
+    //     logfile = fopen("log.txt", "w");
+    //     if (logfile == NULL) {
+    //         printf("erreur fichier.\n");
+    //         return 1;
+    //     }
+    // } else {
+    //     logfile = stdout;
+    // }
+
+    //  if (logfile != stdout) {
+    //     fclose(logfile);
+    // }
+    
     FILE* logfile = fopen("log.txt", "w");
 
     if (strcmp(argv[2], "un") == 0) {
