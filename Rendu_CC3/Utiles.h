@@ -6,6 +6,34 @@ typedef struct s_List_Electeur ListElect;
 typedef struct s_Candidat Candidat;
 typedef struct s_Electeur Electeur;
 
+struct s_Candidat {
+    char* nom;
+    char* prenom;
+    int age;
+    int vote;
+    struct s_Candidat* next;
+};
+
+struct s_Electeur {
+    char* nom;
+    char* prenom;
+    struct s_Candidat* candidat;
+    struct s_Electeur* next;
+};
+
+struct s_List_Electeur {
+    struct s_Electeur* head;
+    struct s_Electeur* tail;
+    unsigned int size;
+};
+
+struct s_List_Cand {
+    struct s_Candidat* head;
+    struct s_Candidat* tail;
+    unsigned int size;
+};
+
+
 
 /*-----------------------------------------------------------------*/
 
