@@ -4,6 +4,7 @@
 #include <time.h>
 
 #include "Utiles.h"
+#include "lecture.h"
 
 
 
