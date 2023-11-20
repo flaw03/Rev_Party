@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
 
     // FILE* logfile; //RENDRE FONCTIONNEL DèS QU'ON A LE GETOPT.H
 
-    // if (argc > 1) {
+    // if (getoppt contient -o) {
     //     logfile = fopen("log.txt", "w");
     //     if (logfile == NULL) {
     //         printf("erreur fichier.\n");
