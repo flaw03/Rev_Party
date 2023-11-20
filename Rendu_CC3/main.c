@@ -5,7 +5,7 @@
 #include <time.h>
 
 
-#include "rendu.c"
+#include "Uninominales.h"
 
 
 int main(int argc, char** argv) {

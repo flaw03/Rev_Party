@@ -2,14 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-// #include "Utiles.c"
 
+#include "Utiles.h"
+#include "lecture.h"
 
-#define MAX_LINE_LENGTH 1024
-
-#define colonneID 0
-#define colonneNom 3
-#define colonneVote 4
 
 
 void removeNewline(char* str) {
