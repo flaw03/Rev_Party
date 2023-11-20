@@ -42,6 +42,7 @@ void delete_Matrice(Matrice matrice){
     free(matrice);
 }
 
+
 void afficher_Matrice(Matrice matrice){
     printf("\nAfficher la matrice %d %d\n",matrice->nb_ligne,matrice->nb_ligne);
 	printf("I/I|");
@@ -165,7 +166,7 @@ void remplire_Matrice_Duel(Matrice matrice, Matrice matriceLigne) {
                 }
             }
         }
-
+        
         // Trouver le prochain minimum dans matriceLigne
         min_Matrice(matriceLigne, &ligne, &colonne, &valeur);
     }
@@ -177,8 +178,8 @@ Matrice obtenirPiresScores(Matrice matriceCombat) {
 
     for (int i = 0; i < matriceCombat->nb_ligne; i++) {
         for (int j = 0; j < matriceCombat->nb_colonne; j++) {
-            if (matriceCombat->tableau[i][j] > piresScores->tableau[0][i]) {
-                piresScores->tableau[0][i] = matriceCombat->tableau[i][j];
+            if (matriceCombat->tableau[j][i] > piresScores->tableau[0][i]) {
+                piresScores->tableau[0][i] = matriceCombat->tableau[j][i];
             }
         }
     }

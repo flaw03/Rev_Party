@@ -6,24 +6,34 @@ OBJ_DIR=obj
 BIN_DIR=bin
 
 # Nom de l'exécutable
-EXEC=verify_my_vote
+EXEC=cc3
 
 # Compilateur
 CC=gcc
 
+
+
+
 # Options de compilation
-CFLAGS=-std=c99 -Werror -Wextra -Wall -pedantic 
+CFLAGS=-std=c99 -Wextra -Wall -pedantic -Werror -Wunused-parameter
 # Options de l'édition de liens
 LDFLAGS=-lm
 
-# Ajout de l'option de débogage (-DDEBUG)
-CFLAGS += -DDEBUG
+ifeq ($(DEBUG),yes)
+	CFLAGS += -g
+	LDFLAGS +=
+else
+	CFLAGS += -O3 -DNDEBUG
+	LDFLAGS +=
+endif
 
-# Liste des fichiers source (.c)=
-SRC= $(wildcard *.c)
+# Liste des fichiers source (.c)
+SRC= main.c rendu.c Utiles.c lecture.c
 
 # Liste des fichiers objets (.o)
 OBJ= $(SRC:%.c=$(OBJ_DIR)/%.o) $(SHA256_SRC:%.c=$(OBJ_DIR)/%.o)
+
+
 
 # Règle par défaut pour tout compiler
 all: 
@@ -36,15 +46,14 @@ endif
 
 # Règle pour créer l'exécutable
 $(EXEC): $(OBJ)
+	@mkdir -p $(BIN_DIR)
 	@$(CC) -o $(BIN_DIR)/$@ $^ $(LDFLAGS)
 
 # Règle générique pour compiler les fichiers source en fichiers objets
 $(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-# Règle pour créer l'exécutable verify_my_vote
-$(BIN_DIR)/verify_my_vote: $(OBJ_DIR)/verify_my_vote.o
-	@$(CC) -o $@ $< Sha256/sha256.c Sha256/sha256_utils.c  6 $(LDFLAGS)
 
 .PHONY: clean mrproper
 

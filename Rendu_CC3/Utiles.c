@@ -43,7 +43,7 @@ Electeur* create_electeur(const char* nom, const char* prenom, Candidat* candida
 }
 
 
-ListElect *listElect_create(){
+ListElect *listElect_create(void){
   ListElect *l = malloc(sizeof(ListElect));
   l-> head = l-> tail = NULL;
   l->size = 0;
@@ -74,7 +74,7 @@ void listElect_delete(ListElect* l) {
 
 
 
-ListCand *listCand_create(){
+ListCand *listCand_create(void){
   ListCand *l = malloc(sizeof(ListCand));
   l-> head = l-> tail = NULL;
   l->size = 0;

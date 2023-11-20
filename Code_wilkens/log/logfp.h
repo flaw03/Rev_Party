@@ -23,6 +23,9 @@ void ouvrirLog(const char* nom_fichier);
 	@param desc : file descriptor
 */
 
-void closeLog(int desc);
+void closeLog(void);
+
+
 
 #endif
+

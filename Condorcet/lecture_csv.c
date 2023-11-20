@@ -124,8 +124,7 @@ void afficher_vote(const char* filename,char* hash){
 
 
 
-
-int lireCSVCondorcet(char* filename,Matrice * matrice){
+int lireCSVCondorcet(char* filename,Matrice *matrice){
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");

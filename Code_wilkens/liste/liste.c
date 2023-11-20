@@ -247,9 +247,11 @@ int list_iterator_value(ListIterator it){
 int main(void)
 {
   List* l=list_create();
+  printf("size %d\n", list_size(l));
   l=list_push_back(l,1,"aa","bb");
   printf("size %d\n", list_size(l));
   l=list_pop_back(l);
   printf("size %d\n", list_size(l));
+  list_delete(&l);
   return 0;
 }

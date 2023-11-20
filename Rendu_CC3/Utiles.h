@@ -23,7 +23,7 @@ Electeur* create_electeur(const char* nom, const char* prenom, Candidat* candida
 /** Creates and initializes an empty list of voters.
     @return A pointer to the newly created list of voters.
 */
-ListElect* listElect_create();
+ListElect* listElect_create(void);
 
 /** Adds an electeur to the list of electeurs.
     @param l The list of electeurs to modify.
@@ -49,7 +49,7 @@ Candidat* create_candidat(const char* nom, const char* prenom, int age);
 /** Creates and initializes an empty list of candidates.
     @return A pointer to the newly created list of candidates.
 */
-ListCand* listCand_create();
+ListCand* listCand_create(void);
 
 /** Adds a candidate to the list of candidates.
     @param l The list of candidates to modify.
