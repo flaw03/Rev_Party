@@ -211,20 +211,3 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     return;
  }
 
-int main(int argc,char** argv){
-    if(argc<3){
-        fprintf(stderr,"Erreur USAGE[%s], veuillez insérer un fichier.csv\n",argv[0]);
-        exit(1);
-    }
-    FILE* logfile = fopen("log.txt","w");
-
-    if(strcmp(argv[2],"un")==0){
-        unTour(argv[1],logfile);
-    }
-    else if(strcmp(argv[2],"deux")==0){
-        deuxTours(logfile,argv[1]);
-    }
-    fclose(logfile);
-
-    return 0;
-}

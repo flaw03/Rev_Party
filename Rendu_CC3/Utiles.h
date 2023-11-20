@@ -1,11 +1,11 @@
 #ifndef LISTESUTILES_H
 #define LISTESUTILES_H
 
-
 typedef struct s_List_Cand ListCand;
 typedef struct s_List_Electeur ListElect;
 typedef struct s_Candidat Candidat;
 typedef struct s_Electeur Electeur;
+
 
 /*-----------------------------------------------------------------*/
 
