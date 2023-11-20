@@ -4,14 +4,17 @@
 #include <string.h>
 #include <time.h>
 
-#include "Utiles.c"
-#include "lecture.c"
+#include "Utiles.h"
+#include "lecture.h"
+#include "rendu.h"
 
 
-typedef struct{//Structure permettant d'avoir des résultats propres
+
+struct s_Resultat {//Structure permettant d'avoir des résultats propres
     Candidat* candidat;
     double nb;
-} Resultat;
+};
+
 
 
 
