@@ -12,8 +12,6 @@ EXEC=cc3
 CC=gcc
 
 
-
-
 # Options de compilation
 CFLAGS=-std=c99 -Wextra -Wall -pedantic -Werror -Wunused-parameter
 # Options de l'édition de liens
@@ -28,7 +26,7 @@ else
 endif
 
 # Liste des fichiers source (.c)
-SRC= main.c rendu.c Utiles.c lecture.c
+SRC= $(wildcard *.c)
 
 # Liste des fichiers objets (.o)
 OBJ= $(SRC:%.c=$(OBJ_DIR)/%.o) $(SHA256_SRC:%.c=$(OBJ_DIR)/%.o)
@@ -57,6 +55,14 @@ $(OBJ_DIR)/%.o: %.c
 
 .PHONY: clean mrproper
 
+
 clean:
 	@rm -rf $(OBJ_DIR)/*.o
 	@rm -rf $(BIN_DIR)/$(EXEC) documentation/TP2
+
+doc : Uninominales.h Utiles.h lecture.h
+
+DELIVER_FMT=$(shell date "+$(shell id -un)_%d-%m-%y_%Hh%Mm%Ss")
+
+deliver:
+	zip -r $(DELIVER_FMT).zip .
