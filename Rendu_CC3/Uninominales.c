@@ -167,6 +167,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     lstCand = initVote(lstElect,lstCand,logfile);
     Resultat victorieux = uninominal_un_tour(lstElect,lstCand,logfile);
     printf("Vote uninominal un tour :\n");
+    printf("Nombre d'électeurs : %d , Nombre de candidats : %d",lstElect->size,lstCand->size);
     printf("Le gagnant au vote uninominal un tour est : %s avec %f %% votes\n",victorieux.candidat->prenom,victorieux.nb);
     listElect_delete(lstElect);
     listCand_delete(lstCand);
@@ -188,6 +189,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     lstCand = initVote(lstElect,lstCand,logfile);
     float nbVotesTotaux = lstElect->size;
     printf("\nVote uninominal deux tours :\n\n");
+    printf("Nombre d'électeurs : %d , Nombre de candidats : %d",lstElect->size,lstCand->size);
     Candidat** sec = finalistes_uninominal_deux_tours(lstElect,lstCand,logfile);
 
     if(sec[1]!=NULL){
