@@ -1,5 +1,5 @@
-#ifndef RENDU_H
-#define RENDU_H
+#ifndef UNINOMINALES_H
+#define UNINOMINALES_H
 
 typedef struct s_Resultat Resultat;
 
