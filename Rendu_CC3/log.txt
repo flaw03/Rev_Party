@@ -1,0 +1,74 @@
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+
+
+ VERIFICATION UNINOMINAL DEUX TOURS 
+-Candidat : A A , nombre de votes : 23
+Candidat : B B , nombre de votes : 19
+Candidat : C C , nombre de votes : 18
+
+
+VERIF 2ND TOURS : 
+-Candidat A A a 25 votes
+ Candidat B B a 35 votes
