@@ -4,7 +4,8 @@
 #include <string.h>
 #include <time.h>
 
-
+#include "Utiles.h"
+#include "lecture.h"
 #include "Uninominales.h"
 
 
