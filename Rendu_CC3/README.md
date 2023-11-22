@@ -1,4 +1,3 @@
-#README
 # Méthodes uninominales à un et deux tours
 
 Description du Projet :
@@ -22,8 +21,10 @@ Le projet est une application de vote uninominal qui prend en entrée un fichier
 Le programme prend en entrée un fichier CSV contenant les données de vote. Chaque ligne du fichier représente un électeur, et chaque colonne représente le choix de l'électeur pour un candidat.
 
 2. Méthodes de Vote :
-Uninominal à un tour (uni1) : Chaque électeur vote pour un seul candidat, et le candidat avec le plus grand nombre de votes remporte l'élection.
-Uninominal à deux tours (uni2) : Les deux candidats avec le plus grand nombre de votes au premier tour passent au deuxième tour, où le candidat avec le plus grand nombre de votes est élu.
+   
+    2.1 Uninominal à un tour (uni1) : Chaque électeur vote pour un seul candidat, et le candidat avec le plus grand nombre de votes remporte l'élection.
+
+    2.2 Uninominal à deux tours (uni2) : Les deux candidats avec le plus grand nombre de votes au premier tour passent au deuxième tour, où le candidat avec le plus grand nombre de votes est élu.
 
 3. Options d'Affichage : 
 L'application propose une option pour afficher les calculs intermédiaires dans un fichier log.
@@ -37,10 +38,13 @@ Pour exécuter le programme, utilisez la commande suivante :
 bin/uninominales -i <filename.csv> -m {uni1, uni2, all} [-o <log_file>]
 ```
 
-*Options :*
+*Paramètres :*
 
 -i : Spécifie le nom du fichier où se trouvent les données de vote.
+
+
 -m : Sélectionne la méthode de vote (uni1, uni2, all).
+
 -o : Optionnel. Spécifie le fichier log pour afficher les calculs intermédiaires.
 
 
@@ -73,11 +77,15 @@ make doc
 
 ## Contributions
 
-Equipe 17 : 
-    -NDOYE Assane 22100318
-    -SMETS Yoann  22100213 
-    -JOSEPH Wilkens Marc Johnley 22112190  
-    -MORELLATO Adrian 22000859
+Equipe 17 :
 
-Remarque :
-Assurez-vous que le fichier CSV est correctement formaté, avec les colonnes appropriées pour représenter les choix des électeurs.
+NDOYE Assane 22100318
+
+SMETS Yoann  22100213 
+
+JOSEPH Wilkens Marc Johnley 22112190  
+
+MORELLATO Adrian 22000859
+
+*Remarque :*
+*Assurez-vous que le fichier CSV est correctement formaté, avec les colonnes appropriées pour représenter les choix des électeurs.*
