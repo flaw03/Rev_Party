@@ -1,4 +1,4 @@
-README
+#README
 # Méthodes uninominales à un et deux tours
 
 Description du Projet :
@@ -74,10 +74,10 @@ make doc
 ## Contributions
 
 Equipe 17 : 
-    NDOYE Assane 22100318
-    SMETS Yoann  22100213 
-    JOSEPH Wilkens Marc Johnley 22112190  
-    MORELLATO Adrian 22000859
+    -NDOYE Assane 22100318
+    -SMETS Yoann  22100213 
+    -JOSEPH Wilkens Marc Johnley 22112190  
+    -MORELLATO Adrian 22000859
 
 Remarque :
 Assurez-vous que le fichier CSV est correctement formaté, avec les colonnes appropriées pour représenter les choix des électeurs.
