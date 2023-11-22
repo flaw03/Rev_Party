@@ -23,8 +23,7 @@ int main(int argc, char** argv) {
     FILE* logfile = NULL;
     
         if(argc<5){
-        
-            fprintf(stderr,"Erreur,Usage[%s], nombre d'arguments invalides , veuillez effectuer :\n./bin/uninominales -i ../Data/<fichier.csv> -o <fichier log> -m {uni1,uni2,all}  \nou\n./bin/uninominales -i ../Data/<fichier.csv> -m {uni1,uni2,all}\n",argv[0]);
+            fprintf(stderr, "Usage: %s -i <filename> -m {uni1, uni2, all} [-o <log_file>]\n", argv[0]);
             exit(9);
         }
     while ((opt = getopt(argc, argv, "i:o:m:")) != -1) {
