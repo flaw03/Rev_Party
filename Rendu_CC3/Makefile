@@ -51,15 +51,21 @@ $(OBJ_DIR)/%.o: %.c
 
 .PHONY: clean doc deliver
 
+mrproper: clean
+	@rm -rf $(EXEC) documentation/html
+
+
 clean:
 	@rm -rf $(OBJ_DIR)/*.o
-	@rm -rf $(BIN_DIR)/$(EXEC) documentation/TP2
 
-doc: Uninominales.h Utiles.h lecture.h
-	doxygen Doxyfile
+doc: Uninominales.h Utiles.h lecture.h main.c
+	@doxygen documentation/Uninominale
+
+doc: Uninominales.h Utiles.h lecture.h main.c
 
 DELIVER_FMT=$(shell date "+%d-%m-%y_%Hh%Mm%Ss")
 
 deliver:
 	@zip -r $(DELIVER_FMT).zip .
+
 
