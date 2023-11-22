@@ -1,5 +1,5 @@
 README
-# méthodes uninominales à un et deux tours
+# Méthodes uninominales à un et deux tours
 
 Description du Projet :
 Le projet est une application de vote uninominal qui prend en entrée un fichier CSV contenant des données de vote et effectue le calcul pour élire un candidat selon la méthode de vote uninominal à un ou deux tours.
