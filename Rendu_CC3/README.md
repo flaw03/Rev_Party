@@ -74,6 +74,8 @@ La documentation peut être générée en utilisant la commande suivante :
 make doc
 ```
 
+Vous pouvez consulter la documentation générée en ouvrant le fichier documentation/html/index.html dans votre navigateur web.
+
 
 ## Contributions
 

@@ -59,7 +59,7 @@ clean:
 	@rm -rf $(OBJ_DIR)/*.o
 
 doc: Uninominales.h Utiles.h lecture.h main.c
-	@doxygen documentation/FILEDOXYGEN
+	@doxygen documentation/Uninominale
 
 
 DELIVER_FMT=$(shell date "+%d-%m-%y_%Hh%Mm%Ss")
