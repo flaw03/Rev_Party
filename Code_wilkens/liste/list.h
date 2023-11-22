@@ -26,6 +26,12 @@ typedef struct s_List List;
 /** Définition of type ptrList : pointer to a List.
  */
 typedef List * ptrList;
+
+typedef struct s_element{
+	int a ;
+	int b;
+	int p;
+} * Element;
 /** @} */
 
 /*-----------------------------------------------------------------*/
@@ -154,6 +160,9 @@ List *list_remove_at(List *l, int p);
 	 @pre 0 <= p < list_size(l)
  */
 int list_at(List *l, int p);
+
+
+List *decreaseSort(List *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
@@ -212,7 +221,6 @@ int list_size(List *l);
  */
 typedef struct s_ListIterator *ListIterator;
 
-
 /**
  *	@brief Constructor of an iterator.
  * @param d the List to iterate
@@ -233,16 +241,18 @@ void list_iterator_delete(ListIterator it);
  *	@return the modified iterator
  *	@note the parameter it is modified by side effect and is returned by the function
  */
-ListIterator list_iterator_next(ListIterator it);
+Element list_iterator_next(ListIterator it);
 
 /**
  *	@brief Acces to the value of the iterator.
  *  @param it the iterator to delete
  *  @return the value designed by the iterator
  */
-int list_iterator_value(ListIterator it);
+Element list_iterator_value(ListIterator it);
 
 
+
+int supprimerElementCourant(ListIterator it);
 
 /** @} */
 

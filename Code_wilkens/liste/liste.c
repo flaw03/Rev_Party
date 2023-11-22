@@ -6,12 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-
 #include "list.h"
+
 typedef struct s_LinkedElement {
-	int poids;
-	char* a;
-	char* b;
+  struct  s_element * element;
 	struct s_LinkedElement *previous;
 	struct s_LinkedElement *next;
 } LinkedElement;
@@ -34,11 +32,13 @@ List *list_create() {
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_back(List *l, int p, char* candidat1, char* candidat2) {
+List *list_push_back(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
-  new->poids=p;
-  new->a=candidat1;
-  new->b=candidat2;
+  Element e = malloc(sizeof(struct s_element ));
+  e->a = candidat1;
+  e->b = candidat2;
+  e->p = p;
+  new->element = e;
   new->next=l->sentinel;
   new->previous=new->next->previous;
   new->next->previous=new;
@@ -50,17 +50,23 @@ List *list_push_back(List *l, int p, char* candidat1, char* candidat2) {
 /*-----------------------------------------------------------------*/
 
 void list_delete(ptrList *l) {
+  for (LinkedElement *e = (*l)->sentinel->next; e != (*l)->sentinel;
+  e = e->next){
+  }
   free(*l);
 	*l=NULL;
 }
 
 /*-----------------------------------------------------------------*/
 
-List *list_push_front(List *l, int p, char* candidat1, char* candidat2) {
+
+List *list_push_front(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
-  new->poids=p;
-  new->a=candidat1;
-  new->b=candidat2;
+  Element e = malloc(sizeof(struct s_element ));
+  e->a = candidat1;
+  e->b = candidat2;
+  e->p = p;
+  new->element = e;
   new->previous=l->sentinel;
   new->next=new->previous->next;
   new->next->previous=new;
@@ -68,6 +74,7 @@ List *list_push_front(List *l, int p, char* candidat1, char* candidat2) {
   ++(l->size);
 	return l;
 }
+
 
 /*-----------------------------------------------------------------*/
 
@@ -110,14 +117,15 @@ List *list_pop_back(List *l){
 }
 
 /*-----------------------------------------------------------------*/
-
-List *list_insert_at(List *l, int pos, int p, char* candidat1, char* candidat2) {
+List *list_insert_at(List *l, int pos, int p, int candidat1, int candidat2) {
   assert(pos>=0 && pos<=l->size);
 	LinkedElement *new=malloc(sizeof(LinkedElement));
   LinkedElement *e=l->sentinel->next;
-  new->poids=p;
-  new->a=candidat1;
-  new->b=candidat2;
+  Element element = malloc(sizeof(struct s_element ));
+  element->a = candidat1;
+  element->b = candidat2;
+  element->p = p;
+  new->element = e;
 
   for(int i=0;i<p; ++i){
     e=e->next;
@@ -145,23 +153,24 @@ List *list_remove_at(List *l, int p) {
   e->previous->next=old->next;
   e->next->previous=old->previous;
   --(l->size);
+  free(old->element);
   free(old);
 	return l;
 }
 
 /*-----------------------------------------------------------------*/
 
-/*int list_at(List *l, int p) {
+LinkedElement* list_at_aux(List *l, int p) {
   assert(p>=0 && p<l->size);
-  int val;
+  //int val;
   LinkedElement *e=l->sentinel->next;
 	for (int i=0; i< p; ++i) {
     e=e->next;
   }
 
-  val=e->value;
-	return val;
-}*/
+  //val=e->value;
+	return e;
+}
 
 /*-----------------------------------------------------------------*/
 
@@ -234,24 +243,67 @@ bool list_iterator_end(ListIterator it){
   return it->current==it->collection->sentinel;
 }
 
-ListIterator list_iterator_next(ListIterator it){
+Element list_iterator_next(ListIterator it){
   it->current=it->next(it->current);
-  return it;
+  return it->current->element;
 }
 
-int list_iterator_value(ListIterator it){
-  return it->current->a;
+Element list_iterator_value(ListIterator it){
+  return it->current->element;
+}
+
+int equivalentElem(List *l, LinkedElement *e){
+  bool trouve=false;
+  int indice=0;
+  for(LinkedElement *e= l->sentinel->next; e!=l->sentinel && !trouve; e=e->next){
+    if(e->element->a==e->element->a
+      && e->element->b==e->element->b
+      && e->element->p== e->element->p){
+    trouve=true;
+    indice--;
+    }
+    indice++;
+
+  }
+  if(!trouve) return -1;
+  return indice;
+}
+
+int supprimerElementCourant(ListIterator it){
+  int indice=equivalentElem(it->collection,(it->current));
+  if(indice==-1) return -1;
+  it=list_iterator_next(it);
+  it->collection=list_remove_at(it->collection,indice);
+  return 1;
+}
+
+int indiceMin(List *l){
+  int indiceMin=0;
+  int indiceCourant=0;
+  int val=l->sentinel->next->element->p;
+  for(LinkedElement *e=l->sentinel->next; e!=l->sentinel; e=e->next){
+    if(val>l->sentinel->next->element->p){
+      indiceMin=indiceCourant;
+    }
+    indiceCourant++;
+  }
+  return indiceMin;
 }
 
 
-int main(void)
-{
-  List* l=list_create();
-  printf("size %d\n", list_size(l));
-  l=list_push_back(l,1,"aa","bb");
-  printf("size %d\n", list_size(l));
-  l=list_pop_back(l);
-  printf("size %d\n", list_size(l));
-  list_delete(&l);
-  return 0;
+
+List * decreaseSort(List *l){
+  int count= l->size;
+  int indice;
+  List* result= list_create();
+  LinkedElement *e;
+  for(int i=0; i<count; i++){
+    indice=indiceMin(l);
+    e=list_at_aux(l,indice);
+    result=list_push_front(result,e->element->p,e->element->a,e->element->b);
+    l=list_remove_at(l,indice);
+  }
+  //free(e);
+  return result;
 }
+

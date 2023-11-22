@@ -26,6 +26,15 @@ typedef struct s_List List;
 /** Définition of type ptrList : pointer to a List.
  */
 typedef List * ptrList;
+
+
+
+typedef struct s_element{
+	int a ;
+	int b;
+	int p;
+} * Element;
+
 /** @} */
 
 /*-----------------------------------------------------------------*/
@@ -41,7 +50,7 @@ typedef int(*SimpleFunctor)(int,int,int);
 /** Functor with user data to be used with the list_reduce operator.
   This functor receive as argument the value of a list element and an opaque pointer to user provided data and must return the eventually modified value of the element.
  */
-typedef int (*ReduceFunctor)(int, int, int);
+typedef int (*ReduceFunctor)(Element,void *);
 
 /** Functor to be used with the list_sort operator.
    This functor must implement a total ordering function (comp). When calling this functor with two list elements a and b, this functor must return true if (a comp b).

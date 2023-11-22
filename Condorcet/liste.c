@@ -9,10 +9,9 @@
 
 #include "list.h"
 #include "utils_tab.h"
+
 typedef struct s_LinkedElement {
-	int poids;
-	int a;
-	int b;
+  struct  s_element * element;
 	struct s_LinkedElement *previous;
 	struct s_LinkedElement *next;
 } LinkedElement;
@@ -37,9 +36,11 @@ List *list_create(void) {
 
 List *list_push_back(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
-  new->poids=p;
-  new->a=candidat1;
-  new->b=candidat2;
+  Element e = malloc(sizeof(struct s_element ));
+  e->a = candidat1;
+  e->b = candidat2;
+  e->p = p;
+  new->element = e;
   new->next=l->sentinel;
   new->previous=new->next->previous;
   new->next->previous=new;
@@ -59,9 +60,11 @@ void list_delete(ptrList *l) {
 
 List *list_push_front(List *l, int p, int candidat1, int candidat2) {
 	LinkedElement *new= malloc(sizeof(LinkedElement));
-  new->poids=p;
-  new->a=candidat1;
-  new->b=candidat2;
+  Element e = malloc(sizeof(struct s_element ));
+  e->a = candidat1;
+  e->b = candidat2;
+  e->p = p;
+  new->element = e;
   new->previous=l->sentinel;
   new->next=new->previous->next;
   new->next->previous=new;
@@ -116,9 +119,11 @@ List *list_insert_at(List *l, int pos, int p, int candidat1, int candidat2) {
   assert(pos>=0 && pos<=l->size);
 	LinkedElement *new=malloc(sizeof(LinkedElement));
   LinkedElement *e=l->sentinel->next;
-  new->poids=p;
-  new->a=candidat1;
-  new->b=candidat2;
+  Element e = malloc(sizeof(struct s_element ));
+  e->a = candidat1;
+  e->b = candidat2;
+  e->p = p;
+  new->element = e;
 
   for(int i=0;i<p; ++i){
     e=e->next;
@@ -146,6 +151,7 @@ List *list_remove_at(List *l, int p) {
   e->previous->next=old->next;
   e->next->previous=old->previous;
   --(l->size);
+  free(old->element);
   free(old);
 	return l;
 }
@@ -187,9 +193,11 @@ List * list_map(List *l, SimpleFunctor f) {
 }
 
 */
-List *list_reduce(List *l, ReduceFunctor f) {
+
+
+List *list_reduce(List *l, ReduceFunctor f,void * env) {
   for (LinkedElement *e=l->sentinel->next; e!=l->sentinel; e=e->next){
-    f(e->a,e->b,e->poids);
+    f(e->element,env);
   }
 	return l;
 }
