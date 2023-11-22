@@ -125,7 +125,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     double votesCandidats1 = cand1->vote;
     double votesCandidats2 = cand2->vote;
     double votes = lstElecteurs->size;
-    fprintf(logfile,"\n\nVERIF 2ND TOURS : \n-Candidat %s %s a %d votes\n Candidat %s %s a %d votes",cand1->prenom,cand1->nom,cand1->vote,cand2->prenom,cand2->nom,cand2->vote);
+    fprintf(logfile,"\n\nVERIF 2ND TOUR : \n-Candidat %s %s a %d votes\n Candidat %s %s a %d votes",cand1->prenom,cand1->nom,cand1->vote,cand2->prenom,cand2->nom,cand2->vote);
     if(votesCandidats1>votesCandidats2){ //Retourne le candidat ayant le plus de votes
         result.candidat = finalistes[0];
         result.nb = (votesCandidats1/votes)*100;
