@@ -11,7 +11,7 @@
 
 
 /**
- *	@brief Opaque definition of the Resultat abstract data type.
+ * @brief Opaque definition of the Resultat abstract data type.
  */
 typedef struct s_Resultat Resultat;
 
