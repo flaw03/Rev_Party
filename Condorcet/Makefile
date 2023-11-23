@@ -13,7 +13,7 @@ CC=gcc
 
 
 # Options de compilation
-CFLAGS=-std=c99 -Wextra -Wall -pedantic -Werror -Wunused-parameter
+CFLAGS=-std=c99 -Wextra -Wall -pedantic -Werror -Wunused-parameter -Werror=unused-result
 # Options de l'édition de liens
 LDFLAGS=-lm
 

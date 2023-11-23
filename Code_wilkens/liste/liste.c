@@ -49,14 +49,19 @@ List *list_push_back(List *l, int p, int candidat1, int candidat2) {
 
 /*-----------------------------------------------------------------*/
 
-void list_delete(ptrList *l) {
-  for (LinkedElement *e = (*l)->sentinel->next; e != (*l)->sentinel;
-  e = e->next){
-  }
-  free(*l);
-	*l=NULL;
+void list_delete(ptrList *l){
+	LinkedElement *e = (*l)->sentinel->next;
+	LinkedElement *f;
+	while (e != (*l)->sentinel){
+		f = e;
+		e = e->next;
+    free(f->element);
+		free(f);
+	}
+	free(e);
+	free(*l);
+	*l = NULL;
 }
-
 /*-----------------------------------------------------------------*/
 
 

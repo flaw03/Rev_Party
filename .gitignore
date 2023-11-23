@@ -20,7 +20,6 @@ verify_my_vote/.DS_Store
 verify_my_vote/.DS_Store
 Code_wilkens/liste/list
 Code_a_verifier/liste/listeexec
-Rendu_CC3/documentation/Uninominale
 Rendu_CC3/documentation/html/_uninominales_8h_source.html
 Rendu_CC3/documentation/html/_utiles_8h_source.html
 Rendu_CC3/documentation/html/annotated.html
@@ -100,3 +99,6 @@ Rendu_CC3/documentation/html/search/search.css
 Rendu_CC3/documentation/html/search/search.js
 Rendu_CC3/documentation/html/search/searchdata.js
 Rendu_CC3/bin/uninominales
+Condorcet/obj/test.o
+.gitignore
+.gitignore

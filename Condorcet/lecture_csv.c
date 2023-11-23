@@ -14,14 +14,14 @@
 *   Fonction pour tester que le fichier en paramètre est bien un csv
 */
 
-int isCSV(const char* filename) {
+void isCSV(const char* filename) {
     const char* extension = strrchr(filename, '.');
     if (extension != NULL) {
-        if (strcmp(extension, ".csv") == 0) {
-            return 1; // Le fichier est .csv
+        if (strcmp(extension, ".csv") != 0) {
+            fprintf(stderr,"filname.csv");
+            exit(1); // Le fichier n'est pas .csv
         }
     }
-    return 0; // Le fichier n'est pas .csv
 }
 
 /*
@@ -39,7 +39,10 @@ char * obtenir_nom_Candidat(const char *filename,int numColonne){
 
 
     // lit la premier ligne 
-    fgets(line, MAX_LINE_LENGTH, file);
+    if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+        perror("fegts");
+        exit(1);
+    };
     fclose(file);
     char* token = strtok(line, ",");
     for (int  i = 0 ; i < MARGE + numColonne; i++){
@@ -86,6 +89,7 @@ void afficher_vote(const char* filename,char* hash){
         perror("Impossible d'ouvrir le fichier\n");
         exit(28);
     }
+    isCSV(filename);
     char line[MAX_LINE_LENGTH];
     // Lire chaque ligne du fichier CSV
     while (fgets(line, MAX_LINE_LENGTH, file)) {
@@ -133,32 +137,37 @@ int lireCSVCondorcet(char* filename,Matrice *matrice){
     char line[MAX_LINE_LENGTH];
 
     // lit la premier ligne 
-    fgets(line, MAX_LINE_LENGTH, file);
+     if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+        perror("fegts");
+        exit(1);
+    };
     char* token = strtok(line, ",");
-    int nb_colonne = 0;
+    int nb_candidat = 0;
     while (token != NULL){
         token = strtok(NULL, ",");
-        nb_colonne ++;
+        nb_candidat ++;
     }
-    nb_colonne -= MARGE;
+    nb_candidat -= MARGE;
     int nombreVotant = 0;
-    *matrice = create_Matrice(nb_colonne,nb_colonne);
-    Matrice ligne = create_Matrice (1,nb_colonne);
+    
+    *matrice = create_Matrice(nb_candidat,nb_candidat);
     init_Matrice(*matrice,0);
+    
+    Tableau tableauVote = create_Tableau(nb_candidat);
     while (fgets(line, MAX_LINE_LENGTH, file)) {
         char* token = strtok(line, ",");
         int colonne = 0;
         nombreVotant++;
         while (token != NULL) {
             if (colonne > MARGE - 1 ) { //Colonne 3 = colonne des SHA 
-                ligne->tableau[ligne->nb_ligne - 1][colonne - MARGE] = atoi(token);
+                tableauVote->tableau[colonne - MARGE] = atoi(token);
             }
             token = strtok(NULL, ",");
             colonne++;
         }
-        remplire_Matrice_Duel(*matrice,ligne);
+        remplire_Matrice_Duel(*matrice,tableauVote);
     }
-    delete_Matrice(ligne);
+    delete_Tableau(tableauVote);
     fclose(file);
     return nombreVotant;
 }

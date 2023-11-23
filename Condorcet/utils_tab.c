@@ -4,42 +4,40 @@
 #include <limits.h>
 
 
-Colonne create_tab1D(int nb_colonne){
-	int* tab;
-	tab = malloc(nb_colonne*sizeof(int));
+
+Tableau create_Tableau(int dim){
+	Tableau tab = malloc(sizeof(struct t_Tableau));
+    tab->dim = dim;
+    tab->tableau = malloc(dim * sizeof(int));
 	return tab;
 }
 
-Tableau create_tab2D(int nb_ligne, int nb_colonne){
-	Tableau tab = malloc(nb_ligne * sizeof(int *));
-	for(int i=0; i<nb_ligne;i++){
-		tab[i]= malloc(nb_colonne*sizeof(int));
-	}
-	return tab;
-}
 
 Matrice create_Matrice(int nb_ligne, int nb_colonne){
 	Matrice matrice = malloc(sizeof(struct t_Matrice));
 	matrice->nb_colonne = nb_colonne;
 	matrice->nb_ligne = nb_ligne;
-	matrice->tableau = create_tab2D(nb_ligne,nb_colonne);
+	matrice->tableau = malloc(nb_ligne * sizeof(int *));
+    for(int i=0; i< nb_ligne;i++){
+		matrice->tableau[i] = malloc(nb_colonne*sizeof(int));
+	}
 	return matrice;
 }
 
-void delete_colone(Colonne colone){
-	free(colone);
-}
 
-void deleteTableau(Tableau tableau,int nb_ligne) {
-    for (int i = 0; i < nb_ligne; i++) {
-        delete_colone(tableau[i]);
-    }
-    free(tableau);
-}
 
 void delete_Matrice(Matrice matrice){
-    deleteTableau (matrice->tableau,matrice->nb_ligne);
+    for (int i = 0; i < matrice->nb_ligne; i++) {
+        free(matrice->tableau[i]);
+    }
+    free(matrice->tableau);
     free(matrice);
+}
+
+
+void delete_Tableau(Tableau tab){
+    free(tab->tableau);
+    free(tab);
 }
 
 
@@ -68,6 +66,26 @@ void afficher_Matrice(Matrice matrice){
 }
 
 
+void afficher_Tableau(Tableau tab){
+    printf("\nAfficher le tableau %d\n",tab->dim);
+    for(int j = 0; j < tab->dim;j++){
+		printf("%-4d|",j);
+	}
+     printf("\n");;
+    for(int j = 0; j < (tab->dim) * 5;j++){
+		printf("-");
+		}
+     printf("\n");
+	for(int i = 0; i <  tab->dim;i++){
+		printf("%-4d|",tab->tableau[i]);
+	}
+     printf("\n");
+    for(int j = 0; j < (tab->dim) * 5;j++){
+		printf("-");
+		}
+    printf("\n");
+}
+
 /**
  * @brief Initialise une matrice avec une valeur spécifique.
  *
@@ -85,44 +103,50 @@ void init_Matrice(Matrice matrice, int valeur) {
     }
 }
 
+void init_Tableau(Tableau tab,int valeur){
+    for(int i = 0; i<tab->dim;i++){
+        tab->tableau[i] = valeur;
+    }
+}
 
-void min_Matrice(Matrice matrice, int *ligne, int *colonne, int *valeur) {
+int min_Tableau(Tableau tab,int *colonne, int *valeur) {
     // Initialisation des valeurs minimales avec des valeurs arbitraires
+    int doublon = 0;    // Initialisation avec une valeur non valide
     *valeur = INT_MAX;  // Utilisation de INT_MAX de <limits.h> pour une valeur initiale maximale
-    *ligne = -1;        // Initialisation avec une valeur non valide
     *colonne = -1;      // Initialisation avec une valeur non valide
 
     // Parcours de la matrice pour trouver le minimum
-    for (int i = 0; i < matrice->nb_ligne; i++) {
-        for (int j = 0; j < matrice->nb_colonne; j++) {
-            int element = matrice->tableau[i][j];
+    for (int i = 0; i < tab->dim; i++) {
+        int element = tab->tableau[i];
 
-            // Vérification si l'élément est un candidat pour être le minimum
-            if (element > 0 && element < *valeur) {
-                // Mise à jour des valeurs minimales
-                *valeur = element;
-                *ligne = i;
-                *colonne = j;
-            }
+        // Vérification si l'élément est un candidat pour être le minimum
+        if (element > 0 && element < *valeur) {
+            // Mise à jour des valeurs minimales
+            doublon = 0;
+            *valeur = element;
+            *colonne = i;
         }
+        else if (element == *valeur){
+            doublon = 1;
+        }   
     }
-
     // Si aucun minimum n'a été trouvé, la valeur minimale est définie sur -1
     if (*valeur == INT_MAX) {
         *valeur = -1;
     }
+    return doublon;
 }
 
 
-int max_Matrice_Ligne(Matrice matrice, int *colonne,int * valeur) {
+int max_Tableau(Tableau tab, int *colonne,int * valeur){
     // Initialisation des valeurs minimales avec des valeurs arbitraires
     int doublon = 0;    // Initialisation avec une valeur non valide
     *valeur = INT_MIN;  // Utilisation de INT_MAX de <limits.h> pour une valeur initiale maximale
     *colonne = -1;      // Initialisation avec une valeur non valide
 
     // Parcours de la matrice pour trouver le minimum
-    for (int i = 0; i < matrice->nb_colonne; i++) {
-        int element = matrice->tableau[0][i];
+    for (int i = 0; i < tab->dim; i++) {
+        int element = tab->tableau[i];
         // Vérification si l'élément est un candidat pour être le minimum
         if (element > *valeur) {
             // Mise à jour des valeurs minimales
@@ -140,23 +164,22 @@ int max_Matrice_Ligne(Matrice matrice, int *colonne,int * valeur) {
 
 
 
-void remplire_Matrice_Duel(Matrice matrice, Matrice matriceLigne) {
+void remplire_Matrice_Duel(Matrice matrice, Tableau tab) {
     int colonne;
-    int ligne;
     int valeur;
-    // Trouver le minimum dans matriceLigne
-    min_Matrice(matriceLigne, &ligne, &colonne, &valeur);
+    // Trouver le minimum dans le tableau
+    min_Tableau(tab, &colonne, &valeur);
 
     // Tant qu'il y a des valeurs à traiter dans matriceLigne
     while (valeur != -1) {
         // Marquer la valeur comme traitée
-        matriceLigne->tableau[ligne][colonne] = -1;
+        tab->tableau[colonne] = -1;
         // Parcourir les lignes de matrice
         for (int i = 0; i < matrice->nb_ligne; i++) {
             // Vérifier si la valeur n'est pas déjà marquée comme traitée
-            if (matriceLigne->tableau[0][i] != -1) {
+            if (tab->tableau[i] != -1) {
                 // Vérifier si la valeur dans matriceLigne correspond à la valeur trouvée précédemment
-                if (matriceLigne->tableau[0][i] == valeur) {
+                if (tab->tableau[i] == valeur) {
                     // Incrémenter les valeurs correspondantes dans matrice
                     matrice->tableau[colonne][i]++;
                     matrice->tableau[i][colonne]++;
@@ -168,18 +191,17 @@ void remplire_Matrice_Duel(Matrice matrice, Matrice matriceLigne) {
         }
         
         // Trouver le prochain minimum dans matriceLigne
-        min_Matrice(matriceLigne, &ligne, &colonne, &valeur);
+        min_Tableau(tab, &colonne, &valeur);
     }
 }
 
-Matrice obtenirPiresScores(Matrice matriceCombat) {
-    Matrice piresScores = create_Matrice(1, matriceCombat->nb_colonne);
-    init_Matrice(piresScores, INT_MIN);
-
+Tableau obtenirPiresScores(Matrice matriceCombat) {
+    Tableau piresScores = create_Tableau( matriceCombat->nb_colonne);
+    init_Tableau(piresScores, INT_MIN);
     for (int i = 0; i < matriceCombat->nb_ligne; i++) {
         for (int j = 0; j < matriceCombat->nb_colonne; j++) {
-            if (matriceCombat->tableau[j][i] > piresScores->tableau[0][i]) {
-                piresScores->tableau[0][i] = matriceCombat->tableau[j][i];
+            if (matriceCombat->tableau[j][i] > piresScores->tableau[i]) {
+                piresScores->tableau[i] = matriceCombat->tableau[j][i];
             }
         }
     }

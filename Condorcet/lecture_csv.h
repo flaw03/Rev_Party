@@ -12,8 +12,7 @@
 #define BUFFER_SIZE 16
 
 
-int isCSV(const char* filename);
-
+void isCSV(const char* filename);
 
 char * obtenir_nom_Candidat(const char *filename,int numColonne);
 
