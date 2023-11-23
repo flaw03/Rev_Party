@@ -10,7 +10,28 @@
 #include "lecture.h"
 #include "Uninominales.h"
 
-//Compiler avec : make
+/**
+ *	@defgroup Main Test program for Uninominales Implantation
+ *  @brief Definition of the Uninominales type and operators
+ *  @{
+ */
+
+
+/** Print a usage message for this program.
+ 
+ @code{.unparsed}
+ $bin/uninominales -i <filename.csv> -m {uni1, uni2, all} [-o <log_file>]
+ 
+-i : Specifies the name of the file where voting datas are located.
+
+-m : Select voting method (uni1, uni2, all).
+
+-o : Optional. Specifies the log file to display intermediate calculations.
+ 
+ @endcode
+ */
+
+//Compile with : make
 
 
 
