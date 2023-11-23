@@ -81,7 +81,7 @@ Candidat** finalistes_uninominal_deux_tours(ListElect *lstElect, ListCand *lstCa
     Candidat* second = NULL;
     Candidat** finalistes = malloc(2*sizeof(Candidat));
     Candidat* cand = lstCand->head;
-    fprintf(fichier,"\n\n VERIFICATION UNINOMINAL DEUX TOURS \n-");
+    fprintf(fichier,"\n\nVERIFICATION UNINOMINAL DEUX TOURS : \n-Premier tour\n-");
     while(cand!=NULL){ //Parcours de la liste de candidats
         int votesEnCours = cand->vote; 
         fprintf(fichier,"Candidat : %s %s , nombre de votes : %d\n",cand->nom,cand->prenom,votesEnCours);
@@ -125,7 +125,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     double votesCandidats1 = cand1->vote;
     double votesCandidats2 = cand2->vote;
     double votes = lstElecteurs->size;
-    fprintf(logfile,"\n\nVERIF 2ND TOURS : \n-Candidat %s %s a %d votes\n Candidat %s %s a %d votes",cand1->prenom,cand1->nom,cand1->vote,cand2->prenom,cand2->nom,cand2->vote);
+    fprintf(logfile,"\n\nVERIF 2ND TOUR : \n-Candidat %s %s a %d votes\n Candidat %s %s a %d votes",cand1->prenom,cand1->nom,cand1->vote,cand2->prenom,cand2->nom,cand2->vote);
     if(votesCandidats1>votesCandidats2){ //Retourne le candidat ayant le plus de votes
         result.candidat = finalistes[0];
         result.nb = (votesCandidats1/votes)*100;
