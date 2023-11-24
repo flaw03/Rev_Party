@@ -9,90 +9,157 @@
 #define LECTURE_H
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Constructors Contructors and destructors of the TAD.
- @{
+/** 
+ *  @file lecture.h 
+ *  @defgroup Constructors Contructors and destructors of the TAD.
+ *  @{
  */
-/** Enlève les sauts de ligne d'une chaine de caractère
-    @param str la chaine à modifier
-    @return la chaine modiée
-*/
+
+
+
+
+
+/** 
+ * @brief Remove line breaks from a chain
+ *
+ * @par Profile
+ * @parblock
+ *	removeNewline : \f$\rightarrow \f$ void.
+ * @endparblock
+ * @param str the chain to modify
+ * @return the modified chain
+ * 
+ */
 void removeNewline(char* str);
 
-/** Selon un tableau de votes renvoie l'indice du vote.
-  @param votes le tableau de votes
-  @param taille la taille du tableau
-  @return l'indice
-
-*/
-
+/** 
+ * @brief According to a vote array returns the vote index.
+ * 
+ * @par Profile
+ * @parblock
+ *	getIndiceVote : \f$\rightarrow \f$ int.
+ * @endparblock
+ * @param votes the voting array
+ * @param taille the size of the array
+ * @return the index
+ * @pre
+ *  0 \f$<\f$ taille
+ *
+ */
 int getIndiceVote(int* votes, int taille);
-/**Renvoie le candidat associé au nombre nb
-  @preconditions : nb< taille lstCand
-  @param nb , un nombre
-  @param lstCand la liste de candidats
-  @return le candidat associé au numéro nb
 
-*/
+/**
+ * @brief Renvoie le candidat associé au nombre nb
+ * 
+ * @par Profile
+ * @parblock
+ *	candidatAssocie : \f$\rightarrow \f$ Candidat*.
+ * @endparblock
+ * @param nb a number
+ * @param lstCand the list of candidates
+ * @return the candidate associated with the number nb
+ * @pre
+ *  nb \f$<\f$ size_of_lstCand
+ *
+ */
 Candidat* candidatAssocie(int nb, ListCand* lstCand);
-/**Fonction créant une liste d'électeurs selon un fichier.csv
-@param lstElect la liste d'électeurs à remplir (vide)
-@param lstCand la liste de Candidats à associer aux electeurs
-@param fichier l'accès aux données
-@param tab Le tableau de votes des electeurs
-@return une liste d'electeurs
 
-*/
+/**
+ * @brief Function creating a list of voters according to a .csv file
+ * 
+ * @par Profile
+ * @parblock
+ *	getElecteur : \f$\rightarrow \f$ ListElect*.
+ * @endparblock
+ * @param lstElect the empty voters list to fill
+ * @param lstCand the list of Candidates to be associated with voters
+ * @param fichier file containing data
+ * @param tab The voters' vote array
+ * @return a list of voters
+ *
+ */
 ListElect* getElecteur(ListElect* lstElect, ListCand* lstCand, char* fichier, int* tab);
 
-/**Fonction créant une liste de candidats à partir d'un fichier.csv
-
-@param lstCand Liste vide de candidats
-@param fichier Le fichier contenant les données
-*/
-
+/**
+ * @brief Function creating a list of candidates according to a .csv file
+ *
+ * @par Profile
+ * @parblock
+ *	getCandidat : \f$\rightarrow \f$ ListCand*.
+ * @endparblock
+ * @param lstCand the empty candidates list to fill
+ * @param fichier file containing data
+ * @return a list of candidates
+ * 
+ */
 ListCand* getCandidat(ListCand* lstCand, char* fichier);
 
-/** Fonction renvoyant l'indice colonne d'un fichier.csv de chaque candidat présent dans la liste
-@param candidats Les candidats présent
-@param fichier Le fichier.csv à analyser
-@param tab le tableau vide qui contiendra les indices des candidats
-
-@return le tableau contenant les indices des candidats
-
-
-*/
-
+/** 
+ * @brief Function returning the column index of a .csv file of each candidate present in the list
+ * 
+ * @par Profile
+ * @parblock
+ *	indice : \f$\rightarrow \f$ int*.
+ * @endparblock
+ * @param candidats The candidates present
+ * @param fichier The .csv file to analyze
+ * @param tab the empty array which will contain the indexes of the candidates
+ * @return the array containing the candidates' indexes
+ *
+ */
 int* indice(ListCand* candidats, char* fichier, int* tab);
-/** Fonction renvoyant l'indice colonne d'un candidat présent dans un fichier.csv
-    Evite de faire appel à une liste
 
-    @param candidat Le candidat à rechercher
-    @param fichier le fichier.csv à  analyser
-
-    @return l'indice colonne du candidat dans le fichier.csv
-
-*/
+/** 
+ * @brief Function returning the column index of a candidate present in a .csv file and avoids calling a list
+ * 
+ * @par Profile
+ * @parblock
+ *	getIndice : \f$\rightarrow \f$ int.
+ * @endparblock
+ * @param candidat The candidate to look for
+ * @param fichier The .csv file to analyze
+ * @return the column index of the candidate in the .csv file
+ *
+ */
 int getIndice(Candidat* candidats, char* fichier);
-/** Fonction permettant de créer une liste d'electurs ayant voté pour 2 candidats différents en choisissant celui qu'ils ont préféré.
-@param lstElect liste vide
-@param c1 Candidat 1
-@param c2 Candidat 2
-@param fichier le fichier contenant les votes et les informations des electeurs
 
-@return Une liste d'électeurs
-
-*/
+/** 
+ * @brief Function allowing you to create a list of voters who voted for two different candidates by choosing the one they preferred.
+ * 
+ * @par Profile
+ * @parblock
+ *	electeurs2ndTours2Candidats : \f$\rightarrow \f$ ListElect*.
+ * @endparblock
+ * @param lstElect an empty list
+ * @param c1 the Candidate 1
+ * @param c2 the Candidate 2
+ * @param fichier the file containing the votes and voter information
+ * @return A list of voters
+ *
+ */
 
 ListElect* electeurs2ndTours2Candidats(ListElect* lstElect, Candidat* c1, Candidat* c2, char* fichier,FILE* logfile);
-/** Fonction permettant de créer une liste d'electurs ayant voté pour un nombre de candidats différents en choisissant celui qu'ils ont préféré.
-@param lstElect liste vide
-@param lstCand la liste des candidats
-@param fichier le fichier contenant les votes et les informations des electeurs
-@param tab Le tableau contenant les votes de chaque electeur
-@return Une liste d'électeurs
 
-
-*/
+/** 
+ * @brief Function allowing you to create a list of voters who voted for a number of different candidates by choosing the one they preferred.
+ * 
+ * @par Profile
+ * @parblock
+ *	getElecteur2ndTour : \f$\rightarrow \f$ ListElect*.
+ * @endparblock
+ * @param lstElect an empty list
+ * @param lstCand the list of candidates
+ * @param fichier the file containing the votes and voter information
+ * @param tab The array containing the votes of each voter
+ * @return A list of voters
+ *
+ */
 ListElect* getElecteur2ndTour(ListElect* lstElect, ListCand* lstCand, char* fichier, int* tab);
+
+/** @} */
+
+
+
+/** @} */
 
 #endif

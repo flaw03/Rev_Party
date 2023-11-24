@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['candidat',['candidat',['../group___constructors.html#ga7cb53c05443ee48a03c872991ed7d157',1,'s_Electeur']]]
+  ['candidat_94',['candidat',['../structs___electeur.html#a7cb53c05443ee48a03c872991ed7d157',1,'s_Electeur']]]
 ];

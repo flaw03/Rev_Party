@@ -3,9 +3,9 @@
 
 
 /**
- * @file Utiles.h
+ *  @file Utiles.h
  *	@defgroup defgroup Constructors Contructors and destructors of the TAD.
- * @{
+ *  @{
  */
 
 
@@ -68,55 +68,112 @@ struct s_List_Cand {
  * @param prenom First name of the voter.
  * @param candidat Pointer to the candidate chosen by the voter.
  * @return A pointer to the newly created voter.
+ * 
  */
 Electeur* create_electeur(const char* nom, const char* prenom, Candidat* candidat);
 
-/** @brief Creates and initializes an empty list of voters.
-    @return A pointer to the newly created list of voters.
-*/
+/** 
+ * @brief Creates and initializes an empty list of voters.
+ * 
+ * @par Profile
+ * @parblock
+ *  listElect_create : \f$\rightarrow\f$ ListElect*.
+ * @endparblock
+ * @return A pointer to the newly created list of voters.
+ * 
+ */
 ListElect* listElect_create(void);
 
-/** @brief Adds an electeur to the list of electeurs.
-    @param l The list of electeurs to modify.
-    @param electehr Pointer to the electeur to be added.
-    @return The modified list of electerrs.
-*/
+/** 
+ * @brief Adds an electeur to the list of electeurs.
+ * 
+ * @par Profile
+ * @parblock
+ *  list_add_Electeur : \f$\rightarrow\f$ ListElect*.
+ * @endparblock
+ *  @param l The list of electeurs to modify.
+ *  @param electeur Pointer to the electeur to be added.
+ *  @return The modified list of electers.
+ * 
+ */
 ListElect* list_add_Electeur(ListElect* l, Electeur* electeur);
 
-
-/** @brief Deletes the entire list of electeurs and frees allocated memory.
-    @param l The list of electeurs to be deleted.
+/** 
+ * @brief Deletes the entire list of electeurs and frees allocated memory.
+ * 
+ * @par Profile
+ * @parblock
+ *	listElect_delete : ListElect\f$\rightarrow \f$ void.
+ * @endparblock
+ * @param l The list of electeurs to delete.
+ * 
 */
 void listElect_delete(ListElect* l);
 
-/** @brief Creates a new candidate with the specified information.
-    @param nom Last name of the candidate.
-    @param prenom First name of the candidate.
-    @param age Age of the candidate.
-    @return A pointer to the newly created candidate.
-*/
+/** 
+ * @brief Creates a new candidate with the specified information.
+ * 
+ * @par Profile
+ * @parblock
+ *	create_candidat : \f$\rightarrow \f$ Candidat*.
+ * @endparblock
+ * @param nom Last name of the candidate.
+ * @param prenom First name of the candidate.
+ * @param age Age of the candidate.
+ * @return A pointer to the newly created candidate.
+ * 
+ */
 Candidat* create_candidat(const char* nom, const char* prenom, int age);
 
-/** @brief Creates and initializes an empty list of candidates.
-    @return A pointer to the newly created list of candidates.
+/** 
+ * @brief Creates and initializes an empty list of candidates.
+ * 
+ * @par Profile
+ * @parblock
+ *	listCand_create : \f$\rightarrow \f$ ListCand*.
+ * @endparblock
+ * @return A pointer to the newly created list of candidates.
+ * 
 */
 ListCand* listCand_create(void);
 
-/** @brief Adds a candidate to the list of candidates.
-    @param l The list of candidates to modify.
-    @param candidat Pointer to the candidate to be added.
-    @return The modified list of candidates.
+/** 
+ * @brief Adds a candidate to the list of candidates.
+ * 
+ * @par Profile
+ * @parblock
+ *	listCand_add : \f$\rightarrow \f$ ListCand*.
+ * @endparblock
+ * @param l The list of candidates to modify.
+ * @param candidat Pointer to the candidate to be added.
+ * @return The modified list of candidates.
+ * 
 */
 ListCand* listCand_add(ListCand* l, Candidat* candidat);
 
-/** @brief Deletes the entire list of candidates and frees allocated memory.
-    @param l The list of candidates to be deleted.
-*/
+/** 
+ * @brief Deletes the entire list of candidates and frees allocated memory.
+ * 
+ * @par Profile
+ * @parblock
+ *	listCand_delete : ListCand*\f$\rightarrow \f$ void.
+ * @endparblock
+ * @param l The list of candidates to be deleted.
+ */
 void listCand_delete(ListCand* l);
 
-/** @brief Displays all the informations of each candidate in the list.
-    @param l The list of candidates to be displayed.
-
-*/
+/** 
+ * @brief Displays all the informations of each candidate in the list.
+ * 
+ * @param l The list of candidates to be displayed.
+ *
+ */
 void printList(ListCand* l);
+
+
+/** @} */
+
+
+
+/** @} */
 #endif
