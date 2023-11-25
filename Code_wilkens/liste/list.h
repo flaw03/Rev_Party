@@ -162,7 +162,7 @@ List *list_remove_at(List *l, int p);
 int list_at(List *l, int p);
 
 
-List *decreaseSort(List *l);
+int decreaseSort(List *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
@@ -249,6 +249,8 @@ Element list_iterator_next(ListIterator it);
  *  @return the value designed by the iterator
  */
 Element list_iterator_value(ListIterator it);
+
+bool list_iterator_end(ListIterator it);
 
 
 
