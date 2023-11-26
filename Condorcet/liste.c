@@ -26,6 +26,7 @@ List *list_create(void) {
 	List *l = malloc(sizeof(struct s_List));
   l->sentinel=malloc(sizeof(LinkedElement));
   l->sentinel->next=l->sentinel->previous=l->sentinel;
+  l->sentinel->element = NULL; 
   l->size=0;
 	return l;
 }
@@ -244,7 +245,11 @@ ListIterator list_iterator_begin(ListIterator it){
 }
 
 int list_iterator_end(ListIterator it){
-    return it->current==it->collection->sentinel;
+    return it->current== it->collection->sentinel;
+}
+
+int list_iterator_has_next(ListIterator it){
+    return it->next(it->current) == it->collection->sentinel;
 }
 
 Element list_iterator_next(ListIterator it){
@@ -256,30 +261,15 @@ Element list_iterator_value(ListIterator it){
   return it->current->element;
 }
 
-// int equivalentElem(List *l, LinkedElement *c){
-//     bool trouve=false;
-//     int indice=0;
-//     for(LinkedElement *e= l->sentinel->next; e!= c; e=e->next){
-//         indice++;
-//     }
-//     if(!trouve) {
-//         return -1;
-//     }
-//     return indice;
-// }
-
-// int supprimerElementCourant(ListIterator it){
-//     int indice = equivalentElem(it->collection,(it->current));
-//     if(indice == -1) {
-//         return -1;
-//     }
-//     list_iterator_next(it);
-//     it->collection = list_remove_at(it->collection,indice);
-//     return 1;
-// }
-
-int supprimerElementCourant(ListIterator it){
+int list_iterator_delete_current(ListIterator it){
     LinkedElement *e = it->current;
+    if (e == it->begin){
+        if (e == it->collection->sentinel->next){
+            it->begin = e->next;
+        }else{
+            it->begin = e->previous;
+        } 
+    }
     list_iterator_next(it);
     e->previous->next = e->next;
     e->next->previous = e->previous;
@@ -288,24 +278,6 @@ int supprimerElementCourant(ListIterator it){
     free(e);
     return 1;
 }
-
-
-
-// int indiceMin(List *l){
-//   int indiceMin=0;
-//   int indiceCourant=0;
-//   int val=l->sentinel->next->element->p;
-//   for(LinkedElement *e=l->sentinel->next; e!=l->sentinel; e=e->next){
-//     if(val>l->sentinel->next->element->p){
-//       indiceMin=indiceCourant;
-//     }
-//     indiceCourant++;
-//   }
-//   return indiceMin;
-// }
-
-
-
 
 
 List *list_reduce(List *l, ReduceFunctor f,void * env) {
@@ -327,4 +299,28 @@ List * matriceCombatToGraphe(Matrice matriceDuel){
         }
     }
     return list;
+}
+
+int triee_liste_decroissant(List* l){
+  LinkedElement *from, *to;
+  Element aux= malloc(sizeof(Element));
+  for(int i=0;i<l->size;i++){
+    from= list_at_aux(l,i);
+    for(int j=i+1; j<l->size; j++){
+      to=list_at_aux(l,j);
+      if(from->element->p< to->element->p){
+        *aux=*(from->element);
+        *(from->element)=*(to->element);
+        *(to->element)=*aux;
+      }
+    }
+  }
+  
+  free(aux);
+    for(LinkedElement* e= l->sentinel->next; e->next!=l->sentinel; e=e->next){
+      if(e->element->p<e->next->element->p){
+        return 0;
+      }
+  }
+  return 1;
 }

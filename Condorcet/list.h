@@ -266,9 +266,11 @@ Element list_iterator_next(ListIterator it);
  */
 Element list_iterator_value(ListIterator it);
 
+int list_iterator_has_next(ListIterator it),
 
 
-int supprimerElementCourant(ListIterator it);
+
+int list_iterator_delete_current(ListIterator it);
 
 
 int list_iterator_end(ListIterator it);
