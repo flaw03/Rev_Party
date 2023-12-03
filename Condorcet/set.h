@@ -6,25 +6,24 @@
 
 
 
-typedef struct s_disjointSet DisjointSet
+typedef struct s_disjointSet DisjointSet;
 
 // Initialiser un ensemble disjoint
-DisjointSet *createDisjointSet(int n);
-
+DisjointSet * createDisjointSet(int n);
 
 // Libérer la mémoire d'un ensemble disjoint
 void freeDisjointSet(DisjointSet *set);
 
-// Trouver le représentant de l'ensemble
-int find(DisjointSet *set, int i);
-
 // Fusionner deux ensembles disjoints par leurs représentants
-void unionSets(DisjointSet *set, int x, int y) ;
+void addEdge(DisjointSet *set, int x, int y) ;
 
 // Vérifier si l'ajout de l'arête (u, v) créerait un cycle
 int doesCreateCycle(DisjointSet *set, int u, int v);
 
-int rootThree(DisjointSet *set)
+int rootThree(DisjointSet *set);
+
+void printSet(DisjointSet *set);
+
 
 #endif
 

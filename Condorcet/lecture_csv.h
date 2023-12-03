@@ -12,12 +12,15 @@
 #define BUFFER_SIZE 16
 
 
-void isCSV(const char* filename);
+int isCSV(const char* filename);
 
 char * obtenir_nom_Candidat(const char *filename,int numColonne);
 
 void afficher_vote(const char* filename,char* hash);
 
 int lireCSVCondorcet(char* filename,Matrice *Matrice);
+
+int lireCSVMatriceDuel(char* filename,Matrice *Matrice);
+
 
 #endif

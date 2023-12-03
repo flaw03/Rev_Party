@@ -212,6 +212,7 @@ List *list_reduce(List *l, ReduceFunctor f,void * env);
 
 List * matriceCombatToGraphe(Matrice matrice);
 
+int triee_liste_decroissant(List* l);
 
 
 
@@ -266,7 +267,7 @@ Element list_iterator_next(ListIterator it);
  */
 Element list_iterator_value(ListIterator it);
 
-int list_iterator_has_next(ListIterator it),
+int list_iterator_has_next(ListIterator it);
 
 
 

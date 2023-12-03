@@ -24,8 +24,6 @@ Matrice create_Matrice(int nb_ligne, int nb_colonne){
 	return matrice;
 }
 
-
-
 void delete_Matrice(Matrice matrice){
     for (int i = 0; i < matrice->nb_ligne; i++) {
         free(matrice->tableau[i]);

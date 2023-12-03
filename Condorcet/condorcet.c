@@ -13,31 +13,12 @@
 // Fait la somme des de chaque sommet 
 void sommeDegresParSommet(List * list,Tableau tableau){
     ListIterator it = list_iterator_create(list,FORWARD_ITERATOR);
-    for (Element e = list_iterator_next(it) ; !list_iterator_end(it);e = list_iterator_next(it)){
+    for (Element e = list_iterator_value(it) ; !list_iterator_end(it);e = list_iterator_next(it)){
         tableau->tableau[e->a]++;
     }
     list_iterator_delete(it);
 }
 
-
-
-int kruskal(List *graphe, int nbSommet,List * arbre) {
-    // Initialiser l'ensemble disjoint
-    DisjointSet *set = createDisjointSet(nbSommet);
-    triee_liste_decroissant(graphe);
-    ListIterator it = list_iterator_create(graphe);
-    arbre = list_create();
-    for(Element e = list_iterator_next(it); !list_iterator_end(it); e = list_iterator_next(it) ){
-        if (!doesCreateCycle(set, e->a, e->b)) {
-            unionSets(set, e->a, e->b);
-            list_push_back(arbre,e->p,e->a,e->b);
-        }
-    }
-    // Libérer la mémoire de l'ensemble disjoint
-    int racine = rootThree(set)
-    freeDisjointSet(set);
-    return racine;
-}
 
 int affichierListe(Element e,void *env){
     fprintf(env, "Candidat %d --[%d]--> Candidat %d\n", e->a, e->p, e->b);
@@ -45,16 +26,49 @@ int affichierListe(Element e,void *env){
 
 }
 
-int condorcet(char *filenmae,Matrice *matriceCombat,List **graphe,int * nombreElecteur){   
-    *nombreElecteur = lireCSVCondorcet(filenmae,matriceCombat);
-    afficher_Matrice(*matriceCombat);
-    *graphe = matriceCombatToGraphe(*matriceCombat);
+int GraphedepoidFortnoncyclique(List *graphe, int nbSommet,ptrList * arbre) {
+    // Initialiser l'ensemble disjoint
+    DisjointSet *set = createDisjointSet(nbSommet);
+    triee_liste_decroissant(graphe);
+    printf("liste decroisante \n");
+    list_reduce(graphe,&affichierListe,stdout);
+    ListIterator it = list_iterator_create(graphe,FORWARD_ITERATOR);
+    *arbre = list_create();
+    printf("kruskal \n");
+    for(Element e = list_iterator_value(it); !list_iterator_end(it); e = list_iterator_next(it) ){
+        printf("\nset avant \n");
+        affichierListe(e,stdout);
+        printSet(set);
+        if (doesCreateCycle(set, e->a, e->b)== 0) {
+            printf("no create cycle\n");
+            addEdge(set,e->a,e->b);
+            list_push_back(*arbre,e->p,e->a,e->b);
+        }else{
+            printf("create cycle\n");
+        }
+        printSet(set);
+
+    }
+    int racine = rootThree(set);
+    // Libérer la mémoire de l'ensemble disjoint
+    freeDisjointSet(set);
+    printf("Fin kruskal racine %d\n",racine);
+    return racine;
+}
+
+
+int condorcet(Matrice *matriceDuel,List **graphe){   
+    printf("matrice de duel\n");
+    afficher_Matrice(*matriceDuel);
+    *graphe = matriceDuelToGraphe(*matriceDuel);
+    printf("Graphe\n");
     list_reduce(*graphe,&affichierListe,stdout);
     
-    Tableau TableauScore = create_Tableau((*matriceCombat)->nb_colonne);
+    Tableau TableauScore = create_Tableau((*matriceDuel)->nb_colonne);
     init_Tableau(TableauScore,0);
     
     sommeDegresParSommet(*graphe,TableauScore);
+    printf("matrice score\n");
     afficher_Tableau(TableauScore);  
     
     int colonne,valeur;
@@ -67,58 +81,49 @@ int condorcet(char *filenmae,Matrice *matriceCombat,List **graphe,int * nombreEl
 }
 
 
-void methode_minmax(char *filenmae){
-    Matrice matriceCombat = NULL;
+int methode_minmax(Matrice *matriceDuel){
     List *graphe = NULL;
-    int nombreElecteur;
-    int vainqueur = condorcet(filenmae,&matriceCombat,&graphe,&nombreElecteur);
+    int vainqueur = condorcet(matriceDuel,&graphe);
     if (vainqueur == -1){
-        Tableau pireScore = obtenirPiresScores(matriceCombat);
+        Tableau pireScore = obtenirPiresScores(*matriceDuel);
         afficher_Tableau(pireScore);
         int valeur;
         min_Tableau(pireScore,&vainqueur,&valeur);
         delete_Tableau(pireScore);
     }
-    char * nomVainqueur = obtenir_nom_Candidat(filenmae,vainqueur);
-    printf("Mode de scrutin : Condorcet minimax, %d candidats, %d votants, vainqueur = %s\n",matriceCombat->nb_colonne,
-    nombreElecteur,nomVainqueur);
-    free(nomVainqueur);
-    delete_Matrice(matriceCombat);
     list_delete(&graphe);
+    return vainqueur;
 }
 
 
-void methode_paire(char *filenmae){
-    Matrice matriceCombat = NULL;
+int methode_paire(Matrice *matriceDuel){
     List *graphe = NULL;
-    int nombreElecteur;
-    int vainqueur = condorcet(filenmae,&matriceCombat,&graphe,&nombreElecteur);
+    int vainqueur = condorcet(matriceDuel,&graphe);
     if (vainqueur == -1){
         List *arbre = NULL;
-        vainqueur = kruskal(graphe,matriceCombat->nb_colonne,arbre);
+        vainqueur = GraphedepoidFortnoncyclique(graphe,(*matriceDuel)->nb_colonne,&arbre);
+        printf("ARBRE : \n");
+        list_reduce(arbre,&affichierListe,stdout);
         list_delete(&arbre);
-        }
-    char * nomVainqueur = obtenir_nom_Candidat(filenmae,vainqueur);
-    printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceCombat->nb_colonne,
-    nombreElecteur,nomVainqueur);
-    free(nomVainqueur);
-    delete_Matrice(matriceCombat);
+    }
     list_delete(&graphe);
+    return vainqueur;
 }
 
-int main()
+int main(void)
 {
-    methode_minmax("../Data/VoteCondorcet.csv");
+    char * filename = "../Data/paire.txt";
+    Matrice matriceDuel = NULL;
+    int nombreElecteur = lireCSVMatriceDuel(filename,&matriceDuel);
+    afficher_Matrice(matriceDuel);
+    printf("nombre de votant = %d\n",nombreElecteur);
     
-    // Matrice matrice = create_Matrice(10,10);
-    // printf("creation ok\n");
-    // init_Matrice(matrice,0);
-    // printf("init ok\n");
-    // afficher_Matrice(matrice);
-    // printf("affichage ok\n");
-    // delete_Matrice(matrice);
-    // printf("supression ok\n");
-
+    int vainqueur = methode_paire(&matriceDuel);
+    char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur);
+    printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+    nombreElecteur,nomVainqueur);
+    delete_Matrice(matriceDuel);
+    free(nomVainqueur);
     
     
     return -1; //Valeur non trouvée

@@ -7,68 +7,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "set.h"
+#include "utils_tab.h"
 
 
 struct s_disjointSet {
-    int size;
-    int *parent;
-    int *rank;
+    Matrice matrice;
 };
 
 // Initialiser un ensemble disjoint
 DisjointSet *createDisjointSet(int n) {
     DisjointSet *set = malloc(sizeof(DisjointSet));
-    set->parent = malloc(n * sizeof(int));
-    set->rank = malloc(n * sizeof(int));
-    set->size = n;
-    for (int i = 0; i < n; i++) {
-        set->parent[i] = -1;
-        set->rank[i] = 0;
-    }
+    set->matrice = create_Matrice(n,n);
+    init_Matrice(set->matrice,0);
     return set;
 }
 
 // Libérer la mémoire d'un ensemble disjoint
 void freeDisjointSet(DisjointSet *set) {
-    free(set->parent);
-    free(set->rank);
+    delete_Matrice(set->matrice);
     free(set);
 }
 
-// Trouver la racine de l'ensemble
-int find(DisjointSet *set, int i) {
-    if (set->parent[i] == -1)
-        return i;
-    return find(set, set->parent[i]);
-}
 
 // Fusionner deux ensembles disjoints par leurs représentants
-void unionSets(DisjointSet *set, int x, int y) {
-
-    int rootX = find(set, x);
-    int rootY = find(set, y);
-
-    // Fusionner par rang pour maintenir l'équilibre de l'arbre
-    if (set->rank[rootX] < set->rank[rootY])
-        set->parent[rootX] = rootY;
-    else if (set->rank[rootX] > set->rank[rootY])
-        set->parent[rootY] = rootX;
-    else {
-        set->parent[rootX] = rootY;
-        set->rank[rootY]++;
+void addEdge(DisjointSet *set, int x, int y) {
+    set->matrice->tableau[x][y] = 1;
+}
+// Vérifier si l'ajout de l'arête (u, v) créerait un cycle
+int doesCreateCycle(DisjointSet *set, int x, int y) {
+    if (set->matrice->tableau[y][x] == 1){
+        return 1;
     }
+    for(int i = 0; i < set->matrice->nb_colonne; i++){
+        if (set->matrice->tableau[y][i] == 1 && doesCreateCycle(set, x, i) == 1){
+            return 1;
+        }
+    }
+    return 0;
 }
 
-// Vérifier si l'ajout de l'arête (u, v) créerait un cycle
-int doesCreateCycle(DisjointSet *set, int u, int v) {
-    int rootU = find(set, u);
-    int rootV = find(set, v);
-
-    // Si les représentants sont les mêmes, il y aurait un cycle
-    return (rootU == rootV);
+void printSet(DisjointSet *set){
+    afficher_Matrice(set->matrice);
 }
 
 int rootThree(DisjointSet *set){
-    for (int i = 0;set->parent[i] != -1;i++)
-    return i;
+    int i,j;
+    int fin = 0;
+    for (i = 0; i < set->matrice->nb_colonne && !fin;i++){
+        for (j = 0;j < set->matrice->nb_colonne && !set->matrice->tableau[j][i];j++);
+        if (j == set->matrice->nb_colonne){
+            return i;
+        }
+    }
+    return -1;
 }
+
+
+
