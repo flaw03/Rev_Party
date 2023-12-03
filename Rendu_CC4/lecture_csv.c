@@ -5,6 +5,14 @@
 #include "lecture_csv.h"
 #include "utils_tab.h"
 
+#define MAX_LIGNES 1024
+#define MAX_COLONNES 1024
+#define MAX_LINE_LENGTH 1024
+#define MARGE 4
+#define COLONNE_SHA 3
+#define BUFFER_SIZE 16
+
+
 /*
 *    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
 */
@@ -103,6 +111,7 @@ char * obtenir_nom_Candidat_csv(const char *filename,int numColonne){
     for (int  i = 0 ; i < MARGE + numColonne; i++){
         token = strtok(NULL, ",");
     }
+
     return formatage_nomCandidat(token);
 }
 
@@ -163,8 +172,13 @@ void afficher_vote(const char* filename,char* hash){
 
 
 int lireBallot(char* filename,Matrice *matrice){
+    if (!isCSV(filename)){
+        fprintf(stderr, "Erreur : Ce n'est pas un fichier csv.\n");
+        exit(27);  
+    }
+
     FILE *file = fopen(filename, "r");
-     if (file == NULL) {
+    if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
         exit(28);
     }

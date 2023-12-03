@@ -287,19 +287,7 @@ List *list_reduce(List *l, ReduceFunctor f,void * env) {
     return l;
 }
 
-List * matriceCombatToGraphe(Matrice matriceDuel){    
-    List *list = list_create();
-    for (int i = 0; i < matriceDuel->nb_ligne;i++){
-        for (int j = 0; j < matriceDuel->nb_colonne;j++){
-            if (i != j){
-                if (matriceDuel->tableau[i][j] >= matriceDuel->tableau[j][i]){
-                    list_push_front(list,matriceDuel->tableau[i][j],i,j);
-                }
-            }
-        }
-    }
-    return list;
-}
+
 
 int triee_liste_decroissant(List* l){
   LinkedElement *from, *to;

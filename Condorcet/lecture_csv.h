@@ -18,9 +18,9 @@ char * obtenir_nom_Candidat(const char *filename,int numColonne);
 
 void afficher_vote(const char* filename,char* hash);
 
-int lireCSVCondorcet(char* filename,Matrice *Matrice);
+int lireBallot(char* filename,Matrice *Matrice);
 
-int lireCSVMatriceDuel(char* filename,Matrice *Matrice);
+int lireMatriceDuel(char* filename,Matrice *Matrice);
 
 
 #endif

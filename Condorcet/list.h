@@ -210,7 +210,6 @@ Sort the list according to the provided ordering functor.
 List *list_reduce(List *l, ReduceFunctor f,void * env);
 /** @} */
 
-List * matriceCombatToGraphe(Matrice matrice);
 
 int triee_liste_decroissant(List* l);
 

@@ -5,7 +5,7 @@
 #include "list.h"
 
 
-
+// Structure pour représenter un ensemble disjoint
 typedef struct s_disjointSet DisjointSet;
 
 // Initialiser un ensemble disjoint
@@ -20,8 +20,10 @@ void addEdge(DisjointSet *set, int x, int y) ;
 // Vérifier si l'ajout de l'arête (u, v) créerait un cycle
 int doesCreateCycle(DisjointSet *set, int u, int v);
 
-int rootThree(DisjointSet *set);
+// Trouver la racine de l'ensemble
+int findRoot(DisjointSet *set);
 
+// Afficher la matrice de l'ensemble disjoint
 void printSet(DisjointSet *set);
 
 

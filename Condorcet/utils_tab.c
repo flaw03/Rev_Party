@@ -193,15 +193,3 @@ void remplire_Matrice_Duel(Matrice matrice, Tableau tab) {
     }
 }
 
-Tableau obtenirPiresScores(Matrice matriceCombat) {
-    Tableau piresScores = create_Tableau( matriceCombat->nb_colonne);
-    init_Tableau(piresScores, INT_MIN);
-    for (int i = 0; i < matriceCombat->nb_ligne; i++) {
-        for (int j = 0; j < matriceCombat->nb_colonne; j++) {
-            if (matriceCombat->tableau[j][i] > piresScores->tableau[i]) {
-                piresScores->tableau[i] = matriceCombat->tableau[j][i];
-            }
-        }
-    }
-    return piresScores;
-}
