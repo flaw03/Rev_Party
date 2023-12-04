@@ -1,0 +1,25 @@
+var group___constructors =
+[
+    [ "removeNewline", "group___constructors.html#gad075de93b105ea287f1304acc26ea272", null ],
+    [ "getElecteur", "group___constructors.html#ga4ccbdb2fc9d2e71cc6d2a82b7003b776", null ],
+    [ "getCandidat", "group___constructors.html#ga7e64bbfa4e5508f5d97fb781c4752d8d", null ],
+    [ "getIndice", "group___constructors.html#ga9aeb0a0ad587aa8384271885b7fa4e63", null ],
+    [ "electeurs2ndTours2Candidats", "group___constructors.html#gadc82f4e1aa7f422296518c1828fcd7a7", null ],
+    [ "initJugement", "group___constructors.html#gaf98fd505259fd47eec61d32f382b3f19", null ],
+    [ "list_create", "group___constructors.html#ga248e4be8e332f8f9f6d533291e6a765c", null ],
+    [ "list_push_back", "group___constructors.html#gac13cda22ebea995bf0acbd72c902cc82", null ],
+    [ "list_delete", "group___constructors.html#ga05450301a8cc077d50d6a22f121ef99e", null ],
+    [ "create_electeur", "group___constructors.html#ga2b5a76fd4665979622e612bae8ae4237", null ],
+    [ "listElect_create", "group___constructors.html#gad1e995c366ce7c42d0cc023de9669537", null ],
+    [ "list_add_Electeur", "group___constructors.html#ga34027d6409242097e4a19c02e841822e", null ],
+    [ "listElect_delete", "group___constructors.html#ga467e00520bad8cea4ff33558aa93adba", null ],
+    [ "create_candidat", "group___constructors.html#gacebdb592e86ab912e80962a3596c8e93", null ],
+    [ "listCand_create", "group___constructors.html#gaba515206e05c1432360870abf92cf9c0", null ],
+    [ "listCand_add", "group___constructors.html#ga11ebddead4fad8b462b213b8e78fe3f5", null ],
+    [ "listCand_delete", "group___constructors.html#gadb028061fde30ba1de5d52ad0fb79735", null ],
+    [ "tableauDelete", "group___constructors.html#gacfb7a09579c154b8762e3f71f642bdfc", null ],
+    [ "printList", "group___constructors.html#ga3b858546d0c9eb79bb39b2729388310f", null ],
+    [ "getIndiceVote", "group___constructors.html#gaac9a8dd45f62392d053958ed17660401", null ],
+    [ "candidatAssocie", "group___constructors.html#ga7d16e46e47452b1e4e9d85fdc147f491", null ],
+    [ "createTableau", "group___constructors.html#gaf2a698241efae86fe3e362f072a5933d", null ]
+];

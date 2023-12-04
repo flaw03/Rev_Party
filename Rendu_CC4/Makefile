@@ -58,8 +58,8 @@ mrproper: clean
 clean:
 	@rm -rf $(OBJ_DIR)/*.o
 
-doc: Uninominales.h Utiles.h lecture.h main.c
-	@doxygen documentation/Uninominale
+doc: fichiers.h/set.h fichiers.h/condorcet.h fichiers.h/jugement.h fichiers.h/lecture.h fichiers.h/list.h fichiers.h/Uninominales.h fichiers.h/Utiles.h fichiers.h/utils_tab.h
+	@doxygen documentation/DOXYFILE
 
 
 DELIVER_FMT=$(shell date "+%d-%m-%y_%Hh%Mm%Ss")

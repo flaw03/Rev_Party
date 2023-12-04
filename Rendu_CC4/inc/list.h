@@ -210,7 +210,12 @@ Sort the list according to the provided ordering functor.
 List *list_reduce(List *l, ReduceFunctor f,void * env);
 /** @} */
 
-
+/**
+ * @brief Sort a list in descending order.
+ *
+ * @param l The list to be sorted.
+ * @return 1 or -1 depending on whether the list is sorted or not.
+ */
 int triee_liste_decroissant(List* l);
 
 
@@ -268,6 +273,5 @@ int list_iterator_end(ListIterator it);
 
 
 /** @} */
-
 #endif
 
