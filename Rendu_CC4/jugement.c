@@ -136,7 +136,7 @@ Candidat* jugementMajoritaire(ListCand* lstCand,ListElect* lstElect,char* fichie
                     med1 = mediane(gagnant->jugement,taille+1);
                     med2 = mediane(c->jugement,taille+1);
             }while(med1==med2 && cheminCourantv2==cheminGagnantv2);
-            if(cheminCourantv2>cheminGagnantv2){
+            if(cheminCourantv2>cheminGagnantv2|| med2<med1){
                         gagnant = c;
                         verifMed = valEtudiee;
                     }
