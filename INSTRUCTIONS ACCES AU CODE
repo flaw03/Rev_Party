@@ -1,8 +1,0 @@
-RENDU 2 METHODES UNINOMINALES
-  Pour accéder au code fonctionnel , merci de se déplacer dans le répertoire Rendu_CC3 , d'effectuer la commande "make" et de lancer le programme avec ./bin/<nomExecutable> ...
-
-  - Commandes linux à réaliser en partant du principe que nous nous trouvons dans le dossier "Rev_Party-main"
-  - cd Rendu_CC3
-  - make
-  - ./bin/uninominales -i ../Data/<fichier.csv> -o <fichierLog.txt> -m {uni1,uni2,all}
-                                              NB: " -o <fichierLog.txt> facultatif "
