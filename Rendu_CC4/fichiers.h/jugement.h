@@ -13,12 +13,6 @@ void trier(int* tab, int taille);
 // @param taille : Taille de la liste des candidats.
 void trierVotes(ListCand* lstCand, int taille);
 
-// Fonction : moyenne
-// Description : Calcule la moyenne d'un tableau d'entiers.
-// @param tab : Tableau d'entiers.
-// @param taille : Taille du tableau.
-// @return : La moyenne des entiers dans le tableau.
-double moyenne(int* tab, int taille);
 
 // Fonction : mediane
 // Description : Calcule la médiane d'un tableau d'entiers.
