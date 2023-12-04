@@ -41,23 +41,6 @@ int assocMention(int i){
     return retour;
 }
 
-double moyenne(int* tab,int taille){//Moyenne des votes sachant que si un vote == 0 , on ne le comptabilise pas
-    double moy=0;
-    bool isZero = false;
-    int nbZero = 0;
-    for(int i = 0;i<taille;i++){
-        if(tab[i]==0){
-            isZero = true;
-
-        }
-        moy+= tab[i];
-    }
-    if(isZero){
-        taille-=nbZero;
-    }
-    return moy/taille;
-}
-
 int calculerChemin(int *tab,int taille){
     int mid;
     if(taille%2 == 0){
