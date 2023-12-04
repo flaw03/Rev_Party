@@ -81,7 +81,7 @@ Candidat** finalistes_uninominal_deux_tours(ListElect *lstElect, ListCand *lstCa
     Candidat* second = NULL;
     Candidat** finalistes = malloc(2*sizeof(Candidat));
     Candidat* cand = lstCand->head;
-    fprintf(fichier,"\n\nVERIFICATION UNINOMINAL DEUX TOURS : \n-Premier tour\n-");
+    fprintf(fichier,"\n\nVERIFICATION UNINOMINAL DEUX TOURS : \nPremier tour\n");
     while(cand!=NULL){ //Parcours de la liste de candidats
         int votesEnCours = cand->vote; 
         fprintf(fichier,"Candidat : %s %s , nombre de votes : %d\n",cand->nom,cand->prenom,votesEnCours);
