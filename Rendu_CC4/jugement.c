@@ -83,14 +83,6 @@ void afficherVote(int* tab,int taille,FILE* logfile){
     }
 }
 
-Candidat* verifMajoritaire(Candidat* first,Candidat* gagnant,int taille){
-    Candidat* retour = NULL;
-    if(mediane(first->jugement,taille)<mediane(gagnant->jugement,taille)){
-        retour = first;
-    }
-    return retour;
-
-}
 
 void affichage(FILE* logfile,Candidat* c,int taille){
     fprintf(logfile,"Candidat : %s\nvotes : ",c->prenom);
