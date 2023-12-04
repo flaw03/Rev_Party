@@ -109,7 +109,6 @@ Candidat* jugementMajoritaire(ListCand* lstCand,ListElect* lstElect,char* fichie
         }
         //Egalite entre 2 médianes => itération en enlevant un électeur et recalculant les chemins
         else if(valEtudiee == verifMed){
-            fprintf(logfile,"Egalite entre 2 médianes pour les candidats %s et %s , calculons la distance jusqu'à la mention précédente..\n",gagnant->prenom,c->prenom);
             int cheminGagnant = calculerChemin(gagnant->jugement,taille);
             int cheminCandCourant = calculerChemin(c->jugement,taille);
             if(cheminCandCourant>cheminGagnant){
@@ -117,7 +116,6 @@ Candidat* jugementMajoritaire(ListCand* lstCand,ListElect* lstElect,char* fichie
                 verifMed = valEtudiee;
             }
             else if(cheminCandCourant==cheminGagnant){
-                fprintf(logfile,"Egalite entre 2 chemins pour les candidats %s et %s , passons à la mention précédente..\n",gagnant->prenom,c->prenom);
                 int cheminGagnantv2 = cheminGagnant;
                 int cheminCourantv2 = cheminCandCourant;
                 double med2 = valEtudiee;
