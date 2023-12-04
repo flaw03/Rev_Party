@@ -22,14 +22,15 @@
 *   Fonction pour tester que le fichier en paramètre est bien un csv
 */
 
-int fichierEstCSV(const char* filename) {
+void isCSV(const char* filename) {
     const char* extension = strrchr(filename, '.');
     if (extension != NULL) {
         if (strcmp(extension, ".csv") == 0) {
-            return 1;
+            return ;
         }
     }
-    return 0;
+    fprintf(stderr, "ERREUR : Le fichier '%s' n'est pas au bon format. L'extension attendue est '.csv'.\n", filename);
+    exit(33);
 }
 
 /*
@@ -68,7 +69,8 @@ char * formatage_nomCandidat(char * nom){
     }
 }
 
-char * obtenir_nom_Candidat_txt(const char *filename,int numColonne){
+char * obtenir_nom_Candidat_matrice(const char *filename,int numColonne){
+    isCSV(filename);
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -81,7 +83,7 @@ char * obtenir_nom_Candidat_txt(const char *filename,int numColonne){
         exit(1);
     };
     fclose(file);
-    const char *delimiteur = "\t";
+    const char *delimiteur = ",";
     char* token = strtok(line,delimiteur);
     int nb_candidat = 0;
     while (token != NULL && nb_candidat < numColonne){
@@ -92,15 +94,14 @@ char * obtenir_nom_Candidat_txt(const char *filename,int numColonne){
 }
 
 
-char * obtenir_nom_Candidat_csv(const char *filename,int numColonne){
+char * obtenir_nom_Candidat_ballot(const char *filename,int numColonne){
+    isCSV(filename);
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
         exit(28);
     }
     char line[MAX_LINE_LENGTH];
-
-
     // lit la premier ligne 
     if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
         perror("fegts");
@@ -111,28 +112,28 @@ char * obtenir_nom_Candidat_csv(const char *filename,int numColonne){
     for (int  i = 0 ; i < MARGE + numColonne; i++){
         token = strtok(NULL, ",");
     }
-
     return formatage_nomCandidat(token);
 }
 
-char * obtenirNomCandidat(const char *filename,int numColonne){
-    if (fichierEstCSV(filename)){
-        return obtenir_nom_Candidat_csv(filename,numColonne);
+char * obtenir_nom_Candidat(const char *filename,int numColonne,bool isBallot){
+    if (isBallot){
+        return obtenir_nom_Candidat_ballot(filename,numColonne);
     }else{
-        return obtenir_nom_Candidat_txt(filename,numColonne);
+        return obtenir_nom_Candidat_matrice(filename,numColonne);
     }
 }
 
 /*
 *    Fonction qui renvoie une ligne d'un hash doné
 */
-void afficherVote(const char* filename,char* hash){
+void afficher_vote(const char* filename,char* hash){
+    isCSV(filename);
     FILE* file = fopen(filename,"r"); 
     if (file == NULL) {
         perror("Impossible d'ouvrir le fichier\n");
         exit(28);
     }
-    fichierEstCSV(filename);
+    isCSV(filename);
     char line[MAX_LINE_LENGTH];
     // Lire chaque ligne du fichier CSV
     while (fgets(line, MAX_LINE_LENGTH, file)) {
@@ -149,7 +150,7 @@ void afficherVote(const char* filename,char* hash){
                     token = strtok(NULL, ",");   
                     printf("Candidat |Vote\n");                 
                     while (token != NULL){
-                        char * nomCandidat = obtenirNomCandidat(filename,colonne);
+                        char * nomCandidat = obtenir_nom_Candidat(filename,colonne,true);
                         printf("%-30s|%s\n",nomCandidat,token);
                         token = strtok(NULL, ",");
 					    colonne++;
@@ -172,13 +173,9 @@ void afficherVote(const char* filename,char* hash){
 
 
 int lireBallot(char* filename,Matrice *matrice){
-    if (!fichierEstCSV(filename)){
-        fprintf(stderr, "Erreur : Ce n'est pas un fichier csv.\n");
-        exit(27);  
-    }
-
+    isCSV(filename);
     FILE *file = fopen(filename, "r");
-    if (file == NULL) {
+     if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
         exit(28);
     }
@@ -223,6 +220,7 @@ int lireBallot(char* filename,Matrice *matrice){
 
 
 int lireMatriceDuel(char* filename,Matrice *matrice){
+    isCSV(filename);
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -235,7 +233,7 @@ int lireMatriceDuel(char* filename,Matrice *matrice){
         perror("fegts");
         exit(1);
     };
-    const char *delimiteur = "\t";
+    const char *delimiteur = ",";
     char* token = strtok(line,delimiteur);
     int nb_candidat = 0;
     while (token != NULL){

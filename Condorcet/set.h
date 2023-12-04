@@ -24,7 +24,7 @@ int doesCreateCycle(DisjointSet *set, int u, int v);
 int findRoot(DisjointSet *set);
 
 // Afficher la matrice de l'ensemble disjoint
-void printSet(DisjointSet *set);
+void printSet(DisjointSet *set,FILE * logfile);
 
 
 #endif

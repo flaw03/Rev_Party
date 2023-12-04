@@ -50,6 +50,7 @@ int main(int argc, char** argv) {
     bool optionMatrice = false;
     char* methode = NULL;
     Matrice matriceDuel = NULL;
+    FILE* logfile = stdout;
     int nbrElecteur;
 
     
@@ -72,7 +73,11 @@ int main(int argc, char** argv) {
             case 'o':                       
                 fichierLog = optarg;
                 hasLog = true;
-                ouvrirLog(fichierLog);
+                logfile = fopen(fichierLog, "w");
+                if (logfile == NULL) {
+                    printf("erreur fichier.\n");
+                    exit(33);
+                }
                 break;
             case 'm':
                 methode = optarg;
@@ -90,7 +95,7 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Erreur : Les options -i et -d ne peuvent pas être présentes simultanément.\n");
         exit(EXIT_FAILURE);
     }
-    if (trcmp(methode,"all") == 0){
+    if (strcmp(methode,"all") == 0){
         optionAll = true;
     }
 
@@ -102,33 +107,31 @@ int main(int argc, char** argv) {
     // }
     // else
     if(strcmp(methode,"cm")==0 || optionAll ){
-        int vainqueur = methode_Minimax(matriceDuel);
+        int vainqueur = methode_Minimax(matriceDuel,logfile);
         char * nomVainqueur = obtenirNomCandidat(filename,vainqueur);
         printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
-    else if(strcmp(methode,"cp")==0 || optionAll ){
-        int vainqueur = methode_Rangement_Des_Paires(matriceDuel);
+    if(strcmp(methode,"cp") ==0 || optionAll ){
+        int vainqueur = methode_Rangement_Des_Paires(matriceDuel,logfile);
         char * nomVainqueur = obtenirNomCandidat(filename,vainqueur);
         printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
-    else if(strcmp(methode,"cs")==0 || optionAll){
-        int vainqueur = methode_Schulze(matriceDuel);
+    if(strcmp(methode,"cs") ==0 || optionAll){
+        int vainqueur = methode_Schulze(matriceDuel,logfile);
         char * nomVainqueur = obtenirNomCandidat(filename,vainqueur);
         printf("Mode de paire : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
-    else{
-        fprintf(stderr, "Usage: %s-i <nomFichierCSV> | -d <nomFichier>  -m {uni1, uni2, cm, cp, cs, all} [-o <log_file>]\n", argv[0]);
-        exit(EXIT_FAILURE);
-    }
     
-    if (hasLog){
-        closeLog();
+
+    
+    if(logfile!=stdout){
+        fclose(logfile);
     }
     delete_Matrice(matriceDuel);
     exit(0);

@@ -1,5 +1,6 @@
 #ifndef __UTILS_TAB_H__
 #define __UTILS_TAB_H__
+#include <stdio.h>
 
 
 typedef struct t_Matrice *Matrice;
@@ -68,8 +69,8 @@ int max_Tableau(Tableau tab, int *colonne,int * valeur);
 void remplire_Matrice_Duel(Matrice matrice,Tableau Tableau);
 
 
-void afficher_Matrice(Matrice matrice);
+void afficher_Matrice(Matrice matrice,FILE* logfile);
 
-void afficher_Tableau(Tableau Tableau);
+void afficher_Tableau(Tableau Tableau,FILE* logfile);
 
 #endif

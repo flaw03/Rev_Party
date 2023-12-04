@@ -39,49 +39,47 @@ void delete_Tableau(Tableau tab){
 }
 
 
-void afficher_Matrice(Matrice matrice){
-    printf("\nAfficher la matrice %d %d\n",matrice->nb_ligne,matrice->nb_ligne);
-	printf("I/I|");
+void afficher_Matrice(Matrice matrice,FILE* logfile){
+	fprintf(logfile,"I/I|");
 	for(int j = 0; j <  matrice->nb_colonne;j++){
-		printf("%-4d|",j);
+		fprintf(logfile,"%-4d|",j);
 	}
-	printf("\n");
+	fprintf(logfile,"\n");
 	for(int j = 0; j < ( matrice->nb_colonne + 1) * 5;j++){
-		printf("-");
+		fprintf(logfile,"-");
 		}
-	printf("\n");
+	fprintf(logfile,"\n");
 	for(int i = 0 ; i < matrice->nb_ligne;i++){
-		printf("%-3d|",i);
+		fprintf(logfile,"%-3d|",i);
 		for (int j = 0; j < matrice->nb_colonne;j++){
-		printf("%-4d|",matrice->tableau[i][j]);
+		fprintf(logfile,"%-4d|",matrice->tableau[i][j]);
 		}
-		printf("\n");
+		fprintf(logfile,"\n");
 		for(int j = 0; j <  (matrice->nb_colonne + 1) * 5;j++){
-		printf("-");
+		fprintf(logfile,"-");
 		}
-		printf("\n");
+		fprintf(logfile,"\n");
 	}
 }
 
 
-void afficher_Tableau(Tableau tab){
-    printf("\nAfficher le tableau %d\n",tab->dim);
+void afficher_Tableau(Tableau tab,FILE* logfile){
     for(int j = 0; j < tab->dim;j++){
-		printf("%-4d|",j);
+		fprintf(logfile,"%-4d|",j);
 	}
-     printf("\n");;
+     fprintf(logfile,"\n");;
     for(int j = 0; j < (tab->dim) * 5;j++){
-		printf("-");
+		fprintf(logfile,"-");
 		}
-     printf("\n");
+     fprintf(logfile,"\n");
 	for(int i = 0; i <  tab->dim;i++){
-		printf("%-4d|",tab->tableau[i]);
+		fprintf(logfile,"%-4d|",tab->tableau[i]);
 	}
-     printf("\n");
+     fprintf(logfile,"\n");
     for(int j = 0; j < (tab->dim) * 5;j++){
-		printf("-");
+		fprintf(logfile,"-");
 		}
-    printf("\n");
+    fprintf(logfile,"\n");
 }
 
 /**
@@ -118,7 +116,7 @@ int min_Tableau(Tableau tab,int *colonne, int *valeur) {
         int element = tab->tableau[i];
 
         // Vérification si l'élément est un candidat pour être le minimum
-        if (element > 0 && element < *valeur) {
+        if (element >= 0 && element < *valeur) {
             // Mise à jour des valeurs minimales
             doublon = 0;
             *valeur = element;

@@ -42,8 +42,8 @@ int doesCreateCycle(DisjointSet *set, int x, int y) {
 }
 
 // Afficher la matrice de l'ensemble disjoint
-void printSet(DisjointSet *set) {
-    afficher_Matrice(set->matrice);
+void printSet(DisjointSet *set,FILE * logfile) {
+    afficher_Matrice(set->matrice,logfile);
 }
 
 // Trouver la racine de l'ensemble

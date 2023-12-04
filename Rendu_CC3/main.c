@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     char* fichierLog=NULL;
     bool hasLog = false;
     char* methode = NULL;
-    FILE* logfile = NULL;
+    FILE* logfile = stdout;
     
         if(argc<5){
             fprintf(stderr, "Usage: %s -i <filename> -m {uni1, uni2, all} [-o <log_file>]\n", argv[0]);

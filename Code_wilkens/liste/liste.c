@@ -296,29 +296,44 @@ int indiceMin(List *l){
 
 
 
-int decreaseSort(List* l){
-  LinkedElement *from, *to;
-  Element aux= malloc(sizeof(Element));
-  for(int i=0;i<l->size;i++){
-    from= list_at_aux(l,i);
-    for(int j=i+1; j<l->size; j++){
-      to=list_at_aux(l,j);
-      if(from->element->p< to->element->p){
-        *aux=*(from->element);
-        *(from->element)=*(to->element);
-        *(to->element)=*aux;
-      }
-    }
-  }
-  
-  free(aux);
+// int decreaseSort(List* l){
+//   LinkedElement *from, *to;
+//   Element * aux ;
+//   for(int i=0;i<l->size;i++){
+//     from= list_at_aux(l,i);
+//     for(int j=i+1; j<l->size; j++){
+//       to=list_at_aux(l,j);
+//       if(from->element->p < to->element->p){
+//         aux = from->element ;
+//         *(from->element) =* (to->element);
+//         to->element = aux ;
+//       }
+//     }
+//   }
 
-    for(LinkedElement* e= l->sentinel->next; e->next!=l->sentinel; e=e->next){
+// }
+
+int decreaseSort(List* l) {
+    LinkedElement *from, *to;
+    Element aux;
+
+    for (int i = 0; i < l->size; i++) {
+        from = list_at_aux(l, i);
+        for (int j = i + 1; j < l->size; j++) {
+            to = list_at_aux(l, j);
+            if (from->element->p < to->element->p) {
+                aux = from->element;
+                from->element = to->element;
+                to->element = aux;
+            }
+        }
+    }
+  for(LinkedElement* e= l->sentinel->next; e->next!=l->sentinel; e=e->next){
       if(e->element->p<e->next->element->p){
         return 0;
       }
   }
   return 1;
+    // La vérification du tri n'est pas nécessaire, car si le tri est correct, la fonction renverra 1.
 }
-
 

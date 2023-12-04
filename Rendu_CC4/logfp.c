@@ -14,13 +14,6 @@ void ouvrirLog(const char* nom_fichier) {
         exit(EXIT_FAILURE);
     }
 
-    printf("Sortie standard -> %s\n", nom_fichier);
-
-    int duppliquer = dup2(fichierLog, 1);
-    if (duppliquer == -1) {
-        perror("Échec de la duplication de la sortie standard");
-        exit(EXIT_FAILURE);
-    }
 }
 
 
