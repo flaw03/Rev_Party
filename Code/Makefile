@@ -26,6 +26,16 @@ SRC= $(wildcard *.c)
 OBJ= $(SRC:%.c=$(OBJ_DIR)/%.o) $(SHA256_SRC:%.c=$(OBJ_DIR)/%.o)
 
 # Règle par défaut pour tout compiler
+
+ifeq ($(DEBUG),yes)
+	CFLAGS += -g
+	LDFLAGS +=
+else
+	CFLAGS += -O3 -DNDEBUG
+	LDFLAGS +=
+endif
+
+
 all: 
 ifeq ($(DEBUG),yes)
 	@echo "Generating in debug mode"

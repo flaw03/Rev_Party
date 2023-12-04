@@ -5,7 +5,7 @@ OBJ_DIR=obj
 BIN_DIR=bin
 
 # Nom de l'exécutable
-EXEC=rev_party
+EXEC=scrutin
 
 # Compilateur
 CC=gcc

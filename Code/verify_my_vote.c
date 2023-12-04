@@ -72,13 +72,7 @@ int main(int argc, char** argv) {
 	}
 	
 	const char* filename = argv[1];
-
-	// On vérifie que le fichier passé en paramètre est bien en csv
-	if (!isCSV(filename)){
-		fprintf(stderr, "Erreur, le fichier en paramètre n'est pas un csv \n");
-		exit(2);
-	}
-
+	
 	char nom[100];
 	printf("Entrez votre nom : ");
 	fgets(nom, sizeof(nom), stdin);

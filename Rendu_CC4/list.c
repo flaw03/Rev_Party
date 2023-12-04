@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "../Rendu_CC4/fichiers.h/list.h"
+#include "inc/list.h"
 
 typedef struct s_LinkedElement {
     struct  s_element * element;
@@ -336,3 +336,5 @@ int  triee_liste_decroissant(List* l) {
   return 1;
     // La vérification du tri n'est pas nécessaire, car si le tri est correct, la fonction renverra 1.
 }
+
+

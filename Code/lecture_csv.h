@@ -2,23 +2,19 @@
 #ifndef __LECTURE_CSV_H__
 #define __LECTURE_CSV_H__
 
-
-#define MAX_LIGNES 1024
-#define MAX_COLONNES 1024
-#define MAX_LINE_LENGTH 1024
-#define MARGE 4
-#define COLONNE_SHA 3
-#define BUFFER_SIZE 16
-
-
-int isCSV(const char* filename);
-
-void obtenir_Vote(const char *filename,int numCandidat,char * nom_Candidat);
-
-void afficher_vote(const char *filename, char *  hash);
+#include "utils_tab.h"
+#include "stdbool.h"
 
 
 
+
+char * obtenir_nom_Candidat(const char *filename,int numColonne,bool isBallot);
+
+void afficher_vote(const char* filename,char* hash);
+
+int lireBallot(char* filename,Matrice *Matrice);
+
+int lireMatriceDuel(char* filename,Matrice *Matrice);
 
 
 #endif

@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "../Rendu_CC4/fichiers.h/utils_tab.h" 
-#include "../Rendu_CC4/fichiers.h/lecture_csv.h"
-#include "../Rendu_CC4/fichiers.h/list.h"
-#include "../Rendu_CC4/fichiers.h/set.h"
+#include "inc/utils_tab.h" 
+#include "inc/lecture_csv.h"
+#include "inc/list.h"
+#include "inc/set.h"
 
 
 
@@ -251,8 +251,11 @@ int condorcet(Matrice matriceDuel, ptrList *graphe,FILE* logfile) {
     if (max_Tableau(tableauArcSortant, &colonne, &valeur) != 0) {
         fprintf(logfile, "Aucun vainqueur de Condorcet trouvé.\n");
         colonne = -1;
+    }else{
+        fprintf(logfile, "Vainqueur de Condorcet trouvé. Pas de resolution de Conflit\n");
     }
-
+    
+    
     // Libération de la mémoire
     delete_Tableau(tableauArcSortant);
 
@@ -262,6 +265,8 @@ int condorcet(Matrice matriceDuel, ptrList *graphe,FILE* logfile) {
 
 
 int methode_Minimax(Matrice matriceDuel,FILE* logfile) {
+    fprintf(logfile,"---------------------------------------------------------------\n");
+    fprintf(logfile,"Methode Minimax");
     // Vérification de la validité de la matrice de duel
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
@@ -306,6 +311,8 @@ int methode_Minimax(Matrice matriceDuel,FILE* logfile) {
 
 
 int methode_Rangement_Des_Paires(Matrice matriceDuel,FILE* logfile) {
+    fprintf(logfile,"---------------------------------------------------------------\n");
+    fprintf(logfile,"Methode rangement des paires par ordre décroissant");
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
         exit(3); 
@@ -334,6 +341,8 @@ int methode_Rangement_Des_Paires(Matrice matriceDuel,FILE* logfile) {
 }
 
 int methode_Schulze(Matrice matriceDuel,FILE* logfile){
+    fprintf(logfile,"---------------------------------------------------------------\n");
+    fprintf(logfile,"Methode Shulze");
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
         exit(3); 

@@ -6,12 +6,12 @@
 #include <stdbool.h>
 #include <getopt.h>
 
-#include "../Rendu_CC4/fichiers.h/Utiles.h"
-#include "../Rendu_CC4/fichiers.h/lecture_csv.h"
-#include "../Rendu_CC4/fichiers.h/Uninominales.h"
-#include "../Rendu_CC4/fichiers.h/utils_tab.h"
-#include "../Rendu_CC4/fichiers.h/condorcet.h"
-#include "../Rendu_CC4/fichiers.h/jugement.h"
+#include "inc/Utiles.h"
+#include "inc/lecture_csv.h"
+#include "inc/uninominales.h"
+#include "inc/utils_tab.h"
+#include "inc/condorcet.h"
+#include "inc/jugement.h"
 
 /**
  *	@defgroup Main Test program for Uninominales Implantation
@@ -26,9 +26,9 @@
  $bin/uninominales -i <filename.csv> | -d <nomFichierCSV> [-o <log_file>] -m {uni1, uni2, all, cm, cp, cs)}
 
 Options :
-  -i <nomFichierCSV> : Traite le fichier CSV spécifié.
-  -d <nomFichierCSV> : Traite le fichier CSV spécifié.
-  -o <fichierLog>    : Spécifie le fichier de log (optionnel).
+  -i <filename.csv> > : Traite le fichier CSV spécifié.
+  -d <filename.csv> > : Traite le fichier CSV spécifié.
+  -o <<filename.csv> >    : Spécifie le fichier de log (optionnel).
   -m <methode>        : Précise la méthode de scrutin à utiliser.
 
 Notez que la commande doit contenir soit -i ou -d, mais pas les deux en même temps.
@@ -47,6 +47,7 @@ int main(int argc, char** argv) {
     bool optionBalot = false;
     bool optionAll = false;
     bool optionMatrice = false;
+    bool optvalide = false;
     char* methode = NULL;
     Matrice matriceDuel = NULL;
     FILE* logfile = stdout;
@@ -54,7 +55,7 @@ int main(int argc, char** argv) {
 
     
     if(argc<5){
-            fprintf(stderr, "Usage: %s -i ../Data/nomFichierCSV> | -d ../Data/<nomFichierCSV>  -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
+            fprintf(stderr, "Usage: %s -i <filename.csv> | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
             exit(9);
         }
     while ((opt = getopt(argc, argv, "i:o:m:d:")) != -1) {
@@ -81,7 +82,7 @@ int main(int argc, char** argv) {
                 methode = optarg;
                 break;
             default:
-                fprintf(stderr, "Usage: %s -i ../Data/<nomFichierCSV> | -d ../Data/<nomFichierCSV>  -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
+                fprintf(stderr, "Usage: %s -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
@@ -90,45 +91,62 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
     if (methode == NULL){
-        fprintf(stderr, "Erreur : Les options -i et -d ne peuvent pas être présentes simultanément.\n");
+        fprintf(stderr, "Usage: %s -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
         exit(EXIT_FAILURE);
     }
+    
     if (strcmp(methode,"all") == 0){
         optionAll = true;
+        optvalide = true;
     }
 
     if((strcmp(methode,"uni1") == 0  || optionAll ) && optionBalot){
-         unTour(filename,logfile);    
+        unTour(filename,logfile);    
+        optvalide = true;
+        
     }
     if((strcmp(methode,"uni2" )==0   || optionAll) && optionBalot){
         deuxTours(logfile,filename);
+        optvalide = true;
     }
     if(strcmp(methode,"cm")==0 || optionAll ){
         int vainqueur = methode_Minimax(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de vote : Condorcet Minimax, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de Scrutin : Condorcet Minimax, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
+        optvalide = true;
+
     }
+
     if(strcmp(methode,"cp") ==0 || optionAll ){
         int vainqueur = methode_Rangement_Des_Paires(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de vote : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de Scrutin : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
+        optvalide = true;
+
     }
+
     if(strcmp(methode,"cs") ==0 || optionAll){
         int vainqueur = methode_Schulze(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de vote : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de Scrutin : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
+        optvalide = true;
+
     }
-     if((strcmp(methode,"jm") == 0 || optionAll) && optionBalot){
+
+    if((strcmp(methode,"jm") == 0 || optionAll) && optionBalot){
         voteJugementMajoritaireBallot(filename,logfile);
+        optvalide = true;
     }
-    else{
-        fprintf(stderr,"Usage [%s] use -m {uni1, uni2, cm, cp, cs,jm, all}\n",argv[0]);
+    
+    if (!optvalide){
+        fprintf(stderr, "Usage: %s -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
+        exit(EXIT_FAILURE);
     }
     
 

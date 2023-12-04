@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Rendu_CC4/fichiers.h/set.h"
-#include "../Rendu_CC4/fichiers.h/utils_tab.h"
+#include "inc/set.h"
+#include "inc/utils_tab.h"
 
 struct s_disjointSet {
     Matrice matrice;

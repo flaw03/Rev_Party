@@ -6,9 +6,9 @@
 #include <stdbool.h>
 
 
-#include "../Rendu_CC4/fichiers.h/Utiles.h"
-#include "../Rendu_CC4/fichiers.h/lecture.h"
-#include "../Rendu_CC4/fichiers.h/jugement.h"
+#include "inc/Utiles.h"
+#include "inc/lecture_csv.h"
+#include "inc/jugement.h"
 
 
 void trier(int* tab,int taille){
@@ -147,6 +147,8 @@ Candidat* jugementMajoritaire(ListCand* lstCand,ListElect* lstElect,char* fichie
 
 
 void voteJugementMajoritaireBallot(char* fichier,FILE* logfile){
+    fprintf(logfile,"---------------------------------------------------------------\n");
+    fprintf(logfile,"Methode Jugement Majoritaire\n");
     ListCand* lstCand = listCand_create();
     ListElect* lstElect = listElect_create();
     getCandidat(lstCand,fichier);
@@ -154,7 +156,7 @@ void voteJugementMajoritaireBallot(char* fichier,FILE* logfile){
     lstElect = getElecteur(lstElect,lstCand,fichier,tab);
 
     Candidat* gagnant = jugementMajoritaire(lstCand,lstElect,fichier,logfile);
-    printf("Jugement majoritaire : %d candidats, %d votants, Vainqueur = %s\n",lstCand->size,lstElect->size,gagnant->prenom);
+    printf("Mode de Scrutin : Jugement majoritaire %d candidats, %d votants, Vainqueur = %s\n",lstCand->size,lstElect->size,gagnant->prenom);
 
     tableauDelete(lstCand);
     listCand_delete(lstCand);

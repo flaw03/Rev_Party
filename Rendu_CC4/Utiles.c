@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include "../Rendu_CC4/fichiers.h/Utiles.h"
+#include "inc/utiles.h"
 
 
 /********************************************************/

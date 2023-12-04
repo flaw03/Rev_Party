@@ -4,9 +4,9 @@
 #include <string.h>
 #include <time.h>
 
-#include "../Rendu_CC4/fichiers.h/Utiles.h"
-#include "../Rendu_CC4/fichiers.h/lecture.h"
-#include "../Rendu_CC4/fichiers.h/Uninominales.h"
+#include "inc/Utiles.h"
+#include "inc/lecture_csv.h"
+#include "inc/uninominales.h"
 
 
 
@@ -158,6 +158,8 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
  }
 
  void unTour(char* fichier,FILE *logfile){
+    fprintf(logfile,"---------------------------------------------------------------\n");
+    fprintf(logfile,"Methode Uninomiale a 1 tours\n");
     ListElect* lstElect = listElect_create();
     ListCand* lstCand = listCand_create();
     lstCand = getCandidat(lstCand,fichier);
@@ -166,7 +168,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     lstElect = getElecteur(lstElect,lstCand,fichier,tab);
     lstCand = initVote(lstElect,lstCand,logfile);
     Resultat victorieux = uninominal_un_tour(lstElect,lstCand,logfile);
-    printf("uninominal un tour :  %d candidats , %d votants",lstCand->size,lstElect->size);
+    printf("Mode de Scrutin : Uninominal un tour :  %d candidats , %d votants",lstCand->size,lstElect->size);
     printf(",Vainqueur = %s, score : %f %%\n",victorieux.candidat->prenom,victorieux.nb);
     listElect_delete(lstElect);
     listCand_delete(lstCand);
@@ -176,7 +178,8 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
  }
 
  void deuxTours(FILE* logfile,char* fichier){
-
+    fprintf(logfile,"---------------------------------------------------------------\n");
+    fprintf(logfile,"Methode Uninomiale a 2 tours\n");
     ListElect* lstElect = listElect_create();
     ListCand* lstCand = listCand_create();
 
@@ -187,11 +190,11 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     lstElect = getElecteur(lstElect,lstCand,fichier,tab);
     lstCand = initVote(lstElect,lstCand,logfile);
     float nbVotesTotaux = lstElect->size;
-    printf("uninominal à deux tours : %d candidats, %d votants ",lstCand->size,lstElect->size);
     Candidat** sec = finalistes_uninominal_deux_tours(lstElect,lstCand,logfile);
 
     if(sec[1]!=NULL){
-        printf("\n  Finalistes: \n  -%s, score : %f%%\n  -%s, score : %f%%\n",sec[0]->nom,(sec[0]->vote/nbVotesTotaux)*100,sec[1]->nom,(sec[1]->vote/nbVotesTotaux)*100);
+        printf("Mode de Scrutin : Uninominal à deux tours, 1er tour, %d candidats, %d votants, vainqueur = %s, score : %f%%\n",lstCand->size,lstElect->size,sec[0]->nom,(sec[0]->vote/nbVotesTotaux)*100);
+        printf("Mode de Scrutin : Uninominal à deux tours, 1er tour, %d candidats, %d votants, vainqueur = %s, score : %f%%\n",lstCand->size,lstElect->size,sec[1]->nom,(sec[1]->vote/nbVotesTotaux)*100);        
         Candidat* elem1 = sec[0];
         Candidat* elem2 = sec[1];
         elem1->vote = 0;
@@ -199,7 +202,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
         ListElect* electeur2 = listElect_create();
         electeurs2ndTours2Candidats(electeur2,elem1,elem2,fichier,logfile);
         Resultat gagnant = uninominal_2nd_Tours(electeur2,sec,logfile);
-        printf("uninominal à deux tours : 2nd tour : Vainqueur = %s, score : %f %%\n",gagnant.candidat->nom,gagnant.nb);
+        printf("Mode de Scrutin : Uninominal à deux tours, 2nd tour : Vainqueur = %s, score : %f %%\n",gagnant.candidat->nom,gagnant.nb);
         listElect_delete(electeur2);
     }
     if(sec[1] == NULL){

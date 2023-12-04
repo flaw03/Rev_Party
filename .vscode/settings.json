@@ -20,6 +20,7 @@
         "set.h": "c",
         "stdbool.h": "c",
         "stdlib.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "utiles.h": "c"
     }
 }

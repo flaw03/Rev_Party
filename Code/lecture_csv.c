@@ -1,7 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "lecture_csv.h"
+#include "utils_tab.h"
+
+#define MAX_LIGNES 1024
+#define MAX_COLONNES 1024
+#define MAX_LINE_LENGTH 1024
+#define MARGE 4
+#define COLONNE_SHA 3
+#define BUFFER_SIZE 16
+
 
 /*
 *    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
@@ -12,18 +22,55 @@
 *   Fonction pour tester que le fichier en paramètre est bien un csv
 */
 
-int isCSV(const char* filename) {
+void isCSV(const char* filename) {
     const char* extension = strrchr(filename, '.');
     if (extension != NULL) {
         if (strcmp(extension, ".csv") == 0) {
-            return 1; // Le fichier est .csv
+            return ;
         }
     }
-    return 0; // Le fichier n'est pas .csv
+    fprintf(stderr, "ERREUR : Le fichier '%s' n'est pas au bon format. L'extension attendue est '.csv'.\n", filename);
+    exit(33);
 }
 
+/*
+*    Fonction qui renvoie le nom d'un candidat
+*/
 
-void obtenir_nom_Candidat(const char *filename,int numColonne,char * nom_Candidat){
+
+char * formatage_nomCandidat(char * nom){
+        if (nom != NULL) {
+        // Allouer de la mémoire pour la chaîne et la copier
+        size_t len = strcspn(nom, "\n");
+        if (len > 0 && nom[len - 1] == '\r') {
+            // Pour les fichiers texte Windows, enlever également le caractère de retour de chariot (\r)
+            len--;
+        }
+
+        // Allouer de la mémoire pour la chaîne et la copier
+        char *result = (char *)malloc(len + 1);
+        if (result == NULL) {
+            perror("Erreur lors de l'allocation de mémoire");
+            exit(28);
+        }
+
+        strncpy(result, nom, len);
+        result[len] = '\0';  // Ajouter le caractère de fin de chaîne
+        return result;
+    } else {
+        // Allouer de la mémoire pour la chaîne et la copier
+        char *result = (char *)malloc(strlen("Candidat Introuvable") + 1);
+        if (result == NULL) {
+            perror("Erreur lors de l'allocation de mémoire");
+            exit(28);
+        }
+        strcpy(result, "Candidat Introuvable");
+        return result;
+    }
+}
+
+char * obtenir_nom_Candidat_matrice(const char *filename,int numColonne){
+    isCSV(filename);
     FILE *file = fopen(filename, "r");
      if (file == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -31,73 +78,119 @@ void obtenir_nom_Candidat(const char *filename,int numColonne,char * nom_Candida
     }
     char line[MAX_LINE_LENGTH];
 
-    // lit la premier ligne 
-    fgets(line, MAX_LINE_LENGTH, file);
-    char* token = strtok(line, ",");
-    int nb_colonne = 0;
-    while (token != NULL && nb_colonne != numColonne){
-        token = strtok(NULL, ",");
-        nb_colonne ++;
+    if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+        perror("fegts");
+        exit(1);
+    };
+    fclose(file);
+    const char *delimiteur = ",";
+    char* token = strtok(line,delimiteur);
+    int nb_candidat = 0;
+    while (token != NULL && nb_candidat < numColonne){
+        token = strtok(NULL,delimiteur);
+        nb_candidat ++;
     }
-    if (token != NULL){
-    char *positionTiret = strstr(token, ">");
-        if (positionTiret != NULL ) {
-            // Déplacer le pointeur au caractère après le tiret
-            positionTiret++; 
-            }
-
-        char *sautDeLigne = strchr(positionTiret, '\n');
-        while (sautDeLigne != NULL) {
-            *sautDeLigne = '\0'; // Remplacer le saut de ligne par un caractère nul
-            sautDeLigne = strchr(sautDeLigne + 1, '\n'); // Trouver le prochain saut de ligne
-        }
-        strcpy(nom_Candidat, positionTiret);
-    }
-    else{
-        strcpy(nom_Candidat, "Candidat Introuvable ");
-    }
+    return formatage_nomCandidat(token);
 }
 
+
+char * obtenir_nom_Candidat_ballot(const char *filename,int numColonne){
+    isCSV(filename);
+    FILE *file = fopen(filename, "r");
+     if (file == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(28);
+    }
+    char line[MAX_LINE_LENGTH];
+    // lit la premier ligne 
+    if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+        perror("fegts");
+        exit(1);
+    };
+    fclose(file);
+    char* token = strtok(line, ",");
+    for (int  i = 0 ; i < MARGE + numColonne; i++){
+        token = strtok(NULL, ",");
+    }
+    return formatage_nomCandidat(token);
+}
+
+char * obtenir_nom_Candidat(const char *filename,int numColonne,bool isBallot){
+    if (isBallot){
+        return obtenir_nom_Candidat_ballot(filename,numColonne);
+    }else{
+        return obtenir_nom_Candidat_matrice(filename,numColonne);
+    }
+}
 
 /*
 *    Fonction qui renvoie une ligne d'un hash doné
 */
+
+
+
+
 void afficher_vote(const char* filename,char* hash){
+    isCSV(filename);
     FILE* file = fopen(filename,"r"); 
     if (file == NULL) {
         perror("Impossible d'ouvrir le fichier\n");
         exit(28);
     }
     char line[MAX_LINE_LENGTH];
+    char cpyline[MAX_LINE_LENGTH];
+     if (fgets(line, MAX_LINE_LENGTH, file) == NULL) {
+        perror("Erreur lors de la lecture de la première ligne");
+        exit(EXIT_FAILURE);
+    }
+
+    strcpy(cpyline,line);
+
+    int nb_candidat = 0;
+    for (char* token = strtok(line, ",");token != NULL; token = strtok(NULL, ",")){
+        nb_candidat ++;
+    }
+    nb_candidat -= MARGE;
+    char ** tabCandidats = (char**)malloc(nb_candidat * sizeof(char*));
+
+    int i = 0;
+    for (char* token = strtok(cpyline, ",");token != NULL; token = strtok(NULL, ",")){
+        if (i - MARGE >= 0){
+            tabCandidats[i] = formatage_nomCandidat(token);
+            printf("%s\n",tabCandidats[i]);
+        }
+        i++;
+    }
+
+    
     // Lire chaque ligne du fichier CSV
     while (fgets(line, MAX_LINE_LENGTH, file)) {
-
-        char *saveptr; 
         char* token ;
-        token = strtok_r(line, ",",&saveptr);
+        token = strtok(line, ",");
         int colonne = 0;
         // Parcourir les tokens (colonnes)
         while (token != NULL && colonne <= COLONNE_SHA) {
             // Si nous avons atteint la colonne souhaitée
             if (colonne == COLONNE_SHA) { //Colonne 3 = colonne des SHA
 				if(strcmp(token,hash) == 0){// HASH trouvé 
-                    char nomCandidat[BUFFER_SIZE];
-                    strcpy(nomCandidat,"Candidat");
                     colonne ++;
-                    token = strtok_r(NULL, ",", &saveptr);   
-                    printf("%-30s|Vote\n",nomCandidat);                 
+                    token = strtok(NULL, ",");   
+                    printf("Candidat |Vote\n");                 
+                    i = 0;
                     while (token != NULL){
-                        obtenir_nom_Candidat(filename,colonne,nomCandidat);
-                        printf("%-30s|%s\n",nomCandidat,token);
-                        token = strtok_r(NULL, ",", &saveptr);
+                        printf("%-30s|%s\n",tabCandidats[0],token);
+                        token = strtok(NULL, ",");
 					    colonne++;
+                        // free(tabCandidats[i]);
+                        i++;
                     }
+                    free(tabCandidats);
 					return;
 				}
 
             }
             // Obtenir le prochain token
-             token = strtok_r(NULL, ",", &saveptr);
+            token = strtok(NULL, ",");
             colonne++;
         }
     }
@@ -106,3 +199,91 @@ void afficher_vote(const char* filename,char* hash){
 
 }
 
+
+
+int lireBallot(char* filename,Matrice *matrice){
+    isCSV(filename);
+    FILE *file = fopen(filename, "r");
+     if (file == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(28);
+    }
+    char line[MAX_LINE_LENGTH];
+
+    // lit la premier ligne 
+     if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+        perror("fegts");
+        exit(1);
+    };
+    char* token = strtok(line, ",");
+    int nb_candidat = 0;
+    while (token != NULL){
+        token = strtok(NULL, ",");
+        nb_candidat ++;
+    }
+    nb_candidat -= MARGE;
+    int nombreVotant = 0;
+    
+    *matrice = create_Matrice(nb_candidat,nb_candidat);
+    init_Matrice(*matrice,0);
+    
+    Tableau tableauVote = create_Tableau(nb_candidat);
+    while (fgets(line, MAX_LINE_LENGTH, file)) {
+        char* token = strtok(line, ",");
+        int colonne = 0;
+        nombreVotant++;
+        while (token != NULL) {
+            if (colonne > MARGE - 1 ) { //Colonne 3 = colonne des SHA 
+                tableauVote->tableau[colonne - MARGE] = atoi(token);
+            }
+            token = strtok(NULL, ",");
+            colonne++;
+        }
+        remplire_Matrice_Duel(*matrice,tableauVote);
+    }
+    delete_Tableau(tableauVote);
+    fclose(file);
+    return nombreVotant;
+}
+
+
+
+int lireMatriceDuel(char* filename,Matrice *matrice){
+    isCSV(filename);
+    FILE *file = fopen(filename, "r");
+     if (file == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(28);
+    }
+    char line[MAX_LINE_LENGTH];
+
+    // lit la premier ligne 
+     if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+        perror("fegts");
+        exit(1);
+    };
+    const char *delimiteur = ",";
+    char* token = strtok(line,delimiteur);
+    int nb_candidat = 0;
+    while (token != NULL){
+        token = strtok(NULL,delimiteur);
+        nb_candidat ++;
+    }
+    
+    *matrice = create_Matrice(nb_candidat,nb_candidat);
+    init_Matrice(*matrice,0);
+    
+    for (int i = 0; i < (*matrice)->nb_ligne;i++){
+        if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+            perror("fgets");
+            exit(3);
+        }
+        token = strtok(line, delimiteur);
+        for (int j = 0 ;j < (*matrice)->nb_colonne && token != NULL;j++){
+            (*matrice)->tableau[i][j] = atoi(token);
+            token = strtok(NULL, delimiteur);
+        }
+    }
+    fclose(file);
+    return (*matrice)->tableau[0][1] + (*matrice)->tableau[1][0];
+}
