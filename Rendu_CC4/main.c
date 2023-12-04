@@ -106,21 +106,21 @@ int main(int argc, char** argv) {
     if(strcmp(methode,"cm")==0 || optionAll ){
         int vainqueur = methode_Minimax(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de paire : Condorcet Minimax, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de vote : Condorcet Minimax, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
     if(strcmp(methode,"cp") ==0 || optionAll ){
         int vainqueur = methode_Rangement_Des_Paires(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de vote : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
     if(strcmp(methode,"cs") ==0 || optionAll){
         int vainqueur = methode_Schulze(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de paire : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de vote : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
