@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "list.h"
+#include "../Rendu_CC4/fichiers.h/list.h"
 
 typedef struct s_LinkedElement {
     struct  s_element * element;

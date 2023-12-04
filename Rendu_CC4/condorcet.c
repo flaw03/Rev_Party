@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "utils_tab.h" 
-#include "lecture_csv.h"
-#include "list.h"
-#include "set.h"
+
+#include "../Rendu_CC4/fichiers.h/utils_tab.h" 
+#include "../Rendu_CC4/fichiers.h/lecture_csv.h"
+#include "../Rendu_CC4/fichiers.h/list.h"
+#include "../Rendu_CC4/fichiers.h/set.h"
 
 
 

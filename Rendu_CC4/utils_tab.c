@@ -1,4 +1,4 @@
-#include "utils_tab.h"
+#include "../Rendu_CC4/fichiers.h/utils_tab.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>

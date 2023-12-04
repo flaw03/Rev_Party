@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "lecture_csv.h"
-#include "utils_tab.h"
+#include "../Rendu_CC4/fichiers.h/lecture_csv.h"
+#include "../Rendu_CC4/fichiers.h/utils_tab.h"
 
 #define MAX_LIGNES 1024
 #define MAX_COLONNES 1024

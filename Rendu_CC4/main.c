@@ -6,11 +6,12 @@
 #include <stdbool.h>
 #include <getopt.h>
 
-// #include "Utiles.h"
-#include "lecture_csv.h"
-// #include "Uninominales.h"
-#include "utils_tab.h"
-#include "condorcet.h"
+#include "../Rendu_CC4/fichiers.h/Utiles.h"
+#include "../Rendu_CC4/fichiers.h/lecture_csv.h"
+#include "../Rendu_CC4/fichiers.h/Uninominales.h"
+#include "../Rendu_CC4/fichiers.h/utils_tab.h"
+#include "../Rendu_CC4/fichiers.h/condorcet.h"
+#include "../Rendu_CC4/fichiers.h/jugement.h"
 
 /**
  *	@defgroup Main Test program for Uninominales Implantation
@@ -53,7 +54,7 @@ int main(int argc, char** argv) {
 
     
     if(argc<5){
-            fprintf(stderr, "Usage: %s -i <nomFichierCSV> | -d <nomFichier>  -m {uni1, uni2, cm, cp, cs, all} [-o <log_file>]\n", argv[0]);
+            fprintf(stderr, "Usage: %s -i ../Data/nomFichierCSV> | -d ../Data/<nomFichierCSV>  -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
             exit(9);
         }
     while ((opt = getopt(argc, argv, "i:o:m:d:")) != -1) {
@@ -80,7 +81,7 @@ int main(int argc, char** argv) {
                 methode = optarg;
                 break;
             default:
-                fprintf(stderr, "Usage: %s -i <nomFichierCSV> | -d <nomFichier>  -m {uni1, uni2, cm, cp, cs, all} [-o <log_file>]\n", argv[0]);
+                fprintf(stderr, "Usage: %s -i ../Data/<nomFichierCSV> | -d ../Data/<nomFichierCSV>  -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
@@ -96,17 +97,16 @@ int main(int argc, char** argv) {
         optionAll = true;
     }
 
-    // if((strcmp(methode,"uni1") == 0  || optionAll ) && optionBalot){
-         // unTour(filename,logfile);    
-    // }
-    // else if((strcmp(methode,"uni2" )==0   || optionAll) && optionBalot){
-    //     // deuxTours(logfile,filename);
-    // }
-    // else
+    if((strcmp(methode,"uni1") == 0  || optionAll ) && optionBalot){
+         unTour(filename,logfile);    
+    }
+    if((strcmp(methode,"uni2" )==0   || optionAll) && optionBalot){
+        deuxTours(logfile,filename);
+    }
     if(strcmp(methode,"cm")==0 || optionAll ){
         int vainqueur = methode_Minimax(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de paire : Condorcet Minimax, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
@@ -123,6 +123,12 @@ int main(int argc, char** argv) {
         printf("Mode de paire : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
+    }
+     if((strcmp(methode,"jm") == 0 || optionAll) && optionBalot){
+        voteJugementMajoritaireBallot(filename,logfile);
+    }
+    else{
+        fprintf(stderr,"Usage [%s] use -m {uni1, uni2, cm, cp, cs,jm, all}\n",argv[0]);
     }
     
 
