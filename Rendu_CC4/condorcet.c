@@ -133,7 +133,7 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
     for (Element e = list_iterator_value(it); !list_iterator_end(it); e = list_iterator_next(it)) {
         
         fprintf(logfile,"\nArc courrant\n");
-        afficherArc(e, stdout);
+        afficherArc(e, logfile);
 
         if (doesCreateCycle(set, e->a, e->b) == 0) {
             fprintf(logfile,"Pas de cycle créé.\n");
@@ -148,7 +148,7 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
     }
     // Afficher l'arbre trouvé
     fprintf(logfile,"\nARBRE :\n");
-    list_reduce(arbre, &afficherArc, stdout);
+    list_reduce(arbre, &afficherArc, logfile);
 
     // Trouver la racine de l'ensemble
     int racine = findRoot(set);
@@ -185,7 +185,7 @@ int resolutionSchulze(ptrList graphe,int nbCandidat,FILE* logfile) {
     ListIterator it = list_iterator_create(graphe, BACKWARD_ITERATOR);
     fprintf(logfile,"\nGraphe trié :\n");
     for (Element e = list_iterator_value(it); !list_iterator_end(it); e = list_iterator_next(it)) {
-        afficherArc(e, stdout);
+        afficherArc(e, logfile);
     }
 
     // Itération sur le graphe trié pour déterminer le vainqueur
@@ -194,7 +194,7 @@ int resolutionSchulze(ptrList graphe,int nbCandidat,FILE* logfile) {
     list_iterator_begin(it);
     for (Element e = list_iterator_value(it); valeur > 0; e = list_iterator_next(it)) {
         fprintf(logfile,"\nArc courrant\n");
-        afficherArc(e, stdout);
+        afficherArc(e, logfile);
         fprintf(logfile,"Tableau de scores après la réduction :\n");
         afficher_Tableau(tableauArcEntrant,logfile);
         tableauArcEntrant->tableau[e->b]--;
@@ -232,7 +232,7 @@ int condorcet(Matrice matriceDuel, ptrList *graphe,FILE* logfile) {
     }
 
     fprintf(logfile,"\nGraphe :\n");
-    list_reduce(*graphe, &afficherArc, stdout);
+    list_reduce(*graphe, &afficherArc, logfile);
 
     // Initialisation du tableau de score
     Tableau tableauArcSortant = create_Tableau(matriceDuel->nb_colonne);

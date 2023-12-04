@@ -10,7 +10,6 @@
 #include "lecture_csv.h"
 // #include "Uninominales.h"
 #include "utils_tab.h"
-#include "logfp.h"
 #include "condorcet.h"
 
 /**
@@ -44,7 +43,6 @@ int main(int argc, char** argv) {
     int opt;
     char* filename = NULL;
     char* fichierLog = NULL;
-    bool hasLog = false;
     bool optionBalot = false;
     bool optionAll = false;
     bool optionMatrice = false;
@@ -72,7 +70,6 @@ int main(int argc, char** argv) {
                 break;
             case 'o':                       
                 fichierLog = optarg;
-                hasLog = true;
                 logfile = fopen(fichierLog, "w");
                 if (logfile == NULL) {
                     printf("erreur fichier.\n");
@@ -108,28 +105,28 @@ int main(int argc, char** argv) {
     // else
     if(strcmp(methode,"cm")==0 || optionAll ){
         int vainqueur = methode_Minimax(matriceDuel,logfile);
-        char * nomVainqueur = obtenirNomCandidat(filename,vainqueur);
+        char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
         printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
     if(strcmp(methode,"cp") ==0 || optionAll ){
         int vainqueur = methode_Rangement_Des_Paires(matriceDuel,logfile);
-        char * nomVainqueur = obtenirNomCandidat(filename,vainqueur);
+        char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
         printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
     if(strcmp(methode,"cs") ==0 || optionAll){
         int vainqueur = methode_Schulze(matriceDuel,logfile);
-        char * nomVainqueur = obtenirNomCandidat(filename,vainqueur);
+        char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
         printf("Mode de paire : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
     }
     
 
-    
+
     if(logfile!=stdout){
         fclose(logfile);
     }

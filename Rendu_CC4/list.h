@@ -259,6 +259,9 @@ Element list_iterator_value(ListIterator it);
 
 int list_iterator_has_next(ListIterator it);
 
+
+ListIterator list_iterator_begin(ListIterator it);
+
 int list_iterator_delete_current(ListIterator it);
 
 int list_iterator_end(ListIterator it);
