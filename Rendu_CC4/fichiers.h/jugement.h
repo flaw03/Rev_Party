@@ -1,46 +1,57 @@
 #ifndef JUGEMENT_H
 #define JUGEMENT_H
 
-// Fonction : trier
-// Description : Trie un tableau d'entiers en ordre croissant.
-// @param tab : Tableau d'entiers à trier.
-// @param taille : Taille du tableau.
+/**
+* @brief Fonction : trier
+* @brief Description : Sorts an array of integers in ascending order.
+* @param tab : The table to be sorted.
+* @param taille : Size of the table.
+*/
 void trier(int* tab, int taille);
 
-// Fonction : trierVotes
-// Description : Trie les votes de chaque candidat dans la liste en ordre croissant.
-// @param lstCand : Liste des candidats.
-// @param taille : Taille de la liste des candidats.
+/**
+* @brief Fonction : trierVotes
+* @brief Description : Sorts the votes for each candidate in the list in ascending order.
+* @param lstCand : List of candidates.
+* @param taille : Size of the list.
+*/
 void trierVotes(ListCand* lstCand, int taille);
 
-
-// Fonction : mediane
-// Description : Calcule la médiane d'un tableau d'entiers.
-// @param tab : Tableau d'entiers.
-// @param taille : Taille du tableau.
-// @return : La médiane des entiers dans le tableau.
+/**
+* @brief Fonction : mediane
+* @brief Description : Calculates the median of an array of integers.
+* @param tab : Table of integers.
+* @param taille : Size of the table.
+* @return : The median of the integers.
+*/
 double mediane(int* tab, int taille);
 
-// Fonction : afficherVote
-// Description : Affiche les votes d'un tableau dans un fichier de log.
-// @param tab : Tableau d'entiers représentant les votes.
-// @param taille : Taille du tableau de votes.
-// @param logfile : Pointeur vers le fichier de log où afficher les votes.
+/**
+* @brief Fonction : afficherVote
+* @brief Description : Display table votes in a log file.
+* @param tab : Array of integers representing votes.
+* @param taille : Size of the array.
+* @param logfile : Pointer to the log file where votes are displayed.
+*/
 void afficherVote(int* tab, int taille, FILE* logfile);
 
-// Fonction : jugementMajoritaire
-// Description : Applique le jugement majoritaire pour déterminer le candidat gagnant.
-// @param lstCand : Liste des candidats.
-// @param lstElect : Liste des électeurs.
-// @param fichier : Nom du fichier d'entrée.
-// @param logfile : Pointeur vers le fichier de log où afficher les résultats.
-// @return : Le candidat gagnant selon le jugement majoritaire.
+/**
+* @brief Fonction : jugementMajoritaire
+* @brief Description : Applies majority judgment to determine the winning candidate.
+* @param lstCand : List of candidates.
+* @param lstElect : List of elector.
+* @param fichier : Name of the entry file.
+* @param logfile : Pointer to the log file where votes are displayed.
+* @return : The winning candidate.
+*/
 Candidat* jugementMajoritaire(ListCand* lstCand, ListElect* lstElect, char* fichier, FILE* logfile);
 
-// Fonction : voteJugementMajoritaireBallot
-// Description : Effectue un vote avec jugement majoritaire en utilisant un fichier d'entrée et génère un fichier de log.
-// @param fichier : Nom du fichier d'entrée.
-// @param logfile : Pointeur vers le fichier de log où afficher les résultats.
+/** 
+* @brief Fonction : voteJugementMajoritaireBallot
+* @brief Description : Performs majority voting using an input file and generates a log file.
+* @param fichier : Name of the entry file.
+* @param logfile : Pointer to the log file where votes are displayed.
+*/
 void voteJugementMajoritaireBallot(char* fichier, FILE* logfile);
 
 #endif

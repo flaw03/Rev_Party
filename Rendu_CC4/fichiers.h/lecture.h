@@ -12,50 +12,46 @@
 /** \defgroup Constructors Contructors and destructors of the TAD.
  @{
  */
-/** Enlève les sauts de ligne d'une chaine de caractère
-    @param str la chaine à modifier
-    @return la chaine modiée
+/** 
+ * @brief Removes line breaks from a character string.
+ * @param str The string to modify.
 */
 void removeNewline(char* str);
 
 
 ListElect* getElecteur(ListElect* lstElect, ListCand* lstCand, char* fichier, int* tab);
 
-/**Fonction créant une liste de candidats à partir d'un fichier.csv
-
-@param lstCand Liste vide de candidats
-@param fichier Le fichier contenant les données
+/**
+ * @brief Create a list of candidates from a csv file
+ * @param lstCand An empty list of candidates.
+ * @param fichier The data file.
 */
-
 ListCand* getCandidat(ListCand* lstCand, char* fichier);
 
-/** Fonction renvoyant l'indice colonne d'un fichier.csv de chaque candidat présent dans la liste
-@param candidats Les candidats présent
-@param fichier Le fichier.csv à analyser
-@param tab le tableau vide qui contiendra les indices des candidats
-
-@return le tableau contenant les indices des candidats
-
-
+/** 
+ * @brief Returning the column index of a .csv file for each candidate in the list
+ * @param candidats Les candidats présent
+ * @param fichier zthe csv file
+ * @param tab the initial empty table containing the candidate indices.
+ * @return the table containing the candidate indexes.
 */
-
 int getIndice(Candidat* candidats, char* fichier);
-/** Fonction permettant de créer une liste d'electurs ayant voté pour 2 candidats différents en choisissant celui qu'ils ont préféré.
-@param lstElect liste vide
-@param c1 Candidat 1
-@param c2 Candidat 2
-@param fichier le fichier contenant les votes et les informations des electeurs
 
-@return Une liste d'électeurs
-
+/** 
+ * @brief create a list of electors who voted for 2 different candidates, choosing the one they preferred.
+ * @param lstElect liste vide
+ * @param c1 Candidate 1.
+ * @param c2 Candidate 2.
+ * @param The file containing votes and voter information.
+ * @return Une liste d'électeurs
 */
-
 ListElect* electeurs2ndTours2Candidats(ListElect* lstElect, Candidat* c1, Candidat* c2, char* fichier,FILE* logfile);
 
-/**Fonction permettant d'initialiser les votes d'une liste de candidat suivant les votes d'une liste d'électeurs
-@param lstCand Liste de Candidat
-@param lstElect Liste d'électeurs
-@param fichier Fichier contenant les votes des électeurs
+/**
+ * @brief Initialize the votes of a candidate list according to the votes of a voter list.
+ * @param lstCand Liste de Candidat
+ * @param lstElect Liste d'électeurs
+ * @param fichier Fichier contenant les votes des électeurs
 */
 void initJugement(ListCand* lstCand,ListElect* lstElect,char* fichier);
 

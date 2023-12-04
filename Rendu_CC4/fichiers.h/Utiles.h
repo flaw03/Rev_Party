@@ -1,9 +1,30 @@
 #ifndef LISTESUTILES_H
 #define LISTESUTILES_H
 
+/** 
+ * @defgroup Utils Utils 
+ * @brief Documentation of utils functions for the project.
+ *@{
+ */
+
+/** 
+ * @brief Opaque definition of ListCand abstract data type.
+ */
 typedef struct s_List_Cand ListCand;
+
+/** 
+ * @brief Opaque definition of ListElect abstract data type.
+ */
 typedef struct s_List_Electeur ListElect;
+
+/** 
+ * @brief Opaque definition of Candidat abstract data type.
+ */
 typedef struct s_Candidat Candidat;
+
+/** 
+ * @brief Opaque definition of Electeur abstract data type.
+ */
 typedef struct s_Electeur Electeur;
 
 
@@ -58,12 +79,12 @@ ListElect* listElect_create(void);
 /** Adds an electeur to the list of electeurs.
     @param l The list of electeurs to modify.
     @param electehr Pointer to the electeur to be added.
-    @return The modified list of electerrs.
+    @return The modified list of electors.
 */
 ListElect* list_add_Electeur(ListElect* l, Electeur* electeur);
 
 
-/** Deletes the entire list of electeurs and frees allocated memory.
+/** Deletes the entire list of electors and frees allocated memory.
     @param l The list of electeurs to be deleted.
 */
 void listElect_delete(ListElect* l);
@@ -117,15 +138,17 @@ int getIndiceVote(int* votes,int taille);
 
   @return The Candidate associated to the given index
 */
-
 Candidat* candidatAssocie(int nb,ListCand* lstCand);
 
 /**Creates and allocate memory of each array present in each candidate
  @param taille The size of the array to allocate
- @param lstCand The list of candidates
- 
+ @param lstCand The list of candidates 
 */
-
 void createTableau(int taille,ListCand* lstCand);
+
+
+/** @} */
+
+/** @} */
 
 #endif
