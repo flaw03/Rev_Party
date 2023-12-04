@@ -5,7 +5,7 @@ OBJ_DIR=obj
 BIN_DIR=bin
 
 # Nom de l'exécutable
-EXEC=uninominales
+EXEC=rev_party
 
 # Compilateur
 CC=gcc

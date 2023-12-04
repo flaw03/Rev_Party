@@ -52,6 +52,9 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
+# Règle pour créer l'exécutable verify_my_vote
+$(BIN_DIR)/verify_my_vote: $(OBJ_DIR)/verify_my_vote.o
+	@$(CC) -o $@ $< Sha256/sha256.c Sha256/sha256_utils.c  6 $(LDFLAGS)
 
 .PHONY: clean mrproper
 

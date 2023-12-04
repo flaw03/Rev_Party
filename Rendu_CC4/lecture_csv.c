@@ -22,7 +22,7 @@
 *   Fonction pour tester que le fichier en paramètre est bien un csv
 */
 
-int isCSV(const char* filename) {
+int fichierEstCSV(const char* filename) {
     const char* extension = strrchr(filename, '.');
     if (extension != NULL) {
         if (strcmp(extension, ".csv") == 0) {
@@ -115,8 +115,8 @@ char * obtenir_nom_Candidat_csv(const char *filename,int numColonne){
     return formatage_nomCandidat(token);
 }
 
-char * obtenir_nom_Candidat(const char *filename,int numColonne){
-    if (isCSV(filename)){
+char * obtenirNomCandidat(const char *filename,int numColonne){
+    if (fichierEstCSV(filename)){
         return obtenir_nom_Candidat_csv(filename,numColonne);
     }else{
         return obtenir_nom_Candidat_txt(filename,numColonne);
@@ -126,13 +126,13 @@ char * obtenir_nom_Candidat(const char *filename,int numColonne){
 /*
 *    Fonction qui renvoie une ligne d'un hash doné
 */
-void afficher_vote(const char* filename,char* hash){
+void afficherVote(const char* filename,char* hash){
     FILE* file = fopen(filename,"r"); 
     if (file == NULL) {
         perror("Impossible d'ouvrir le fichier\n");
         exit(28);
     }
-    isCSV(filename);
+    fichierEstCSV(filename);
     char line[MAX_LINE_LENGTH];
     // Lire chaque ligne du fichier CSV
     while (fgets(line, MAX_LINE_LENGTH, file)) {
@@ -149,7 +149,7 @@ void afficher_vote(const char* filename,char* hash){
                     token = strtok(NULL, ",");   
                     printf("Candidat |Vote\n");                 
                     while (token != NULL){
-                        char * nomCandidat = obtenir_nom_Candidat(filename,colonne);
+                        char * nomCandidat = obtenirNomCandidat(filename,colonne);
                         printf("%-30s|%s\n",nomCandidat,token);
                         token = strtok(NULL, ",");
 					    colonne++;
@@ -172,7 +172,7 @@ void afficher_vote(const char* filename,char* hash){
 
 
 int lireBallot(char* filename,Matrice *matrice){
-    if (!isCSV(filename)){
+    if (!fichierEstCSV(filename)){
         fprintf(stderr, "Erreur : Ce n'est pas un fichier csv.\n");
         exit(27);  
     }

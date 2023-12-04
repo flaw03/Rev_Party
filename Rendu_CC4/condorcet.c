@@ -1,6 +1,9 @@
-#include <limits.h>
+
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include "condorcet.h"
 #include "utils_tab.h"
 #include "lecture_csv.h"
 #include "list.h"
@@ -181,7 +184,7 @@ int condorcet(Matrice matriceDuel, ptrList *graphe) {
 
 
 
-int methode_minimax(Matrice matriceDuel) {
+int methode_Minimax(Matrice matriceDuel) {
     // Vérification de la validité de la matrice de duel
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
@@ -217,7 +220,7 @@ int methode_minimax(Matrice matriceDuel) {
 }
 
 
-int methode_paire(Matrice matriceDuel) {
+int methode_Rangement_Des_Paires(Matrice matriceDuel) {
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
         exit(3); 
@@ -254,28 +257,23 @@ int methode_paire(Matrice matriceDuel) {
 }
 
 
-int main(void){
-    char * filename = "../Data/paire.txt";
-    Matrice matriceDuel = NULL;
-    int nombreElecteur;
-    if (isCSV(filename)){
-        nombreElecteur = lireBallot(filename,&matriceDuel);
-    }else
-    {
-        nombreElecteur = lireMatriceDuel(filename,&matriceDuel);
+// methode pas encore fini
+int methode_Schulze(Matrice matriceDuel){
+    if (matriceDuel == NULL) {
+        fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
+        exit(3); 
     }
     
-    afficher_Matrice(matriceDuel);
-    printf("nombre de votant = %d\n",nombreElecteur);
+    List *graphe = NULL;
     
-    int vainqueur = methode_paire(matriceDuel);
-    char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur);
-    printf("Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
-    nombreElecteur,nomVainqueur);
-    delete_Matrice(matriceDuel);
-    free(nomVainqueur);
-    
-    
-    return -1; //Valeur non trouvée
+    int vainqueur = condorcet(matriceDuel, &graphe);
 
+    // Vérification de la validité de la matrice de duel
+
+    // Vérification de la validité de la liste de graphe
+    if (graphe == NULL) {
+        fprintf(stderr, "Erreur : Impossible de créer la liste de graphe.\n");
+        exit(4); 
+    }
+    return vainqueur;
 }
