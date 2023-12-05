@@ -26,26 +26,49 @@ Le programme prend en entrée un fichier CSV contenant les données de vote. Cha
 
     2.2 Uninominal à deux tours (uni2) : Les deux candidats avec le plus grand nombre de votes au premier tour passent au deuxième tour, où le candidat avec le plus grand nombre de votes est élu.
 
-3. Options d'Affichage : 
+   2.3
+
+   2.4
+   
+   2.5
+
+   2.6
+
+4. Options d'Affichage : 
 L'application propose une option pour afficher les calculs intermédiaires dans un fichier log.
 
 
 ## Utilisation
 
-Pour exécuter le programme, utilisez la commande suivante :
+
+Pour exécuter le programme indepandant verify_my_vote, utilisez la commande suivante :
 
 ```bash
-bin/uninominales -i <filename.csv> -m {uni1, uni2, all} [-o <log_file>]
+bin/verify_my_vote <filename.csv> 
 ```
+
+
+Pour exécuter le programme scrutin, utilisez la commande suivante :
+
+```bash
+bin/scrutin  -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]
+```
+
+
 
 *Paramètres :*
 
--i : Spécifie le nom du fichier où se trouvent les données de vote.
+-i : Spécifie le nom du fichier csv où se trouvent les ballots de vote.
 
+-d : Spécifie le nom du fichier csv où se trouvent la matrice de duel.
 
 -m : Sélectionne la méthode de vote (uni1, uni2, all).
 
 -o : Optionnel. Spécifie le fichier log pour afficher les calculs intermédiaires.
+
+*Note*
+*L'option -i et -d ne peuvent pas etre presente en meme temps*
+
 
 
 ## Exemple d'Utilisation 
@@ -59,12 +82,17 @@ Cette commande lance le programme avec le fichier CSV "donnees_votes.csv", utili
 
 ## Compilation
 
-Pour compiler le programme, exécutez la commande suivante :
+Pour compiler le programme scrutin, exécutez la commande suivante :
 
 ```bash
-make
+make scrutin
 ```
 
+Pour compiler le programme indepandant verify_my_vote, exécutez la commande suivante :
+
+```bash
+make verify_my_vote
+```
 
 ## Documentation
 
