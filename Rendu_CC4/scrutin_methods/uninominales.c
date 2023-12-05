@@ -4,9 +4,9 @@
 #include <string.h>
 #include <time.h>
 
-#include "inc/utiles.h"
-#include "inc/lecture_csv.h"
-#include "inc/uninominales.h"
+#include "../utility_module/utiles.h"
+#include "../utility_module/lecture_csv.h"
+#include "uninominales.h"
 
 
 

@@ -3,9 +3,9 @@
 #include <string.h>
 #include <time.h>
 
-#include "inc/lecture_csv.h"
-#include "inc/utils_tab.h"
-#include "inc/utiles.h"
+#include "lecture_csv.h"
+#include "utils_tab.h"
+#include "utiles.h"
 
 #define MAX_LIGNES 1024
 #define MAX_COLONNES 1024
@@ -14,6 +14,7 @@
 #define COLONNE_SHA 3
 #define BUFFER_SIZE 16
 #define colonneID 0
+#define SIZE_TAB 50
 
 
 
@@ -138,41 +139,48 @@ void afficher_vote(const char* filename,char* hash){
         perror("Impossible d'ouvrir le fichier\n");
         exit(28);
     }
-    isCSV(filename);
     char line[MAX_LINE_LENGTH];
+    char *tabCandidat[SIZE_TAB];
+    int nbCandidat = 0;
+    bool find = false ;
+    if (fgets(line, MAX_LINE_LENGTH, file) == NULL){
+        perror("fegts");
+        exit(1);
+    };
+    char*  token = strtok(line, ",");
+    token = strtok(NULL, ",");
+    token = strtok(NULL, ",");
+    token = strtok(NULL, ",");
+    token = strtok(NULL, ",");
+
+    for (int i = 0; token != NULL; i++){
+        tabCandidat[i] = formatage_nomCandidat(token);
+        token = strtok(NULL, ",");
+        nbCandidat ++;
+    }
     // Lire chaque ligne du fichier CSV
-    while (fgets(line, MAX_LINE_LENGTH, file)) {
-
-        char* token ;
+    while (fgets(line, MAX_LINE_LENGTH, file) && !find) {
         token = strtok(line, ",");
-        int colonne = 0;
-        // Parcourir les tokens (colonnes)
-        while (token != NULL && colonne <= COLONNE_SHA) {
-            // Si nous avons atteint la colonne souhaitée
-            if (colonne == COLONNE_SHA) { //Colonne 3 = colonne des SHA
-				if(strcmp(token,hash) == 0){// HASH trouvé 
-                    colonne ++;
-                    token = strtok(NULL, ",");   
-                    printf("Candidat |Vote\n");                 
-                    while (token != NULL){
-                        char * nomCandidat = obtenir_nom_Candidat(filename,colonne,true);
-                        printf("%-30s|%s\n",nomCandidat,token);
-                        token = strtok(NULL, ",");
-					    colonne++;
-                        free(nomCandidat);
-                    }
-					return;
-				}
-
+        token = strtok(NULL, ",");
+        token = strtok(NULL, ",");
+        token = strtok(NULL, ",");
+        if(strcmp(token,hash) == 0){// HASH trouvé 
+            token = strtok(NULL, ",");   
+            printf("Candidat |Vote\n");                 
+            for (int i = 0 ; i < nbCandidat && token != NULL ; i++) {
+                printf("%-30s|%s\n",tabCandidat[i],token);
+                token = strtok(NULL, ",");   
             }
-            // Obtenir le prochain token
-             token = strtok(NULL, ",");
-            colonne++;
+            find = true;
         }
     }
-    printf("Électeur non trouvé dans la liste.\n");
+    for (int i = 0; i < nbCandidat ; i++){
+        free(tabCandidat[i]);
+    }
+    if (!find){
+        printf("Électeur non trouvé dans la liste.\n");
+    }
     fclose(file);
-
 }
 
 

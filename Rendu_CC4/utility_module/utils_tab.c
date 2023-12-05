@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "inc/utils_tab.h"
+#include "utils_tab.h"
 
 
 

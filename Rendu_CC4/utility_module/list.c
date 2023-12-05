@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "inc/list.h"
+#include "list.h"
 
 typedef struct s_LinkedElement {
     struct  s_element * element;

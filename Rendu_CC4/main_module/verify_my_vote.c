@@ -4,9 +4,9 @@
 #include <memory.h>
 #include <ctype.h>
 
-#include "lecture_csv.h"
-#include "sha256.h"
-#include "sha256_utils.h"
+#include "../utility_module/lecture_csv.h"
+#include "../sha256_module/sha256.h"
+#include "../sha256_module/sha256_utils.h"
 #define STRLONG 100
 
 /*

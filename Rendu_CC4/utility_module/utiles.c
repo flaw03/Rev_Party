@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include "inc/utiles.h"
+#include "utiles.h"
 
 
 /********************************************************/

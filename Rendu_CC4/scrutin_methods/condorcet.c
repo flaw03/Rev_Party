@@ -3,10 +3,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "inc/utils_tab.h" 
-#include "inc/lecture_csv.h"
-#include "inc/list.h"
-#include "inc/set.h"
+#include "../utility_module/utils_tab.h" 
+#include "../utility_module/lecture_csv.h"
+#include "../utility_module/list.h"
+#include "../utility_module/set.h"
+#include "condorcet.h"
 
 
 

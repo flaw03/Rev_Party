@@ -6,12 +6,12 @@
 #include <stdbool.h>
 #include <getopt.h>
 
-#include "inc/utiles.h"
-#include "inc/lecture_csv.h"
-#include "inc/uninominales.h"
-#include "inc/utils_tab.h"
-#include "inc/condorcet.h"
-#include "inc/jugement.h"
+#include "../utility_module/utiles.h"
+#include "../utility_module/lecture_csv.h"
+#include "../utility_module/utils_tab.h"
+#include "../scrutin_methods/uninominales.h"
+#include "../scrutin_methods/condorcet.h"
+#include "../scrutin_methods/jugement.h"
 
 /**
  *	@defgroup Main Test program for Uninominales Implantation

@@ -6,9 +6,9 @@
 #include <stdbool.h>
 
 
-#include "inc/utiles.h"
-#include "inc/lecture_csv.h"
-#include "inc/jugement.h"
+#include "../utility_module/utiles.h"
+#include "../utility_module/lecture_csv.h"
+#include "jugement.h"
 
 
 void trier(int* tab,int taille){
