@@ -51,7 +51,7 @@ bin/verify_my_vote <filename.csv>
 Pour exécuter le programme scrutin, utilisez la commande suivante :
 
 ```bash
-bin/scrutin  -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]
+bin/scrutin  -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs, jm, all} [-o <log_file>]
 ```
 
 
