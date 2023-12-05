@@ -1,7 +1,7 @@
 # Méthodes uninominales à un et deux tours
 
 Description du Projet :
-Le projet est une application de vote qui prend en entrée un fichier CSV contenant des données de vote et effectue le calcul pour élire un candidat selon la méthode de vote de votre choix parmis celles disponibles.
+Le projet est une application de vote qui prend en entrée un fichier CSV contenant des données de vote et effectue le calcul pour élire un candidat selon la méthode de vote de votre choix parmi celles disponibles.
 
 
 ## Table des Matières
