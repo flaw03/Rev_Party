@@ -30,7 +30,7 @@ Le programme prend en entrée un fichier CSV contenant les données de vote. Cha
 
    2.4 Condorcet Paires (cp) : Le gagnant est déterminé en comparant toutes les paires de candidats possibles et en sélectionnant celui qui remporte le plus grand nombre de duels un contre un
    
-   2.5 Condorcet Schulze (cs) : Le gagnant est choisi en évaluant les marges de victoire dans les duels un contre un entre tous les candidats, puis en sélectionnant celui qui a les marges les plus fortes dans l'ensemble des comparaisons. Cette méthode prend en compte la force relative des victoires dans les duels pour déterminer le vainqueur.
+   2.5 Condorcet Schulze (cs) : Le gagnant est choisi en évaluant les marges de victoire dans les duels un contre un entre tous les candidats, puis en sélectionnant celui qui a les marges les plus fortes dans l'ensemble                                  des comparaisons. Cette méthode prend en compte la force relative des victoires dans les duels pour déterminer le vainqueur.
 
    2.6 Jugement majoritaire (jm) : Le gagnant est déterminé en attribuant des jugements qualitatifs, puis en choisissant le candidat ayant la médiane la plus élevée
 
@@ -62,12 +62,12 @@ bin/scrutin  -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,j
 
 -d : Spécifie le nom du fichier csv où se trouvent la matrice de duel.
 
--m : Sélectionne la méthode de vote (uni1, uni2, all).
+-m : Sélectionne la méthode de vote (uni1, uni2, cm, cp, cs, jm, all).
 
 -o : Optionnel. Spécifie le fichier log pour afficher les calculs intermédiaires.
 
 *Note*
-*L'option -i et -d ne peuvent pas etre presente en meme temps*
+*L'option -i et -d ne peuvent pas être présente en même temps*
 
 
 
