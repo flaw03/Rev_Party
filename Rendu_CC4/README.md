@@ -26,13 +26,13 @@ Le programme prend en entrée un fichier CSV contenant les données de vote. Cha
 
     2.2 Uninominal à deux tours (uni2) : Les deux candidats avec le plus grand nombre de votes au premier tour passent au deuxième tour, où le candidat avec le plus grand nombre de votes est élu.
 
-   2.3
+   2.3 Condorcet minimax (cm) : Le gagnant est choisi en identifiant la paire de candidats avec la plus petite marge de défaite potentielle, visant ainsi à minimiser le risque de la pire défaite
 
-   2.4
+   2.4 Condorcet Paires (cp) : Le gagnant est déterminé en comparant toutes les paires de candidats possibles et en sélectionnant celui qui remporte le plus grand nombre de duels un contre un
    
-   2.5
+   2.5 Condorcet Schulze (cs) : Le gagnant est choisi en évaluant les marges de victoire dans les duels un contre un entre tous les candidats, puis en sélectionnant celui qui a les marges les plus fortes dans l'ensemble des comparaisons. Cette méthode prend en compte la force relative des victoires dans les duels pour déterminer le vainqueur.
 
-   2.6
+   2.6 Jugement majoritaire (jm) : Le gagnant est déterminé en attribuant des jugements qualitatifs, puis en choisissant le candidat ayant la médiane la plus élevée
 
 4. Options d'Affichage : 
 L'application propose une option pour afficher les calculs intermédiaires dans un fichier log.
