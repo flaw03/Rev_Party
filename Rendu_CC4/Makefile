@@ -18,46 +18,46 @@ LDFLAGS=-lm
 
 
 scrutin: $(OBJ_DIR)/utiles.o $(OBJ_DIR)/utils_tab.o $(OBJ_DIR)/lecture_csv.o $(OBJ_DIR)/list.o $(OBJ_DIR)/set.o  $(OBJ_DIR)/condorcet.o $(OBJ_DIR)/jugement.o $(OBJ_DIR)/uninominales.o $(OBJ_DIR)/scrutin.o 
-	$(CC) -o $(BIN_DIR)/$@ $^ $(LDFLAGS) 2> /dev/null
+	$(CC) -o $(BIN_DIR)/$@ $^ $(LDFLAGS)
 
 verify_my_vote: $(OBJ_DIR)/utiles.o $(OBJ_DIR)/utils_tab.o $(OBJ_DIR)/lecture_csv.o $(OBJ_DIR)/sha256.o $(OBJ_DIR)/sha256_utils.o $(OBJ_DIR)/verify_my_vote.o 
-	$(CC) -o $(BIN_DIR)/$@ $^ $(LDFLAGS) 2> /dev/null
+	$(CC) -o $(BIN_DIR)/$@ $^ $(LDFLAGS)
 
 $(OBJ_DIR)/sha256.o: sha256_module/sha256.c
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/sha256_utils.o :sha256_module/sha256_utils.c sha256_module/sha256.c
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/utiles.o: utility_module/utiles.c
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/utils_tab.o : utility_module/utils_tab.c
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/lecture_csv.o: utility_module/lecture_csv.c utility_module/utiles.h utility_module/utils_tab.h	
-	$(CC) -o $@ -c $<  $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $<  $(CFLAGS) 
 
 $(OBJ_DIR)/set.o: utility_module/set.c utility_module/set.h utility_module/utils_tab.h
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/list.o: utility_module/list.c utility_module/list.h
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/condorcet.o: scrutin_methods/condorcet.c utility_module/utils_tab.h utility_module/list.h utility_module/set.h
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/jugement.o: scrutin_methods/jugement.c utility_module/utiles.h utility_module/lecture_csv.h
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/uninominales.o: scrutin_methods/uninominales.c utility_module/utiles.h utility_module/lecture_csv.h
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/scrutin.o: main_module/scrutin.c utility_module/utiles.h utility_module/lecture_csv.h utility_module/utils_tab.h scrutin_methods/condorcet.h scrutin_methods/jugement.h scrutin_methods/uninominales.h
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(OBJ_DIR)/verify_my_vote.o: main_module/verify_my_vote.c utility_module/lecture_csv.h sha256_module/sha256.h sha256_module/sha256_utils.h
-	$(CC) -o $@ -c $< $(CFLAGS) 2> /dev/null
+	$(CC) -o $@ -c $< $(CFLAGS) 
 
 $(BIN_DIR):
 	mkdir -p $@
@@ -86,6 +86,10 @@ $(EXEC): $(OBJ)
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) -o $@ -c $< $(CFLAGS)
+
+all:
+	scrutin
+	verify_my_vote
 
 .PHONY: clean doc deliver
 

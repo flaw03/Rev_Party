@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
         }
     }
     if ((optionBalot && optionMatrice) || (!optionMatrice && !optionBalot) ) {
-        fprintf(stderr, "Erreur : Les options -i et -d ne peuvent pas être présentes simultanément.\n");
+        fprintf(stderr, "Erreur : L'option -i et -d ne peuvent pas etre presente en meme temps\n");
         exit(EXIT_FAILURE);
     }
     if (methode == NULL){

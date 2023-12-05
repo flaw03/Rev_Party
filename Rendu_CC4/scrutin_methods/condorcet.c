@@ -10,27 +10,26 @@
 #include "condorcet.h"
 
 
-
+// renvoie un tableau contenant le pire defaite de chaque candidat
 Tableau obtenirPiresScores(Matrice matriceCombat) {
     // Vérification de la validité de la matrice de combat
     if (matriceCombat == NULL || matriceCombat->tableau == NULL) {
         fprintf(stderr, "Erreur : Matrice de combat invalide.\n");
-        return NULL;  // Ou ajustez selon vos besoins
+        return NULL;  
     }
 
-    Tableau piresScores = create_Tableau(matriceCombat->nb_colonne);
-    init_Tableau(piresScores, INT_MIN);
+    Tableau tabPiresScores = create_Tableau(matriceCombat->nb_colonne);
+    init_Tableau(tabPiresScores, INT_MIN);
 
     for (int i = 0; i < matriceCombat->nb_ligne; i++) {
         for (int j = 0; j < matriceCombat->nb_colonne; j++) {
             // Comparaison pour trouver les pires scores
-            if (matriceCombat->tableau[j][i] > piresScores->tableau[i]) {
-                piresScores->tableau[i] = matriceCombat->tableau[j][i];
+            if (matriceCombat->tableau[j][i] > tabPiresScores->tableau[i]) {
+                tabPiresScores->tableau[i] = matriceCombat->tableau[j][i];
             }
         }
     }
-
-    return piresScores;
+    return tabPiresScores;
 }
 
 
@@ -83,24 +82,23 @@ int afficherArc(Element e,void *env){
 
 }
 
+// Transforme une matrice duel en graphe 
 List *matriceDuelToGraphe(Matrice matriceDuel) {
     // Vérification de la validité de la matrice de duel
     if (matriceDuel == NULL || matriceDuel->tableau == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
-        return NULL;  // Ou ajustez selon vos besoins
+        return NULL;  
     }
 
     List *list = list_create();
-
+    int poid ;
     for (int i = 0; i < matriceDuel->nb_ligne; i++) {
         for (int j = 0; j < matriceDuel->nb_colonne; j++) {
             // Éviter les auto-arêtes (boucles)
             if (i != j) {
-                // Ajouter les deux arêtes si le graphe est non orienté
-                // ou ajuster selon la définition spécifique de votre problème
                 if (matriceDuel->tableau[i][j] >= matriceDuel->tableau[j][i]) {
-                    list_push_back(list, matriceDuel->tableau[i][j] -matriceDuel->tableau[j][i] , i, j);
-                    // list_push_back(list, matriceDuel->tableau[j][i], j, i);  // Ajouter l'arête inverse si nécessaire
+                    poid = matriceDuel->tableau[i][j] - matriceDuel->tableau[j][i];
+                    list_push_back(list, poid , i, j);
                 }
             }
         }
@@ -116,7 +114,6 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
         fprintf(stderr, "Erreur : Liste invalide.\n");
         return -1; 
     }
-    // Initialiser l'ensemble disjoint
 
     // Tri décroissant de la liste
     triee_liste_decroissant(graphe);
@@ -127,7 +124,9 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
     ListIterator it = list_iterator_create(graphe, FORWARD_ITERATOR);
     ptrList arbre = list_create();
 
+    // Initialiser l'ensemble disjoint
     DisjointSet *set = createDisjointSet(nbSommet);
+    
     fprintf(logfile,"\nEnsemble :\n");
     printSet(set,logfile);
 
@@ -166,53 +165,63 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
 }
 
 
-int resolutionSchulze(ptrList graphe,int nbCandidat,FILE* logfile) {
+int resolutionSchulze(ptrList graphe, int nbCandidat, FILE* logfile) {
     int vainqueur;
+
+    // Création et initialisation d'un tableau pour stocker les scores entrants de chaque candidat
     Tableau tableauArcEntrant = create_Tableau(nbCandidat);
     init_Tableau(tableauArcEntrant, 0);
 
-    // Calcul des scores entrants
+    // Calcul des scores entrants pour chaque candidat en parcourant le graphe
     sommeDegresEntrantsParSommet(graphe, tableauArcEntrant);
 
-    // Affichage du graphe
-
     // Affichage du tableau de scores entrants
-    fprintf(logfile,"\nTableau de scores entrants :\n");
-    afficher_Tableau(tableauArcEntrant,logfile);
+    fprintf(logfile, "\nTableau de scores entrants :\n");
+    afficher_Tableau(tableauArcEntrant, logfile);
 
-    // Tri décroissant du graphe
+    // Tri décroissant du graphe selon les scores de chaque candidat
     triee_liste_decroissant(graphe);
 
-    // Affichage du graphe trié
+    // Itération sur le graphe en partant de la fin pour obtenir une liste triée en ordre croissant des scores
     ListIterator it = list_iterator_create(graphe, BACKWARD_ITERATOR);
-    fprintf(logfile,"\nGraphe trié :\n");
+
+    // Affichage du graphe trié
+    fprintf(logfile, "\nGraphe trié :\n");
     for (Element e = list_iterator_value(it); !list_iterator_end(it); e = list_iterator_next(it)) {
         afficherArc(e, logfile);
     }
 
-    // Itération sur le graphe trié pour déterminer le vainqueur
     int valeur;
+    // Recherche du minimum dans le tableau de scores entrants
     min_Tableau(tableauArcEntrant, &vainqueur, &valeur);
     list_iterator_begin(it);
+
+    // Itération sur le graphe trié pour déterminer le vainqueur selon la méthode de Schulze
     for (Element e = list_iterator_value(it); valeur > 0; e = list_iterator_next(it)) {
-        fprintf(logfile,"\nArc courrant\n");
+        fprintf(logfile, "\nArc courant :\n");
         afficherArc(e, logfile);
-        fprintf(logfile,"Tableau de scores après la réduction :\n");
-        afficher_Tableau(tableauArcEntrant,logfile);
+        fprintf(logfile, "Tableau de scores après la réduction :\n");
+        afficher_Tableau(tableauArcEntrant, logfile);
+
+        // Réduction du tableau de scores entrants
         tableauArcEntrant->tableau[e->b]--;
+        // Recherche du nouveau minimum dans le tableau de scores entrants
         min_Tableau(tableauArcEntrant, &vainqueur, &valeur);
     }
 
     // Affichage final du tableau de scores
-    fprintf(logfile,"\nTableau de scores entrants :\n");
-    afficher_Tableau(tableauArcEntrant,logfile);
+    fprintf(logfile, "\nTableau de scores entrants après la résolution Schulze :\n");
+    afficher_Tableau(tableauArcEntrant, logfile);
 
     // Libération de la mémoire
     delete_Tableau(tableauArcEntrant);
-    // Libération de la mémoire pour la liste d'arbre
+    // Libération de la mémoire pour l'itérateur de la liste
     list_iterator_delete(it);
+
+    // Retourne le vainqueur déterminé par la méthode de Schulze
     return vainqueur;
 }
+
 
 int condorcet(Matrice matriceDuel, ptrList *graphe,FILE* logfile) {
     // Vérification de la validité de la matrice de duel
