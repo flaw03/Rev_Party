@@ -17,42 +17,50 @@ Le projet est une application de vote qui prend en entrée un fichier CSV conten
 
 ## Fonctionnalités Principales :
 
-1. Entrée des Données : 
-Le programme prend en entrée un fichier CSV contenant les données de vote. Chaque ligne du fichier représente un électeur, et chaque colonne représente le choix de l'électeur pour un candidat.
+1. Entrée des Données :
+Le programme accepte deux types de fichiers CSV en tant qu'entrée. Le premier type contient des bulletins de vote, où chaque ligne représente un électeur et chaque colonne représente le choix de l'électeur pour un candidat. Le second type contient une matrice de duels, où chaque cellule indique le nombre de fois que le candidat de la ligne a été préféré au candidat de la colonne. L'utilisation du second type de fichier désactive l'option cp, uni1, uni2, et jm.
+
 
 2. Méthodes de Vote :
    
-    2.1 Uninominal à un tour (uni1) : Chaque électeur vote pour un seul candidat, et le candidat avec le plus grand nombre de votes remporte l'élection.
+   2.1 Uninominal à un tour (uni1) : Chaque électeur vote pour un seul candidat, et le candidat avec le plus grand nombre de votes remporte l'élection.
 
-    2.2 Uninominal à deux tours (uni2) : Les deux candidats avec le plus grand nombre de votes au premier tour passent au deuxième tour, où le candidat avec le plus grand nombre de votes est élu.
+   2.2 Uninominal à deux tours (uni2) : Les deux candidats avec le plus grand nombre de votes au premier tour passent au deuxième tour, où le candidat avec le plus grand nombre de votes est élu.
 
-   2.3 Condorcet minimax (cm) : Le gagnant est choisi en identifiant la paire de candidats avec la plus petite marge de défaite potentielle, visant ainsi à minimiser le risque de la pire défaite
+   2.3 Condorcet minimax (cm) : En quête d'un vainqueur selon la méthode de Condorcet, cette méthode, en l'absence d'un vainqueur évident, sélectionne le candidat gagnant en identifiant la paire de candidats présentant la marge de défaite potentielle la plus réduite. L'objectif est de minimiser le risque de subir la pire défaite possible.
 
-   2.4 Condorcet Paires (cp) : Le gagnant est déterminé en comparant toutes les paires de candidats possibles et en sélectionnant celui qui remporte le plus grand nombre de duels un contre un
-   
-   2.5 Condorcet Schulze (cs) : Le gagnant est choisi en évaluant les marges de victoire dans les duels un contre un entre tous les candidats, puis en sélectionnant celui qui a les marges les plus fortes dans l'ensemble                                  des comparaisons. Cette méthode prend en compte la force relative des victoires dans les duels pour déterminer le vainqueur.
+   2.4 Condorcet Paires (cp) : En quête d'un vainqueur selon la méthode de Condorcet, cette approche, en l'absence de vainqueur évident, détermine le gagnant en comparant toutes les paires de candidats possibles. Le choix se porte sur le candidat qui remporte le plus grand nombre de duels individuels.
+
+   2.5 Condorcet Schulze (cs) : À la recherche d'un vainqueur selon la méthode de Condorcet, cette méthode, en cas d'absence de vainqueur, sélectionne le gagnant en évaluant les marges de victoire dans les duels un contre un entre tous les candidats. Le choix se porte sur le candidat ayant les marges de victoire les plus fortes dans l'ensemble des comparaisons. Cette approche prend en considération la puissance relative des victoires individuelles pour déterminer le vainqueur.
 
    2.6 Jugement majoritaire (jm) : Le gagnant est déterminé en attribuant des jugements qualitatifs, puis en choisissant le candidat ayant la médiane la plus élevée
 
-4. Options d'Affichage : 
-L'application propose une option pour afficher les calculs intermédiaires dans un fichier log.
+3. Options d'Affichage : 
+L'application propose une option pour afficher les calculs intermédiaires dans un fichier log.Si non mentionner de l'option -o les calculs intemerdaires seront afficher sur la sortie normale.
 
+4. Programme indepandant verify_my_vote :
+Cherche dans le fichier de votes, le vote correspondant au hash d’un votant avec sa clef secrète.
+     
 
 ## Utilisation
 
 
-Pour exécuter le programme indepandant verify_my_vote, utilisez la commande suivante :
-
-```bash
-bin/verify_my_vote <filename.csv> 
-```
-
+1. Programme Principale *scrutin*
 
 Pour exécuter le programme scrutin, utilisez la commande suivante :
 
 ```bash
 bin/scrutin  -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs, jm, all} [-o <log_file>]
 ```
+
+2. Programme indepandant *verify_my_vote*
+   
+Pour exécuter le programme indepandant verify_my_vote, utilisez la commande suivante :
+
+```bash
+bin/verify_my_vote <filename.csv> 
+```
+
 
 
 
@@ -66,12 +74,15 @@ bin/scrutin  -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs, 
 
 -o : Optionnel. Spécifie le fichier log pour afficher les calculs intermédiaires.
 
-*Note*
-*L'option -i et -d ne peuvent pas être présente en même temps*
+*Note L'option -i et -d ne peuvent pas être présente en même temps*
 
 
 
 ## Exemple d'Utilisation 
+
+
+
+1. Programme Principale *scrutin*
 
 ```bash
 bin/uninominales -i donnees_votes.csv -m uni2 -o log.txt
@@ -79,20 +90,34 @@ bin/uninominales -i donnees_votes.csv -m uni2 -o log.txt
 
 Cette commande lance le programme avec le fichier CSV "donnees_votes.csv", utilise la méthode de vote uninominal à deux tours, et écrit les calculs dans le fichier log "log.txt".
 
+2. Programme indepandant *verify_my_vote*
+```bash
+bin/verify_my_vote donnees_votes.csv
+```
+
 
 ## Compilation
 
+1. Programme Principale *scrutin*
+   
 Pour compiler le programme scrutin, exécutez la commande suivante :
 
 ```bash
 make scrutin
 ```
-
+2. Programme indepandant *verify_my_vote*
+   
 Pour compiler le programme indepandant verify_my_vote, exécutez la commande suivante :
 
 ```bash
 make verify_my_vote
 ```
+
+Pour compiler les 2 programme **scrutin** et **verify_my_vote**, exécutez la commande suivante :
+```bash
+make all
+```
+
 
 ## Documentation
 
