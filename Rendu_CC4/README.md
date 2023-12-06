@@ -1,7 +1,7 @@
-# Méthodes uninominales à un et deux tours
+# Présentation du projet
 
 Description du Projet :
-Le projet est une application de vote qui prend en entrée un fichier CSV contenant des données de vote et effectue le calcul pour élire un candidat selon la méthode de vote de votre choix parmi celles disponibles.
+Ce projet REV_Party est une application de vote qui prend en entrée un fichier CSV contenant des données de vote et effectue le calcul pour élire un candidat selon la méthode de vote de votre choix parmi celles disponibles.
 
 
 ## Table des Matières
@@ -18,7 +18,7 @@ Le projet est une application de vote qui prend en entrée un fichier CSV conten
 ## Fonctionnalités Principales :
 
 1. Entrée des Données :
-Le programme accepte deux types de fichiers CSV en tant qu'entrée. Le premier type contient des bulletins de vote, où chaque ligne représente un électeur et chaque colonne représente le choix de l'électeur pour un candidat. Le second type contient une matrice de duels, où chaque cellule indique le nombre de fois que le candidat de la ligne a été préféré au candidat de la colonne. L'utilisation du second type de fichier désactive l'option cp, uni1, uni2, et jm.
+Le programme accepte deux types de fichiers CSV en tant qu'entrée. Le premier type contient des bulletins de vote, où chaque ligne représente un électeur et chaque colonne représente le choix de l'électeur pour un candidat. Le second type contient une matrice de duels, où chaque cellule indique le nombre de fois que le candidat de la ligne a été préféré au candidat de la colonne. L'utilisation du second type de fichier désactive l'option uni1, uni2, et jm.
 
 
 2. Méthodes de Vote :
@@ -33,13 +33,13 @@ Le programme accepte deux types de fichiers CSV en tant qu'entrée. Le premier t
 
    2.5 Condorcet Schulze (cs) : À la recherche d'un vainqueur selon la méthode de Condorcet, cette méthode, en cas d'absence de vainqueur, sélectionne le gagnant en évaluant les marges de victoire dans les duels un contre un entre tous les candidats. Le choix se porte sur le candidat ayant les marges de victoire les plus fortes dans l'ensemble des comparaisons. Cette approche prend en considération la puissance relative des victoires individuelles pour déterminer le vainqueur.
 
-   2.6 Jugement majoritaire (jm) : Le gagnant est déterminé en attribuant des jugements qualitatifs, puis en choisissant le candidat ayant la médiane la plus élevée
+   2.6 Jugement majoritaire (jm) : Le gagnant est déterminé en attribuant des jugements qualitatifs, puis en choisissant le candidat ayant la médiane la plus élevée . En cas d'égalité , on détermine la nouvelle mention majoritaire de ces candidats en enlevant le vote de l'électeur médian.
 
 3. Options d'Affichage : 
-L'application propose une option pour afficher les calculs intermédiaires dans un fichier log.Si non mentionner de l'option -o les calculs intemerdaires seront afficher sur la sortie normale.
+L'application propose une option pour afficher les calculs intermédiaires dans un fichier log. Si l'option -o de la ligne de commande n'est pas mentionné , l'affichage se fera sur la sortir standard.
 
 4. Programme indepandant verify_my_vote :
-Cherche dans le fichier de votes, le vote correspondant au hash d’un votant avec sa clef secrète.
+Cherche dans le fichier de votes, le vote correspondant au hash d’un votant , crypté avec son nom,prénom,clef secrète.
      
 
 ## Utilisation
