@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
+#include <ctype.h>
 #include "lecture_csv.h"
 #include "utils_tab.h"
 #include "utiles.h"
@@ -28,6 +28,59 @@
 *   Fonction pour tester que le fichier en paramètre est bien un csv
 */
 
+
+int fichierValide(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        fprintf(stderr, "Erreur : Impossible d'ouvrir le fichier %s.\n", filename);
+        exit(1); // Code d'erreur pour une ouverture de fichier échouée
+    }
+
+    char line[1024]; // Taille maximale d'une ligne
+    int lineNumber = 1;
+
+    // Ignorer la première ligne
+    if (fgets(line, sizeof(line), file) == NULL) {
+        fprintf(stderr, "Erreur : Fichier vide.\n");
+        fclose(file);
+        return -2; // Code d'erreur pour un fichier vide
+    }
+
+    // Lire le reste des lignes
+    while (fgets(line, sizeof(line), file) != NULL) {
+        lineNumber++;
+        
+        // Ignorer les lignes vides
+        if (strlen(line) <= 1) {
+            continue;
+        }
+
+        // Trouver la quatrième colonne (indice 3) en utilisant des tabulations comme séparateurs
+        char *token = strtok(line, "\t");
+        int col = 0;
+        while (token != NULL) {
+            if (col == 3) {
+                // Vérifier si la valeur n'est pas un entier
+                if (isInteger(token)) {
+                    fclose(file);
+                    return 1; // Code d'erreur pour une valeur entière trouvée
+                }
+            }
+            else if(col == 6){
+                if (!isInteger(token)){
+                    fclose(file);
+                    return 1;
+                }
+            }
+            col++;
+            token = strtok(NULL, "\t");
+        }
+    }
+
+    fclose(file);
+    return 0; // Aucune erreur détectée
+}
+
 void isCSV(const char* filename) {
     const char* extension = strrchr(filename, '.');
     if (extension != NULL) {
@@ -42,8 +95,6 @@ void isCSV(const char* filename) {
 /*
 *    Fonction qui renvoie le nom d'un candidat
 */
-
-
 char * formatage_nomCandidat(char * nom){
         if (nom != NULL) {
         // Allouer de la mémoire pour la chaîne et la copier
@@ -286,6 +337,10 @@ void removeNewline(char* str) {
 
 
 ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,int* tab) {
+   if(fichierValide(fichier)==1){
+        fprintf(stderr,"Fichier transmis non valide,veuillez vérifier la conformité des données\n");
+        exit(2);
+    }
     FILE* file = fopen(fichier, "r");
     if (file == NULL) {
         perror("Impossible d'ouvrir le fichier!!");
@@ -340,11 +395,20 @@ ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,int* 
 
     }
     fclose(file);
+    if(lstElect == NULL){
+    	fprintf(stderr,"Fichier.csv invalide");
+    	exit(1);
+    }
     return lstElect;
     
 }
 
 ListCand* getCandidat(ListCand* lstCand,char* fichier){
+    if(fichierValide(fichier)==1){
+        fprintf(stderr,"Fichier transmis non valide,veuillez vérifier la conformité des données\n");
+        exit(2);
+    }
+
     srand(time(NULL));
     FILE* file = fopen(fichier, "r");
     if (file == NULL) {
@@ -377,10 +441,18 @@ ListCand* getCandidat(ListCand* lstCand,char* fichier){
         }
         firstline = 1;
         fclose(file);
+        if(lstCand == NULL){
+    	fprintf(stderr,"Fichier.csv invalide");
+    	exit(20);
+    }
         return lstCand;
     }
     }
     fclose(file);
+    if(lstCand == NULL){
+    	fprintf(stderr,"Fichier.csv invalide");
+    	exit(20);
+    }
     return NULL;
 }
 
@@ -532,6 +604,13 @@ void initJugement(ListCand* lstCand,ListElect* lstElect,char* fichier) {
         cpt++;
     }
     fclose(file);
+}
+
+void verifFichier(const char* filename){
+    if(fichierValide(filename)==1){
+    fprintf(stderr,"Fichier non valide, non respect des normes de remplissage du fichier,les votes doivent commencer à partir de la colonne 4.\n");
+    exit(EXIT_FAILURE);
+    }
 }
 
 
