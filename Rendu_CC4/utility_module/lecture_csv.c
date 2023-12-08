@@ -199,10 +199,9 @@ void afficher_vote(const char* filename,char* hash){
         exit(1);
     };
     char*  token = strtok(line, ",");
-    token = strtok(NULL, ",");
-    token = strtok(NULL, ",");
-    token = strtok(NULL, ",");
-    token = strtok(NULL, ",");//Recalcule la mediane sans cet electeur
+    for(int i = 0;i<MARGE;i++){
+        token = strtok(NULL,",");//Récupère le nom des candidats
+    }
 
     for (int i = 0; token != NULL; i++){
         tabCandidat[i] = formatage_nomCandidat(token);
@@ -212,9 +211,9 @@ void afficher_vote(const char* filename,char* hash){
     // Lire chaque ligne du fichier CSV
     while (fgets(line, MAX_LINE_LENGTH, file) && !find) {
         token = strtok(line, ",");
-        token = strtok(NULL, ",");
-        token = strtok(NULL, ",");
-        token = strtok(NULL, ",");
+        for(int i = 0;i<MARGE-1;i++){//Se place dans la colonne des votes
+            token = strtok(NULL,",");
+        }
         if(strcmp(token,hash) == 0){// HASH trouvé 
             token = strtok(NULL, ",");   
             printf("Candidat |Vote\n");                 
