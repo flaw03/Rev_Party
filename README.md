@@ -1,9 +1,10 @@
-                                                                                           # Rev_Party
+# REV_Party
+
 
 # Présentation du projet
 
 Description du Projet :
-Ce projet REV_Party est une application de vote qui prend en entrée un fichier CSV contenant des données de vote et effectue le calcul pour élire un candidat selon la méthode de vote de votre choix parmi celles disponibles.
+Ce projet informatique est une application de vote qui prend en entrée un fichier CSV contenant des données de vote et effectue le calcul pour élire un candidat selon la méthode de vote de votre choix parmi celles disponibles.
 
 
 ## Table des Matières
