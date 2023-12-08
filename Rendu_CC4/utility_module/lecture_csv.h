@@ -18,6 +18,12 @@ int lireBallot(char* filename,Matrice *Matrice);
 
 int lireMatriceDuel(char* filename,Matrice *Matrice);
 
+int fichierValide(const char *filename);
+
+
+void verifFichier(const char* filename);
+
+
 
 /** \defgroup Constructors Contructors and destructors of the TAD.
  @{
