@@ -62,6 +62,7 @@ int main(int argc, char** argv) {
         switch (opt) {
             case 'i':
                 filename= optarg;
+                verifFichier(filename);
                 nbrElecteur = lireBallot(filename,&matriceDuel);
                 optionBalot = true;
                 break;
