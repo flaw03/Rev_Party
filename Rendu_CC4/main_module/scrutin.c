@@ -56,12 +56,13 @@ int main(int argc, char** argv) {
     
     if(argc<5){
             fprintf(stderr, "Usage: %s -i <filename.csv> | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
-            exit(9);
+            exit(EXIT_FAILURE);
         }
     while ((opt = getopt(argc, argv, "i:o:m:d:")) != -1) {
         switch (opt) {
             case 'i':
                 filename= optarg;
+                verifFichier(filename);
                 nbrElecteur = lireBallot(filename,&matriceDuel);
                 optionBalot = true;
                 break;
@@ -87,7 +88,7 @@ int main(int argc, char** argv) {
         }
     }
     if ((optionBalot && optionMatrice) || (!optionMatrice && !optionBalot) ) {
-        fprintf(stderr, "Erreur : L'option -i et -d ne peuvent pas etre presente en meme temps\n");
+        fprintf(stderr, "Erreur : Les options -i ou -d doivent être prensente mais ne peuvent pas être présentes en simultanément.\n");
         exit(EXIT_FAILURE);
     }
     if (methode == NULL){
@@ -99,7 +100,6 @@ int main(int argc, char** argv) {
         optionAll = true;
         optvalide = true;
     }
-
     if((strcmp(methode,"uni1") == 0  || optionAll ) && optionBalot){
         unTour(filename,logfile);    
         optvalide = true;
@@ -128,7 +128,6 @@ int main(int argc, char** argv) {
         optvalide = true;
 
     }
-
     if(strcmp(methode,"cs") == 0 || optionAll){
         int vainqueur = methode_Schulze(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
@@ -138,7 +137,6 @@ int main(int argc, char** argv) {
         optvalide = true;
 
     }
-
     if((strcmp(methode,"jm") == 0 || optionAll) && optionBalot){
         voteJugementMajoritaireBallot(filename,logfile);
         optvalide = true;

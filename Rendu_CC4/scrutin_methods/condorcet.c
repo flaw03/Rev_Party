@@ -143,8 +143,7 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
         } else {
             fprintf(logfile,"Cycle créé.\n");
         }
-
-        fprintf(logfile,"\nEnsemble :\n");
+        fprintf(logfile,"\nEnsemble post operation:\n");
         printSet(set,logfile);
     }
     // Afficher l'arbre trouvé
@@ -186,7 +185,7 @@ int resolutionSchulze(ptrList graphe, int nbCandidat, FILE* logfile) {
     ListIterator it = list_iterator_create(graphe, BACKWARD_ITERATOR);
 
     // Affichage du graphe trié
-    fprintf(logfile, "\nGraphe trié :\n");
+    fprintf(logfile, "\nArc trié par poid croissant :\n");
     for (Element e = list_iterator_value(it); !list_iterator_end(it); e = list_iterator_next(it)) {
         afficherArc(e, logfile);
     }
@@ -200,11 +199,11 @@ int resolutionSchulze(ptrList graphe, int nbCandidat, FILE* logfile) {
     for (Element e = list_iterator_value(it); valeur > 0; e = list_iterator_next(it)) {
         fprintf(logfile, "\nArc courant :\n");
         afficherArc(e, logfile);
-        fprintf(logfile, "Tableau de scores après la réduction :\n");
-        afficher_Tableau(tableauArcEntrant, logfile);
 
         // Réduction du tableau de scores entrants
         tableauArcEntrant->tableau[e->b]--;
+        fprintf(logfile, "Tableau de scores après la réduction :\n");
+        afficher_Tableau(tableauArcEntrant, logfile);
         // Recherche du nouveau minimum dans le tableau de scores entrants
         min_Tableau(tableauArcEntrant, &vainqueur, &valeur);
     }
@@ -305,7 +304,7 @@ int methode_Minimax(Matrice matriceDuel,FILE* logfile) {
             vainqueur = -1;
             fprintf(logfile, "ERREUR : Il y a des doublons dans le tableau des pires scores.\n");
         }else{
-            fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec la methode minimax : %d\n",vainqueur);
+            fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec la methode minimax : Candidat n° %d\n",vainqueur);
         }
         
 
@@ -341,7 +340,7 @@ int methode_Rangement_Des_Paires(Matrice matriceDuel,FILE* logfile) {
     if (vainqueur == -1) {
         fprintf(logfile,"\n-- Resoltion du conflit avec la methode rangement des paires par ordre décroissant --\n");
         vainqueur = KruskalMaxWeightTree(graphe, matriceDuel->nb_colonne,logfile);
-        fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec la methode rangement des paires par ordre décroissant : %d\n",vainqueur);
+        fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec la methode rangement des paires par ordre décroissant : Candidat n° %d\n",vainqueur);
     }
 
     // Libération de la mémoire pour la liste de graphe
@@ -369,7 +368,7 @@ int methode_Schulze(Matrice matriceDuel,FILE* logfile){
     if (vainqueur == -1){
         fprintf(logfile,"\n-- Resoltion du conflit avec Schulze --\n");
         vainqueur = resolutionSchulze(graphe,matriceDuel->nb_colonne,logfile);
-        fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec Schulze : %d\n",vainqueur);
+        fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec Schulze : Candidat n° %d\n",vainqueur);
     }
     list_delete(&graphe);
     return vainqueur;

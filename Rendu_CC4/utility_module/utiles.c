@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <ctype.h>
 #include "utiles.h"
 
 
@@ -132,5 +133,15 @@ void createTableau(int taille,ListCand* lstCand){
     }
 }
 /********************************************************/
-
+int isInteger(const char *str) {
+    // Vérifie si la chaîne est un entier
+    int i = 0;
+    while (str[i]) {
+        if (!isdigit(str[i])) {
+            return 0;
+        }
+        i++;
+    }
+    return 1;
+}
 

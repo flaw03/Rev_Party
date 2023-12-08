@@ -95,7 +95,7 @@ void gererCasCheminsEgaux(Candidat* gagnant, Candidat* candidatCourant, int tail
     double med1, med2;
 
     do {
-        taille++; //Passe au vote de l'électeur d'avant (tableau rangé ordre décroissant)
+        taille--; //Passe au vote de l'électeur d'avant (tableau rangé ordre décroissant)
         cheminGagnantv2 = calculerChemin(gagnant->jugement, taille); //Recalcule le chemin sans cet electeur
         cheminCourantv2 = calculerChemin(candidatCourant->jugement, taille);//Recalcule le chemin sans cet electeur
         med1 = mediane(gagnant->jugement, taille);//Recalcule la mediane sans cet electeur

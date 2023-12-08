@@ -357,7 +357,7 @@ int methode_Schulze(Matrice matriceDuel,FILE* logfile){
 
 
 int main(void){
-    char * filename = "../Data/wiki_paires.csv";
+    char * filename = "../Data/vote100.csv";
     bool isBallot = false;
     Matrice matriceDuel = NULL;
     int nombreElecteur;

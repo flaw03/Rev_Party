@@ -97,6 +97,7 @@ mrproper: clean
 
 clean:
 	@rm -rf $(OBJ_DIR)/*.o
+	@rm -rf log.txt
 	@rm -rf $(BIN_DIR)/verify_my_vote
 	@rm -rf $(BIN_DIR)/scrutin
 
@@ -106,5 +107,6 @@ doc: utility_module/set.h scrutin_methods/condorcet.h scrutin_methods/jugement.h
 DELIVER_FMT=$(shell date "+%d-%m-%y_%Hh%Mm%Ss")
 
 deliver:
+	make clean
 	@zip -r $(DELIVER_FMT).zip .
 
