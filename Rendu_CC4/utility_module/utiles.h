@@ -147,6 +147,15 @@ Candidat* candidatAssocie(int nb,ListCand* lstCand);
 void createTableau(int taille,ListCand* lstCand);
 
 
+/**Iterate on the string chain and verify if it contains any integer
+ * @param *str the character string
+ * @return 1 if it contains an integer, 0 otherwise
+ 
+*/
+int isInteger(const char *str);
+
+
+
 /** @} */
 
 /** @} */
