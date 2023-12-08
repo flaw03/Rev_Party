@@ -1,0 +1,23 @@
+---------------------------------------------------------------
+Methode Uninomiale a 1 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur :  Vote XXX a vote pour  Tarte à la fraise
+Electeur :  Vote XXX a vote pour  Quatre quart
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Clafouti
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Baba au ruhm
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Tarte à la fraise
+
+
+ VERIFICATION UNINOMINAL UN TOUR 
+-Candidat en cours :  Charlotte aux poires  Charlotte aux poires , Nombre de votes pour ce candidat : 5
+Candidat en cours :  Clafouti  Clafouti , Nombre de votes pour ce candidat : 1
+Candidat en cours :  Quatre quart  Quatre quart , Nombre de votes pour ce candidat : 1
+Candidat en cours :  Baba au ruhm  Baba au ruhm , Nombre de votes pour ce candidat : 1
+Candidat en cours :  Tarte à la fraise  Tarte à la fraise , Nombre de votes pour ce candidat : 2

@@ -1,0 +1,70 @@
+---------------------------------------------------------------
+Methode Shulze
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |
+------------------------------
+0  |0   |53  |40  |60  |76  |
+------------------------------
+1  |47  |0   |56  |60  |76  |
+------------------------------
+2  |60  |44  |0   |60  |87  |
+------------------------------
+3  |40  |40  |40  |0   |40  |
+------------------------------
+4  |24  |24  |13  |60  |0   |
+------------------------------
+
+Graphe :
+Candidat 0 --[6]--> Candidat 1
+Candidat 0 --[20]--> Candidat 3
+Candidat 0 --[52]--> Candidat 4
+Candidat 1 --[12]--> Candidat 2
+Candidat 1 --[20]--> Candidat 3
+Candidat 1 --[52]--> Candidat 4
+Candidat 2 --[20]--> Candidat 0
+Candidat 2 --[20]--> Candidat 3
+Candidat 2 --[74]--> Candidat 4
+Candidat 4 --[20]--> Candidat 3
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |
+-------------------------
+3   |3   |3   |0   |1   |
+-------------------------
+Aucun vainqueur de Condorcet trouvé.
+
+-- Resoltion du conflit avec Schulze --
+
+Tableau de scores entrants :
+0   |1   |2   |3   |4   |
+-------------------------
+1   |1   |1   |4   |3   |
+-------------------------
+
+Graphe trié :
+Candidat 0 --[6]--> Candidat 1
+Candidat 1 --[12]--> Candidat 2
+Candidat 4 --[20]--> Candidat 3
+Candidat 1 --[20]--> Candidat 3
+Candidat 2 --[20]--> Candidat 3
+Candidat 2 --[20]--> Candidat 0
+Candidat 0 --[20]--> Candidat 3
+Candidat 0 --[52]--> Candidat 4
+Candidat 1 --[52]--> Candidat 4
+Candidat 2 --[74]--> Candidat 4
+
+Arc courant :
+Candidat 0 --[6]--> Candidat 1
+Tableau de scores après la réduction :
+0   |1   |2   |3   |4   |
+-------------------------
+1   |1   |1   |4   |3   |
+-------------------------
+
+Tableau de scores entrants après la résolution Schulze :
+0   |1   |2   |3   |4   |
+-------------------------
+1   |0   |1   |4   |3   |
+-------------------------
+
+Vainqueur apres Resoltion du conflit avec Schulze : 1

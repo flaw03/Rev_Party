@@ -1,0 +1,34 @@
+---------------------------------------------------------------
+Methode Shulze
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |
+------------------------------
+0  |0   |45  |48  |68  |64  |
+------------------------------
+1  |55  |0   |51  |74  |75  |
+------------------------------
+2  |52  |48  |0   |65  |80  |
+------------------------------
+3  |32  |26  |35  |0   |53  |
+------------------------------
+4  |36  |25  |20  |47  |0   |
+------------------------------
+
+Graphe :
+Candidat 0 --[36]--> Candidat 3
+Candidat 0 --[28]--> Candidat 4
+Candidat 1 --[10]--> Candidat 0
+Candidat 1 --[3]--> Candidat 2
+Candidat 1 --[48]--> Candidat 3
+Candidat 1 --[50]--> Candidat 4
+Candidat 2 --[4]--> Candidat 0
+Candidat 2 --[30]--> Candidat 3
+Candidat 2 --[60]--> Candidat 4
+Candidat 3 --[6]--> Candidat 4
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |
+-------------------------
+2   |4   |3   |1   |0   |
+-------------------------
+Vainqueur de Condorcet trouvé. Pas de resolution de Conflit

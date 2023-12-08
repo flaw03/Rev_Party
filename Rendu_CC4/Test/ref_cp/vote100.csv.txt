@@ -1,0 +1,1 @@
+Mode de Scrutin : Condorcet paires, 7 candidats, 100 votants, vainqueur =  Idéfix

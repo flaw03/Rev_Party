@@ -1,0 +1,115 @@
+---------------------------------------------------------------
+Methode Uninomiale a 1 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Panoramix
+
+
+ VERIFICATION UNINOMINAL UN TOUR 
+-Candidat en cours :  Astérix  Astérix , Nombre de votes pour ce candidat : 16
+Candidat en cours :  Obélix  Obélix , Nombre de votes pour ce candidat : 24
+Candidat en cours :  Panoramix  Panoramix , Nombre de votes pour ce candidat : 14
+Candidat en cours :  Assurancetourix  Assurancetourix , Nombre de votes pour ce candidat : 14
+Candidat en cours :  Abraracourcix  Abraracourcix , Nombre de votes pour ce candidat : 11
+Candidat en cours :  Agecanonix  Agecanonix , Nombre de votes pour ce candidat : 9
+Candidat en cours :  Idéfix  Idéfix , Nombre de votes pour ce candidat : 12

@@ -1,0 +1,42 @@
+---------------------------------------------------------------
+Methode Uninomiale a 2 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur :  Vote XXX a vote pour  Tarte à la fraise
+Electeur :  Vote XXX a vote pour  Quatre quart
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Clafouti
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Baba au ruhm
+Electeur :  Vote XXX a vote pour  Charlotte aux poires
+Electeur :  Vote XXX a vote pour  Tarte à la fraise
+
+
+VERIFICATION UNINOMINAL DEUX TOURS : 
+Premier tour
+Candidat :  Charlotte aux poires  Charlotte aux poires , nombre de votes : 5
+Candidat :  Clafouti  Clafouti , nombre de votes : 1
+Candidat :  Quatre quart  Quatre quart , nombre de votes : 1
+Candidat :  Baba au ruhm  Baba au ruhm , nombre de votes : 1
+Candidat :  Tarte à la fraise  Tarte à la fraise , nombre de votes : 2
+
+
+VERIF 2ND TOUR : 
+Electeur : 1  Vote XXX a voté pour  Tarte à la fraise
+Electeur : 2  Vote XXX a voté pour  Tarte à la fraise
+Electeur : 3  Vote XXX a voté pour  Charlotte aux poires
+Electeur : 4  Vote XXX a voté pour  Charlotte aux poires
+Electeur : 5  Vote XXX a voté pour  Charlotte aux poires
+Electeur : 6  Vote XXX a voté pour  Charlotte aux poires
+Electeur : 7  Vote XXX a voté pour  Charlotte aux poires
+Electeur : 8  Vote XXX a voté pour  Charlotte aux poires
+Electeur : 9  Vote XXX a voté pour  Charlotte aux poires
+Electeur : 10  Vote XXX a voté pour  Tarte à la fraise
+
+
+VERIF 2ND TOUR : 
+-Candidat  Charlotte aux poires  Charlotte aux poires a 7 votes
+ Candidat  Tarte à la fraise  Tarte à la fraise a 3 votes

@@ -1,0 +1,224 @@
+---------------------------------------------------------------
+Methode Uninomiale a 2 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Abraracourcix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Agecanonix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Assurancetourix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Idéfix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Obélix
+Electeur :  Vote XXX a vote pour  Panoramix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Astérix
+Electeur :  Vote XXX a vote pour  Panoramix
+
+
+VERIFICATION UNINOMINAL DEUX TOURS : 
+Premier tour
+Candidat :  Astérix  Astérix , nombre de votes : 16
+Candidat :  Obélix  Obélix , nombre de votes : 24
+Candidat :  Panoramix  Panoramix , nombre de votes : 14
+Candidat :  Assurancetourix  Assurancetourix , nombre de votes : 14
+Candidat :  Abraracourcix  Abraracourcix , nombre de votes : 11
+Candidat :  Agecanonix  Agecanonix , nombre de votes : 9
+Candidat :  Idéfix  Idéfix , nombre de votes : 12
+
+
+VERIF 2ND TOUR : 
+Electeur : 1  Vote XXX a voté pour  Obélix
+Electeur : 2  Vote XXX a voté pour  Astérix
+Electeur : 3  Vote XXX a voté pour  Obélix
+Electeur : 4  Vote XXX a voté pour  Astérix
+Electeur : 5  Vote XXX a voté pour  Astérix
+Electeur : 6  Vote XXX a voté pour  Astérix
+Electeur : 7  Vote XXX a voté pour  Astérix
+Electeur : 8  Vote XXX a voté pour  Astérix
+Electeur : 9  Vote XXX a voté pour  Astérix
+Electeur : 10  Vote XXX a voté pour  Obélix
+Electeur : 11  Vote XXX a voté pour  Obélix
+Electeur : 12  Vote XXX a voté pour  Obélix
+Electeur : 13  Vote XXX a voté pour  Obélix
+Electeur : 14  Vote XXX a voté pour  Astérix
+Electeur : 15  Vote XXX a voté pour  Astérix
+Electeur : 16  Vote XXX a voté pour  Obélix
+Electeur : 17  Vote XXX a voté pour  Obélix
+Electeur : 18  Vote XXX a voté pour  Obélix
+Electeur : 19  Vote XXX a voté pour  Obélix
+Electeur : 20  Vote XXX a voté pour  Astérix
+Electeur : 21  Vote XXX a voté pour  Astérix
+Electeur : 22  Vote XXX a voté pour  Astérix
+Electeur : 23  Vote XXX a voté pour  Astérix
+Electeur : 24  Vote XXX a voté pour  Obélix
+Electeur : 25  Vote XXX a voté pour  Obélix
+Electeur : 26  Vote XXX a voté pour  Astérix
+Electeur : 27  Vote XXX a voté pour  Astérix
+Electeur : 28  Vote XXX a voté pour  Astérix
+Electeur : 29  Vote XXX a voté pour  Astérix
+Electeur : 30  Vote XXX a voté pour  Obélix
+Electeur : 31  Vote XXX a voté pour  Obélix
+Electeur : 32  Vote XXX a voté pour  Obélix
+Electeur : 33  Vote XXX a voté pour  Obélix
+Electeur : 34  Vote XXX a voté pour  Astérix
+Electeur : 35  Vote XXX a voté pour  Obélix
+Electeur : 36  Vote XXX a voté pour  Obélix
+Electeur : 37  Vote XXX a voté pour  Astérix
+Electeur : 38  Vote XXX a voté pour  Astérix
+Electeur : 39  Vote XXX a voté pour  Obélix
+Electeur : 40  Vote XXX a voté pour  Obélix
+Electeur : 41  Vote XXX a voté pour  Astérix
+Electeur : 42  Vote XXX a voté pour  Astérix
+Electeur : 43  Vote XXX a voté pour  Astérix
+Electeur : 44  Vote XXX a voté pour  Astérix
+Electeur : 45  Vote XXX a voté pour  Obélix
+Electeur : 46  Vote XXX a voté pour  Astérix
+Electeur : 47  Vote XXX a voté pour  Obélix
+Electeur : 48  Vote XXX a voté pour  Obélix
+Electeur : 49  Vote XXX a voté pour  Astérix
+Electeur : 50  Vote XXX a voté pour  Obélix
+Electeur : 51  Vote XXX a voté pour  Astérix
+Electeur : 52  Vote XXX a voté pour  Obélix
+Electeur : 53  Vote XXX a voté pour  Obélix
+Electeur : 54  Vote XXX a voté pour  Obélix
+Electeur : 55  Vote XXX a voté pour  Astérix
+Electeur : 56  Vote XXX a voté pour  Obélix
+Electeur : 57  Vote XXX a voté pour  Obélix
+Electeur : 58  Vote XXX a voté pour  Astérix
+Electeur : 59  Vote XXX a voté pour  Astérix
+Electeur : 60  Vote XXX a voté pour  Obélix
+Electeur : 61  Vote XXX a voté pour  Obélix
+Electeur : 62  Vote XXX a voté pour  Astérix
+Electeur : 63  Vote XXX a voté pour  Astérix
+Electeur : 64  Vote XXX a voté pour  Obélix
+Electeur : 65  Vote XXX a voté pour  Astérix
+Electeur : 66  Vote XXX a voté pour  Astérix
+Electeur : 67  Vote XXX a voté pour  Astérix
+Electeur : 68  Vote XXX a voté pour  Astérix
+Electeur : 69  Vote XXX a voté pour  Obélix
+Electeur : 70  Vote XXX a voté pour  Obélix
+Electeur : 71  Vote XXX a voté pour  Astérix
+Electeur : 72  Vote XXX a voté pour  Obélix
+Electeur : 73  Vote XXX a voté pour  Obélix
+Electeur : 74  Vote XXX a voté pour  Obélix
+Electeur : 75  Vote XXX a voté pour  Obélix
+Electeur : 76  Vote XXX a voté pour  Astérix
+Electeur : 77  Vote XXX a voté pour  Obélix
+Electeur : 78  Vote XXX a voté pour  Astérix
+Electeur : 79  Vote XXX a voté pour  Obélix
+Electeur : 80  Vote XXX a voté pour  Astérix
+Electeur : 81  Vote XXX a voté pour  Obélix
+Electeur : 82  Vote XXX a voté pour  Astérix
+Electeur : 83  Vote XXX a voté pour  Astérix
+Electeur : 84  Vote XXX a voté pour  Obélix
+Electeur : 85  Vote XXX a voté pour  Obélix
+Electeur : 86  Vote XXX a voté pour  Obélix
+Electeur : 87  Vote XXX a voté pour  Obélix
+Electeur : 88  Vote XXX a voté pour  Astérix
+Electeur : 89  Vote XXX a voté pour  Obélix
+Electeur : 90  Vote XXX a voté pour  Obélix
+Electeur : 91  Vote XXX a voté pour  Obélix
+Electeur : 92  Vote XXX a voté pour  Astérix
+Electeur : 93  Vote XXX a voté pour  Astérix
+Electeur : 94  Vote XXX a voté pour  Astérix
+Electeur : 95  Vote XXX a voté pour  Astérix
+Electeur : 96  Vote XXX a voté pour  Astérix
+Electeur : 97  Vote XXX a voté pour  Obélix
+Electeur : 98  Vote XXX a voté pour  Obélix
+Electeur : 99  Vote XXX a voté pour  Obélix
+Electeur : 100  Vote XXX a voté pour  Obélix
+
+
+VERIF 2ND TOUR : 
+-Candidat  Obélix  Obélix a 52 votes
+ Candidat  Astérix  Astérix a 48 votes

@@ -1,0 +1,414 @@
+---------------------------------------------------------------
+Methode Minimax
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |11  |12  |13  |
+---------------------------------------------------------------------------
+0  |86475|6   |0   |35  |1   |1   |2   |10  |3   |3   |4   |4   |10  |9   |
+---------------------------------------------------------------------------
+1  |87263|12  |0   |0   |1   |3   |10  |9   |-1  |5   |6   |4   |8   |2   |
+---------------------------------------------------------------------------
+2  |87107|11  |0   |18  |1   |2   |3   |10  |8   |7   |7   |5   |3   |3   |
+---------------------------------------------------------------------------
+3  |86567|6   |0   |8   |9   |4   |2   |5   |3   |10  |1   |6   |8   |7   |
+---------------------------------------------------------------------------
+4  |86900|8   |0   |0   |10  |9   |8   |7   |6   |5   |4   |3   |2   |1   |
+---------------------------------------------------------------------------
+5  |86531|6   |0   |0   |3   |2   |6   |8   |5   |9   |1   |4   |10  |7   |
+---------------------------------------------------------------------------
+6  |87494|16  |0   |0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |
+---------------------------------------------------------------------------
+7  |86776|7   |0   |51  |8   |9   |4   |9   |5   |9   |8   |8   |7   |5   |
+---------------------------------------------------------------------------
+8  |86643|6   |0   |3025|8   |4   |9   |6   |7   |5   |10  |10  |6   |7   |
+---------------------------------------------------------------------------
+9  |86897|8   |0   |0   |2   |3   |1   |8   |8   |6   |7   |5   |-1  |4   |
+---------------------------------------------------------------------------
+10 |86533|6   |0   |837 |4   |5   |6   |3   |7   |2   |8   |1   |9   |10  |
+---------------------------------------------------------------------------
+11 |87004|10  |0   |0   |10  |3   |2   |8   |4   |9   |1   |5   |6   |7   |
+---------------------------------------------------------------------------
+12 |86948|9   |0   |6098|1   |7   |6   |10  |5   |9   |8   |4   |2   |3   |
+---------------------------------------------------------------------------
+13 |87140|11  |0   |448803534|4   |2   |8   |10  |6   |1   |9   |4   |7   |1   |
+---------------------------------------------------------------------------
+
+Graphe :
+Candidat 1 --[87257]--> Candidat 0
+Candidat 1 --[2]--> Candidat 7
+Candidat 1 --[0]--> Candidat 10
+Candidat 2 --[87107]--> Candidat 0
+Candidat 2 --[11]--> Candidat 1
+Candidat 2 --[18]--> Candidat 3
+Candidat 2 --[1]--> Candidat 4
+Candidat 2 --[2]--> Candidat 5
+Candidat 2 --[3]--> Candidat 6
+Candidat 2 --[10]--> Candidat 7
+Candidat 2 --[8]--> Candidat 8
+Candidat 2 --[7]--> Candidat 9
+Candidat 2 --[7]--> Candidat 10
+Candidat 2 --[5]--> Candidat 11
+Candidat 2 --[3]--> Candidat 12
+Candidat 2 --[3]--> Candidat 13
+Candidat 3 --[86532]--> Candidat 0
+Candidat 3 --[6]--> Candidat 1
+Candidat 3 --[9]--> Candidat 4
+Candidat 3 --[4]--> Candidat 5
+Candidat 3 --[2]--> Candidat 6
+Candidat 3 --[10]--> Candidat 9
+Candidat 3 --[6]--> Candidat 11
+Candidat 4 --[86899]--> Candidat 0
+Candidat 4 --[7]--> Candidat 1
+Candidat 4 --[6]--> Candidat 5
+Candidat 4 --[7]--> Candidat 6
+Candidat 4 --[3]--> Candidat 9
+Candidat 4 --[0]--> Candidat 10
+Candidat 4 --[1]--> Candidat 12
+Candidat 5 --[86530]--> Candidat 0
+Candidat 5 --[3]--> Candidat 1
+Candidat 5 --[4]--> Candidat 6
+Candidat 5 --[1]--> Candidat 8
+Candidat 5 --[6]--> Candidat 9
+Candidat 5 --[1]--> Candidat 11
+Candidat 5 --[3]--> Candidat 12
+Candidat 5 --[5]--> Candidat 13
+Candidat 6 --[87492]--> Candidat 0
+Candidat 6 --[6]--> Candidat 1
+Candidat 6 --[0]--> Candidat 7
+Candidat 6 --[5]--> Candidat 9
+Candidat 6 --[1]--> Candidat 10
+Candidat 6 --[6]--> Candidat 11
+Candidat 6 --[3]--> Candidat 12
+Candidat 6 --[2]--> Candidat 13
+Candidat 7 --[86766]--> Candidat 0
+Candidat 7 --[46]--> Candidat 3
+Candidat 7 --[1]--> Candidat 4
+Candidat 7 --[1]--> Candidat 5
+Candidat 7 --[0]--> Candidat 6
+Candidat 7 --[1]--> Candidat 9
+Candidat 7 --[5]--> Candidat 10
+Candidat 7 --[0]--> Candidat 11
+Candidat 8 --[86640]--> Candidat 0
+Candidat 8 --[7]--> Candidat 1
+Candidat 8 --[3022]--> Candidat 3
+Candidat 8 --[2]--> Candidat 4
+Candidat 8 --[4]--> Candidat 6
+Candidat 8 --[1]--> Candidat 7
+Candidat 8 --[3]--> Candidat 10
+Candidat 8 --[6]--> Candidat 11
+Candidat 8 --[1]--> Candidat 12
+Candidat 8 --[1]--> Candidat 13
+Candidat 9 --[86894]--> Candidat 0
+Candidat 9 --[3]--> Candidat 1
+Candidat 9 --[3]--> Candidat 8
+Candidat 9 --[5]--> Candidat 10
+Candidat 9 --[3]--> Candidat 13
+Candidat 10 --[86529]--> Candidat 0
+Candidat 10 --[0]--> Candidat 1
+Candidat 10 --[836]--> Candidat 3
+Candidat 10 --[0]--> Candidat 4
+Candidat 10 --[4]--> Candidat 5
+Candidat 10 --[0]--> Candidat 11
+Candidat 10 --[1]--> Candidat 12
+Candidat 10 --[1]--> Candidat 13
+Candidat 11 --[87000]--> Candidat 0
+Candidat 11 --[6]--> Candidat 1
+Candidat 11 --[7]--> Candidat 4
+Candidat 11 --[0]--> Candidat 7
+Candidat 11 --[4]--> Candidat 9
+Candidat 11 --[0]--> Candidat 10
+Candidat 11 --[2]--> Candidat 12
+Candidat 11 --[3]--> Candidat 13
+Candidat 12 --[86938]--> Candidat 0
+Candidat 12 --[1]--> Candidat 1
+Candidat 12 --[6090]--> Candidat 3
+Candidat 12 --[3]--> Candidat 7
+Candidat 12 --[10]--> Candidat 9
+Candidat 13 --[87131]--> Candidat 0
+Candidat 13 --[9]--> Candidat 1
+Candidat 13 --[448803527]--> Candidat 3
+Candidat 13 --[3]--> Candidat 4
+Candidat 13 --[5]--> Candidat 7
+Candidat 13 --[4]--> Candidat 12
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |11  |12  |13  |
+----------------------------------------------------------------------
+0   |3   |13  |7   |7   |8   |8   |8   |10  |5   |8   |8   |5   |6   |
+----------------------------------------------------------------------
+Vainqueur de Condorcet trouvé. Pas de resolution de Conflit
+---------------------------------------------------------------
+Methode rangement des paires par ordre décroissant
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |11  |12  |13  |
+---------------------------------------------------------------------------
+0  |86475|6   |0   |35  |1   |1   |2   |10  |3   |3   |4   |4   |10  |9   |
+---------------------------------------------------------------------------
+1  |87263|12  |0   |0   |1   |3   |10  |9   |-1  |5   |6   |4   |8   |2   |
+---------------------------------------------------------------------------
+2  |87107|11  |0   |18  |1   |2   |3   |10  |8   |7   |7   |5   |3   |3   |
+---------------------------------------------------------------------------
+3  |86567|6   |0   |8   |9   |4   |2   |5   |3   |10  |1   |6   |8   |7   |
+---------------------------------------------------------------------------
+4  |86900|8   |0   |0   |10  |9   |8   |7   |6   |5   |4   |3   |2   |1   |
+---------------------------------------------------------------------------
+5  |86531|6   |0   |0   |3   |2   |6   |8   |5   |9   |1   |4   |10  |7   |
+---------------------------------------------------------------------------
+6  |87494|16  |0   |0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |
+---------------------------------------------------------------------------
+7  |86776|7   |0   |51  |8   |9   |4   |9   |5   |9   |8   |8   |7   |5   |
+---------------------------------------------------------------------------
+8  |86643|6   |0   |3025|8   |4   |9   |6   |7   |5   |10  |10  |6   |7   |
+---------------------------------------------------------------------------
+9  |86897|8   |0   |0   |2   |3   |1   |8   |8   |6   |7   |5   |-1  |4   |
+---------------------------------------------------------------------------
+10 |86533|6   |0   |837 |4   |5   |6   |3   |7   |2   |8   |1   |9   |10  |
+---------------------------------------------------------------------------
+11 |87004|10  |0   |0   |10  |3   |2   |8   |4   |9   |1   |5   |6   |7   |
+---------------------------------------------------------------------------
+12 |86948|9   |0   |6098|1   |7   |6   |10  |5   |9   |8   |4   |2   |3   |
+---------------------------------------------------------------------------
+13 |87140|11  |0   |448803534|4   |2   |8   |10  |6   |1   |9   |4   |7   |1   |
+---------------------------------------------------------------------------
+
+Graphe :
+Candidat 1 --[87257]--> Candidat 0
+Candidat 1 --[2]--> Candidat 7
+Candidat 1 --[0]--> Candidat 10
+Candidat 2 --[87107]--> Candidat 0
+Candidat 2 --[11]--> Candidat 1
+Candidat 2 --[18]--> Candidat 3
+Candidat 2 --[1]--> Candidat 4
+Candidat 2 --[2]--> Candidat 5
+Candidat 2 --[3]--> Candidat 6
+Candidat 2 --[10]--> Candidat 7
+Candidat 2 --[8]--> Candidat 8
+Candidat 2 --[7]--> Candidat 9
+Candidat 2 --[7]--> Candidat 10
+Candidat 2 --[5]--> Candidat 11
+Candidat 2 --[3]--> Candidat 12
+Candidat 2 --[3]--> Candidat 13
+Candidat 3 --[86532]--> Candidat 0
+Candidat 3 --[6]--> Candidat 1
+Candidat 3 --[9]--> Candidat 4
+Candidat 3 --[4]--> Candidat 5
+Candidat 3 --[2]--> Candidat 6
+Candidat 3 --[10]--> Candidat 9
+Candidat 3 --[6]--> Candidat 11
+Candidat 4 --[86899]--> Candidat 0
+Candidat 4 --[7]--> Candidat 1
+Candidat 4 --[6]--> Candidat 5
+Candidat 4 --[7]--> Candidat 6
+Candidat 4 --[3]--> Candidat 9
+Candidat 4 --[0]--> Candidat 10
+Candidat 4 --[1]--> Candidat 12
+Candidat 5 --[86530]--> Candidat 0
+Candidat 5 --[3]--> Candidat 1
+Candidat 5 --[4]--> Candidat 6
+Candidat 5 --[1]--> Candidat 8
+Candidat 5 --[6]--> Candidat 9
+Candidat 5 --[1]--> Candidat 11
+Candidat 5 --[3]--> Candidat 12
+Candidat 5 --[5]--> Candidat 13
+Candidat 6 --[87492]--> Candidat 0
+Candidat 6 --[6]--> Candidat 1
+Candidat 6 --[0]--> Candidat 7
+Candidat 6 --[5]--> Candidat 9
+Candidat 6 --[1]--> Candidat 10
+Candidat 6 --[6]--> Candidat 11
+Candidat 6 --[3]--> Candidat 12
+Candidat 6 --[2]--> Candidat 13
+Candidat 7 --[86766]--> Candidat 0
+Candidat 7 --[46]--> Candidat 3
+Candidat 7 --[1]--> Candidat 4
+Candidat 7 --[1]--> Candidat 5
+Candidat 7 --[0]--> Candidat 6
+Candidat 7 --[1]--> Candidat 9
+Candidat 7 --[5]--> Candidat 10
+Candidat 7 --[0]--> Candidat 11
+Candidat 8 --[86640]--> Candidat 0
+Candidat 8 --[7]--> Candidat 1
+Candidat 8 --[3022]--> Candidat 3
+Candidat 8 --[2]--> Candidat 4
+Candidat 8 --[4]--> Candidat 6
+Candidat 8 --[1]--> Candidat 7
+Candidat 8 --[3]--> Candidat 10
+Candidat 8 --[6]--> Candidat 11
+Candidat 8 --[1]--> Candidat 12
+Candidat 8 --[1]--> Candidat 13
+Candidat 9 --[86894]--> Candidat 0
+Candidat 9 --[3]--> Candidat 1
+Candidat 9 --[3]--> Candidat 8
+Candidat 9 --[5]--> Candidat 10
+Candidat 9 --[3]--> Candidat 13
+Candidat 10 --[86529]--> Candidat 0
+Candidat 10 --[0]--> Candidat 1
+Candidat 10 --[836]--> Candidat 3
+Candidat 10 --[0]--> Candidat 4
+Candidat 10 --[4]--> Candidat 5
+Candidat 10 --[0]--> Candidat 11
+Candidat 10 --[1]--> Candidat 12
+Candidat 10 --[1]--> Candidat 13
+Candidat 11 --[87000]--> Candidat 0
+Candidat 11 --[6]--> Candidat 1
+Candidat 11 --[7]--> Candidat 4
+Candidat 11 --[0]--> Candidat 7
+Candidat 11 --[4]--> Candidat 9
+Candidat 11 --[0]--> Candidat 10
+Candidat 11 --[2]--> Candidat 12
+Candidat 11 --[3]--> Candidat 13
+Candidat 12 --[86938]--> Candidat 0
+Candidat 12 --[1]--> Candidat 1
+Candidat 12 --[6090]--> Candidat 3
+Candidat 12 --[3]--> Candidat 7
+Candidat 12 --[10]--> Candidat 9
+Candidat 13 --[87131]--> Candidat 0
+Candidat 13 --[9]--> Candidat 1
+Candidat 13 --[448803527]--> Candidat 3
+Candidat 13 --[3]--> Candidat 4
+Candidat 13 --[5]--> Candidat 7
+Candidat 13 --[4]--> Candidat 12
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |11  |12  |13  |
+----------------------------------------------------------------------
+0   |3   |13  |7   |7   |8   |8   |8   |10  |5   |8   |8   |5   |6   |
+----------------------------------------------------------------------
+Vainqueur de Condorcet trouvé. Pas de resolution de Conflit
+---------------------------------------------------------------
+Methode Shulze
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |11  |12  |13  |
+---------------------------------------------------------------------------
+0  |86475|6   |0   |35  |1   |1   |2   |10  |3   |3   |4   |4   |10  |9   |
+---------------------------------------------------------------------------
+1  |87263|12  |0   |0   |1   |3   |10  |9   |-1  |5   |6   |4   |8   |2   |
+---------------------------------------------------------------------------
+2  |87107|11  |0   |18  |1   |2   |3   |10  |8   |7   |7   |5   |3   |3   |
+---------------------------------------------------------------------------
+3  |86567|6   |0   |8   |9   |4   |2   |5   |3   |10  |1   |6   |8   |7   |
+---------------------------------------------------------------------------
+4  |86900|8   |0   |0   |10  |9   |8   |7   |6   |5   |4   |3   |2   |1   |
+---------------------------------------------------------------------------
+5  |86531|6   |0   |0   |3   |2   |6   |8   |5   |9   |1   |4   |10  |7   |
+---------------------------------------------------------------------------
+6  |87494|16  |0   |0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |
+---------------------------------------------------------------------------
+7  |86776|7   |0   |51  |8   |9   |4   |9   |5   |9   |8   |8   |7   |5   |
+---------------------------------------------------------------------------
+8  |86643|6   |0   |3025|8   |4   |9   |6   |7   |5   |10  |10  |6   |7   |
+---------------------------------------------------------------------------
+9  |86897|8   |0   |0   |2   |3   |1   |8   |8   |6   |7   |5   |-1  |4   |
+---------------------------------------------------------------------------
+10 |86533|6   |0   |837 |4   |5   |6   |3   |7   |2   |8   |1   |9   |10  |
+---------------------------------------------------------------------------
+11 |87004|10  |0   |0   |10  |3   |2   |8   |4   |9   |1   |5   |6   |7   |
+---------------------------------------------------------------------------
+12 |86948|9   |0   |6098|1   |7   |6   |10  |5   |9   |8   |4   |2   |3   |
+---------------------------------------------------------------------------
+13 |87140|11  |0   |448803534|4   |2   |8   |10  |6   |1   |9   |4   |7   |1   |
+---------------------------------------------------------------------------
+
+Graphe :
+Candidat 1 --[87257]--> Candidat 0
+Candidat 1 --[2]--> Candidat 7
+Candidat 1 --[0]--> Candidat 10
+Candidat 2 --[87107]--> Candidat 0
+Candidat 2 --[11]--> Candidat 1
+Candidat 2 --[18]--> Candidat 3
+Candidat 2 --[1]--> Candidat 4
+Candidat 2 --[2]--> Candidat 5
+Candidat 2 --[3]--> Candidat 6
+Candidat 2 --[10]--> Candidat 7
+Candidat 2 --[8]--> Candidat 8
+Candidat 2 --[7]--> Candidat 9
+Candidat 2 --[7]--> Candidat 10
+Candidat 2 --[5]--> Candidat 11
+Candidat 2 --[3]--> Candidat 12
+Candidat 2 --[3]--> Candidat 13
+Candidat 3 --[86532]--> Candidat 0
+Candidat 3 --[6]--> Candidat 1
+Candidat 3 --[9]--> Candidat 4
+Candidat 3 --[4]--> Candidat 5
+Candidat 3 --[2]--> Candidat 6
+Candidat 3 --[10]--> Candidat 9
+Candidat 3 --[6]--> Candidat 11
+Candidat 4 --[86899]--> Candidat 0
+Candidat 4 --[7]--> Candidat 1
+Candidat 4 --[6]--> Candidat 5
+Candidat 4 --[7]--> Candidat 6
+Candidat 4 --[3]--> Candidat 9
+Candidat 4 --[0]--> Candidat 10
+Candidat 4 --[1]--> Candidat 12
+Candidat 5 --[86530]--> Candidat 0
+Candidat 5 --[3]--> Candidat 1
+Candidat 5 --[4]--> Candidat 6
+Candidat 5 --[1]--> Candidat 8
+Candidat 5 --[6]--> Candidat 9
+Candidat 5 --[1]--> Candidat 11
+Candidat 5 --[3]--> Candidat 12
+Candidat 5 --[5]--> Candidat 13
+Candidat 6 --[87492]--> Candidat 0
+Candidat 6 --[6]--> Candidat 1
+Candidat 6 --[0]--> Candidat 7
+Candidat 6 --[5]--> Candidat 9
+Candidat 6 --[1]--> Candidat 10
+Candidat 6 --[6]--> Candidat 11
+Candidat 6 --[3]--> Candidat 12
+Candidat 6 --[2]--> Candidat 13
+Candidat 7 --[86766]--> Candidat 0
+Candidat 7 --[46]--> Candidat 3
+Candidat 7 --[1]--> Candidat 4
+Candidat 7 --[1]--> Candidat 5
+Candidat 7 --[0]--> Candidat 6
+Candidat 7 --[1]--> Candidat 9
+Candidat 7 --[5]--> Candidat 10
+Candidat 7 --[0]--> Candidat 11
+Candidat 8 --[86640]--> Candidat 0
+Candidat 8 --[7]--> Candidat 1
+Candidat 8 --[3022]--> Candidat 3
+Candidat 8 --[2]--> Candidat 4
+Candidat 8 --[4]--> Candidat 6
+Candidat 8 --[1]--> Candidat 7
+Candidat 8 --[3]--> Candidat 10
+Candidat 8 --[6]--> Candidat 11
+Candidat 8 --[1]--> Candidat 12
+Candidat 8 --[1]--> Candidat 13
+Candidat 9 --[86894]--> Candidat 0
+Candidat 9 --[3]--> Candidat 1
+Candidat 9 --[3]--> Candidat 8
+Candidat 9 --[5]--> Candidat 10
+Candidat 9 --[3]--> Candidat 13
+Candidat 10 --[86529]--> Candidat 0
+Candidat 10 --[0]--> Candidat 1
+Candidat 10 --[836]--> Candidat 3
+Candidat 10 --[0]--> Candidat 4
+Candidat 10 --[4]--> Candidat 5
+Candidat 10 --[0]--> Candidat 11
+Candidat 10 --[1]--> Candidat 12
+Candidat 10 --[1]--> Candidat 13
+Candidat 11 --[87000]--> Candidat 0
+Candidat 11 --[6]--> Candidat 1
+Candidat 11 --[7]--> Candidat 4
+Candidat 11 --[0]--> Candidat 7
+Candidat 11 --[4]--> Candidat 9
+Candidat 11 --[0]--> Candidat 10
+Candidat 11 --[2]--> Candidat 12
+Candidat 11 --[3]--> Candidat 13
+Candidat 12 --[86938]--> Candidat 0
+Candidat 12 --[1]--> Candidat 1
+Candidat 12 --[6090]--> Candidat 3
+Candidat 12 --[3]--> Candidat 7
+Candidat 12 --[10]--> Candidat 9
+Candidat 13 --[87131]--> Candidat 0
+Candidat 13 --[9]--> Candidat 1
+Candidat 13 --[448803527]--> Candidat 3
+Candidat 13 --[3]--> Candidat 4
+Candidat 13 --[5]--> Candidat 7
+Candidat 13 --[4]--> Candidat 12
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |5   |6   |7   |8   |9   |10  |11  |12  |13  |
+----------------------------------------------------------------------
+0   |3   |13  |7   |7   |8   |8   |8   |10  |5   |8   |8   |5   |6   |
+----------------------------------------------------------------------
+Vainqueur de Condorcet trouvé. Pas de resolution de Conflit
