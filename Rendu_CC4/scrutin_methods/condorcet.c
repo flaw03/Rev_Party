@@ -155,7 +155,7 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
 
     // Libérer la mémoire de l'ensemble disjoint
     freeDisjointSet(set);
-
+    list_iterator_delete(it);
     list_delete(&arbre);
 
     fprintf(logfile,"\nFin de Kruskal. Racine : %d\n", racine);

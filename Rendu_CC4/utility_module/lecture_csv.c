@@ -37,7 +37,6 @@ int fichierValide(const char *filename) {
     }
 
     char line[1024]; // Taille maximale d'une ligne
-    int lineNumber = 1;
 
     // Ignorer la première ligne
     if (fgets(line, sizeof(line), file) == NULL) {
@@ -48,7 +47,6 @@ int fichierValide(const char *filename) {
 
     // Lire le reste des lignes
     while (fgets(line, sizeof(line), file) != NULL) {
-        lineNumber++;
         
         // Ignorer les lignes vides
         if (strlen(line) <= 1) {

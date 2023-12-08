@@ -157,6 +157,7 @@ int KruskalMaxWeightTree(List *graphe, int nbSommet,FILE* logfile) {
     freeDisjointSet(set);
 
     list_delete(&arbre);
+    list_iterator_delete(it);
 
     fprintf(logfile,"\nFin de Kruskal. Racine : %d\n", racine);
 
@@ -357,7 +358,7 @@ int methode_Schulze(Matrice matriceDuel,FILE* logfile){
 
 
 int main(void){
-    char * filename = "../Data/vote100.csv";
+    char * filename = "../Data/testCondorcet2.csv";
     bool isBallot = false;
     Matrice matriceDuel = NULL;
     int nombreElecteur;
@@ -370,7 +371,7 @@ int main(void){
     }
     
     
-    int vainqueur = methode_Minimax(matriceDuel,logfile);
+    int vainqueur = methode_Rangement_Des_Paires(matriceDuel,logfile);
     char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,isBallot);
     fprintf(logfile,"Mode de paire : Condorcet paires, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
     nombreElecteur,nomVainqueur);

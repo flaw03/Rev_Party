@@ -12,7 +12,8 @@ Ce projet REV_Party est une application de vote qui prend en entrée un fichier 
 4. [Exemple d'Utilisation](#exemple-dutilisation)
 5. [Compilation](#compilation)
 6. [Documentation](#documentation)
-7. [Contributeur](#contributions)
+7. [Test](#test)
+8. [Contributeur](#contributions)
 
 
 ## Fonctionnalités Principales :
@@ -128,6 +129,10 @@ make doc
 ```
 
 Vous pouvez consulter la documentation générée en ouvrant le fichier documentation/html/index.html dans votre navigateur web.
+
+
+## Test
+
 
 
 ## Contributions
