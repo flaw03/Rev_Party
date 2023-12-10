@@ -27,7 +27,7 @@ void removeNewline(char* str);
  *
  * @param filename Le nom du fichier à lire.
  * @param numColonne Le numéro de colonne à extraire.
- * @param isBallot Un booléen indiquant s'il s'agit d'une opération sur un bulletin de vote.
+ * @param isBallot Un booléen indiquant s'il s'agit une fichier csv de type balot ou dans cas contraire une matrice de duel
  * @return Un pointeur vers la chaîne de caractères représentant le nom du candidat.
  *         (N'oubliez pas de libérer la mémoire après utilisation.)
  */
@@ -42,20 +42,26 @@ char* obtenir_nom_Candidat(const char* filename, int numColonne, bool isBallot);
 void afficher_vote(const char* filename, char* hash);
 
 /**
- * Lit les bulletins de vote à partir du fichier spécifié et les stocke dans la structure Matrice.
+ * @brief Lit un fichier CSV contenant les votes sous la forme de bulletins et les transforme en matrice de duels.
  *
- * @param filename Le nom du fichier à lire.
+ * Cette fonction prend en entrée le nom d'un fichier CSV contenant les bulletins de vote, puis elle crée une matrice de duels
+ * représentant les comparaisons deux à deux des candidats. La matrice résultante est stockée dans une structure Matrice.
+ *
+ * @param filename Le nom du fichier CSV contenant les bulletins de vote.
  * @param Matrice Un pointeur vers la structure Matrice pour stocker les données lues.
- * @return Le nombre de bulletins de vote lus avec succès.
+ * @return Le nombre d'électeurs dans le fichier.
  */
 int lireBallot(char* filename, Matrice* Matrice);
 
 /**
- * Lit la matrice de duel à partir du fichier spécifié et la stocke dans la structure Matrice.
+ * @brief Lit la matrice de duels à partir d'un fichier CSV et remplit la matrice de duels correspondante.
  *
- * @param filename Le nom du fichier à lire.
+ * Cette fonction prend en entrée le nom d'un fichier CSV contenant une matrice de duels, puis elle remplit la matrice
+ * de duels représentant les comparaisons deux à deux des candidats. La matrice résultante est stockée dans une structure Matrice.
+ *
+ * @param filename Le nom du fichier CSV contenant la matrice de duels.
  * @param Matrice Un pointeur vers la structure Matrice pour stocker les données lues.
- * @return Le nombre de lignes (ou colonnes) de la matrice lue avec succès.
+ * @return Le nombre d'électeurs dans le fichier.
  */
 int lireMatriceDuel(char* filename, Matrice* Matrice);
 
