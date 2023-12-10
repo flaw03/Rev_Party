@@ -10,19 +10,6 @@
 
 
 
-char * obtenir_nom_Candidat(const char *filename,int numColonne,bool isBallot);
-
-void afficher_vote(const char* filename,char* hash);
-
-int lireBallot(char* filename,Matrice *Matrice);
-
-int lireMatriceDuel(char* filename,Matrice *Matrice);
-
-int fichierValide(const char *filename);
-
-
-void verifFichier(const char* filename);
-
 
 
 /** \defgroup Constructors Contructors and destructors of the TAD.
@@ -33,6 +20,59 @@ void verifFichier(const char* filename);
     @return la chaine modiée
 */
 void removeNewline(char* str);
+
+
+/**
+ * Obtient le nom du candidat à partir du fichier spécifié.
+ *
+ * @param filename Le nom du fichier à lire.
+ * @param numColonne Le numéro de colonne à extraire.
+ * @param isBallot Un booléen indiquant s'il s'agit d'une opération sur un bulletin de vote.
+ * @return Un pointeur vers la chaîne de caractères représentant le nom du candidat.
+ *         (N'oubliez pas de libérer la mémoire après utilisation.)
+ */
+char* obtenir_nom_Candidat(const char* filename, int numColonne, bool isBallot);
+
+/**
+ * Affiche les votes correspondant à un hachage spécifié dans le fichier spécifié.
+ *
+ * @param filename Le nom du fichier à lire.
+ * @param hash Le hachage à rechercher et afficher.
+ */
+void afficher_vote(const char* filename, char* hash);
+
+/**
+ * Lit les bulletins de vote à partir du fichier spécifié et les stocke dans la structure Matrice.
+ *
+ * @param filename Le nom du fichier à lire.
+ * @param Matrice Un pointeur vers la structure Matrice pour stocker les données lues.
+ * @return Le nombre de bulletins de vote lus avec succès.
+ */
+int lireBallot(char* filename, Matrice* Matrice);
+
+/**
+ * Lit la matrice de duel à partir du fichier spécifié et la stocke dans la structure Matrice.
+ *
+ * @param filename Le nom du fichier à lire.
+ * @param Matrice Un pointeur vers la structure Matrice pour stocker les données lues.
+ * @return Le nombre de lignes (ou colonnes) de la matrice lue avec succès.
+ */
+int lireMatriceDuel(char* filename, Matrice* Matrice);
+
+/**
+ * Vérifie la validité des données présentes dans le fichier spécifié.
+ *
+ * @param filename Le nom du fichier à vérifier.
+ * @return 1 si le fichier est valide, 0 sinon.
+ */
+int fichierValide(const char* filename);
+
+/**
+ * Fonction permettant de factoriser la fonction fichierValide pour faciliter son appel.
+ *
+ * @param filename Le nom du fichier à vérifier.
+ */
+void verifFichier(const char* filename);
 
 
 ListElect* getElecteur(ListElect* lstElect, ListCand* lstCand, char* fichier, int* tab);

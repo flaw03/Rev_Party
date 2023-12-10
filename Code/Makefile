@@ -103,7 +103,7 @@ clean:
 	@rm -rf $(BIN_DIR)/verify_my_vote
 	@rm -rf $(BIN_DIR)/scrutin
 
-doc: utility_module/set.h scrutin_methods/condorcet.h scrutin_methods/jugement.h  scrutin_methods/Uninominales.h utility_module/Utiles.h utility_module/utils_tab.h
+doc: utility_module/set.h scrutin_methods/condorcet.h scrutin_methods/jugement.h  scrutin_methods/uninominales.h utility_module/utiles.h utility_module/utils_tab.h
 	@doxygen documentation/DOXYFILE
 
 test:
