@@ -9,14 +9,7 @@
 #include "../sha256_module/sha256_utils.h"
 #define STRLONG 100
 
-/*
-*    Equipe 17 : 
-				NDOYE Assane 22100318
-				SMETS Yoann  22100213 
-				JOSEPH Wilkens Marc Johnley 22112190  
-				MORELLATO Adrian 22000859
 
-*/
 
 /*
 *     On compile avec la commande make verify_my_vote

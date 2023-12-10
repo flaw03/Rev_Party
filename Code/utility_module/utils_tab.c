@@ -82,14 +82,7 @@ void afficher_Tableau(Tableau tab,FILE* logfile){
     fprintf(logfile,"\n");
 }
 
-/**
- * @brief Initialise une matrice avec une valeur spécifique.
- *
- * Cette fonction initialise tous les éléments d'une matrice avec une valeur spécifique.
- *
- * @param matrice La matrice à initialiser.
- * @param valeur La valeur avec laquelle initialiser la matrice.
- */
+
 void init_Matrice(Matrice matrice, int valeur) {
     // Parcours de la matrice pour initialiser chaque élément avec la valeur spécifiée
     for (int i = 0; i < matrice->nb_ligne; i++) {
