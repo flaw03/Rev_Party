@@ -60,7 +60,7 @@ int lireBallot(char* filename, Matrice* Matrice);
 int lireMatriceDuel(char* filename, Matrice* Matrice);
 
 /**
- * Vérifie la validité du fichier spécifié.
+ * Vérifie la validité des données présentes dans le fichier spécifié.
  *
  * @param filename Le nom du fichier à vérifier.
  * @return 1 si le fichier est valide, 0 sinon.
@@ -68,7 +68,7 @@ int lireMatriceDuel(char* filename, Matrice* Matrice);
 int fichierValide(const char* filename);
 
 /**
- * Effectue des vérifications supplémentaires sur le fichier spécifié.
+ * Fonction permettant de factoriser la fonction fichierValide pour faciliter son appel.
  *
  * @param filename Le nom du fichier à vérifier.
  */
