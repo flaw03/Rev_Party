@@ -135,8 +135,11 @@ Vous pouvez consulter la documentation générée en ouvrant le fichier document
 
 
 ## Test
+Les Test peut être générée en utilisant la commande suivante :
 
-
+```bash
+make test
+```
 
 ## Contributions
 

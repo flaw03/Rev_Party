@@ -1,11 +1,13 @@
 # Répertoire de destination pour les fichiers objet (.o)
 OBJ_DIR=obj
+# Répertoire de destination pour les exécutables
+
+BIN_DIR=bin
+
+
 
 $(OBJ_DIR):
 	mkdir -p $@
-
-# Répertoire de destination pour les exécutables
-BIN_DIR=bin
 
 $(BIN_DIR):
 	mkdir -p $@
@@ -103,6 +105,9 @@ clean:
 
 doc: utility_module/set.h scrutin_methods/condorcet.h scrutin_methods/jugement.h  scrutin_methods/Uninominales.h utility_module/Utiles.h utility_module/utils_tab.h
 	@doxygen documentation/DOXYFILE
+
+test:
+	Test/test_script.sh Code/module_main/scrutin
 
 DELIVER_FMT=$(shell date "+%d-%m-%y_%Hh%Mm%Ss")
 
