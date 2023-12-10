@@ -100,7 +100,7 @@ Candidat** finalistes_uninominal_deux_tours(ListElect *lstElect, ListCand *lstCa
                 first = cand;
             }
         }
-        if (votesEnCours == max2 && max2 != 0 && cand != second) {//Si il y a ex aequo avec le finaliste 1 , prendre le plus vieux
+        if (votesEnCours == max2 && max2 != 0 && cand != second) {//Si il y a ex aequo avec le finaliste 2 , prendre le plus vieux
             if ((cand->age > second->age)) {
                 second = cand;
              }
