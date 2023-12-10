@@ -23,7 +23,7 @@
 /** Print a usage message for this program.
  
  @code{.unparsed}
- $bin/uninominales -i <filename.csv> | -d <nomFichierCSV> [-o <log_file>] -m {uni1, uni2, all, cm, cp, cs)}
+ $bin/uninominales -i data/<filename.csv> | -d data/<nomFichierCSV> [-o <log_file>] -m {uni1, uni2, all, cm, cp, cs,jm,all)}
 
 Options :
   -i <filename.csv> > : Traite le fichier CSV spécifié.
