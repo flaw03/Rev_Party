@@ -79,6 +79,15 @@ int fichierValide(const char* filename);
  * @param filename Le nom du fichier à vérifier.
  */
 void verifFichier(const char* filename);
+/**Fonction créant une liste d'électeurs à partir d'un fichier et du candidat pour lequel il vote.
+
+ @param lstElect Liste vide d'électeurs
+ @param lstCand Liste de candidats possibles
+ @param fichier Fichier contenant les données des électeurs et de leurs votes
+ @param tab Tableau qui va contenir les différents votes de l'électeur pour chaque candidat
+
+ @return Une liste d'électeurs initialisée
+*/
 
 
 ListElect* getElecteur(ListElect* lstElect, ListCand* lstCand, char* fichier, int* tab);
@@ -87,6 +96,8 @@ ListElect* getElecteur(ListElect* lstElect, ListCand* lstCand, char* fichier, in
 
 @param lstCand Liste vide de candidats
 @param fichier Le fichier contenant les données
+
+@return Une liste de candidats initialisée
 */
 
 ListCand* getCandidat(ListCand* lstCand, char* fichier);
@@ -97,12 +108,10 @@ ListCand* getCandidat(ListCand* lstCand, char* fichier);
 @param tab le tableau vide qui contiendra les indices des candidats
 
 @return le tableau contenant les indices des candidats
-
-
 */
 
 int getIndice(Candidat* candidats, char* fichier);
-/** Fonction permettant de créer une liste d'electurs ayant voté pour 2 candidats différents en choisissant celui qu'ils ont préféré.
+/** Fonction permettant de créer une liste d'electeurs ayant voté pour 2 candidats différents en choisissant celui qu'ils ont préféré.
 @param lstElect liste vide
 @param c1 Candidat 1
 @param c2 Candidat 2
