@@ -5,8 +5,8 @@ wipe='\e[00m';
 ok='\e[01;32m';
 
 COMMAND="$1"
-PATH=..
-BASE=.
+PATH=.
+BASE=..
 TEST=$PATH/Test/fich_tests
 LOG=$PATH/Test/Log
 RET=
@@ -23,7 +23,7 @@ function test_uni1 {
     /usr/bin/mkdir $PATH/Test/Result_Uni1/
 	while read i
 	do
- 	    ../bin/scrutin -i $TEST/$i  -o $LOG/log_uni1_${i} -m uni1 > $PATH/Test/Result_Uni1/$i.txt
+ 	    $PATH/bin/scrutin -i $TEST/$i  -o $LOG/log_uni1_${i} -m uni1 > $PATH/Test/Result_Uni1/$i.txt
 #        /usr/bin/cat -A $PATH/Test/ref_uni1/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Uni1/$i.txt
@@ -53,7 +53,7 @@ function test_uni2 {
 
 	while read i
 	do
- 	    ../bin/scrutin -i $TEST/$i  -o $LOG/log_uni2_${i} -m uni2 > $PATH/Test/Result_Uni2/${i}.txt
+ 	    $PATH/bin/scrutin -i $TEST/$i  -o $LOG/log_uni2_${i} -m uni2 > $PATH/Test/Result_Uni2/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_uni2/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Uni2/$i.txt
@@ -80,7 +80,7 @@ function test_minimaxb {
 
 	while read i
 	do
- 	    ../bin/scrutin -i $TEST/$i  -o $LOG/log_minimax_${i} -m cm > $PATH/Test/Result_Cmb/${i}.txt
+ 	    $PATH/bin/scrutin -i $TEST/$i  -o $LOG/log_minimax_${i} -m cm > $PATH/Test/Result_Cmb/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_cm/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Cmb/$i.txt
@@ -105,7 +105,7 @@ function test_minimaxd {
 
 	while read i
 	do
- 	    ../bin/scrutin -d $TEST/$i  -o $LOG/log_minimax_${i} -m cm > $PATH/Test/Result_Cmd/${i}.txt
+ 	    $PATH/bin/scrutin -d $TEST/$i  -o $LOG/log_minimax_${i} -m cm > $PATH/Test/Result_Cmd/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_cm/$i.txt
 #       printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Cmd/$i.txt
@@ -132,7 +132,7 @@ function test_schulzeb {
 
 	while read i
 	do
- 	    ../bin/scrutin -i $TEST/$i  -o $LOG/log_schulze_${i} -m cs > $PATH/Test/Result_Csb/${i}.txt
+ 	    $PATH/bin/scrutin -i $TEST/$i  -o $LOG/log_schulze_${i} -m cs > $PATH/Test/Result_Csb/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_cs/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Csb/$i.txt
@@ -162,7 +162,7 @@ function test_schulzed {
 
 	while read i
 	do
- 	    ../bin/scrutin -d $TEST/$i  -o $LOG/log_schulze_${i} -m cs > $PATH/Test/Result_Csd/${i}.txt
+ 	    $PATH/bin/scrutin -d $TEST/$i  -o $LOG/log_schulze_${i} -m cs > $PATH/Test/Result_Csd/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_cs/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Csd/$i.txt
@@ -189,7 +189,7 @@ function test_pairesb {
 
 	while read i
 	do
- 	    ../bin/scrutin -i $TEST/$i  -o $LOG/log_paires_${i} -m cp > $PATH/Test/Result_Cpb/${i}.txt
+ 	    $PATH/bin/scrutin -i $TEST/$i  -o $LOG/log_paires_${i} -m cp > $PATH/Test/Result_Cpb/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_cp/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Cpb/$i.txt
@@ -214,7 +214,7 @@ function test_pairesd {
 
 	while read i
 	do
- 	    ../bin/scrutin -d $TEST/$i  -o $LOG/log_paires_${i} -m cp >  $PATH/Test/Result_Cpd/${i}.txt
+ 	    $PATH/bin/scrutin -d $TEST/$i  -o $LOG/log_paires_${i} -m cp >  $PATH/Test/Result_Cpd/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_cp/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Cpd/$i.txt
@@ -242,7 +242,7 @@ function test_jm {
 
 	while read i
 	do
- 	    ../bin/scrutin -i $TEST/$i  -o $LOG/log_jm_${i} -m jm >  $PATH/Test/Result_Jm/${i}.txt
+ 	    $PATH/bin/scrutin -i $TEST/$i  -o $LOG/log_jm_${i} -m jm >  $PATH/Test/Result_Jm/${i}.txt
 #	    /usr/bin/cat -A $PATH/Test/ref_jm/$i.txt
 #        printf "\n"
 #        /usr/bin/cat -A $PATH/Test/Result_Jm/$i.txt
