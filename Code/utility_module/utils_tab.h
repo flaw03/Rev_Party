@@ -123,6 +123,9 @@ void afficher_Tableau(Tableau Tableau, FILE *logfile);
 void trier_Tableau(Tableau tableau);
 
 
+void afficherVote(Tableau tab,FILE* logfile);
+
+
 
 
 #endif

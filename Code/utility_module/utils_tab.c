@@ -62,6 +62,16 @@ void afficher_Matrice(Matrice matrice,FILE* logfile){
 	}
 }
 
+void afficherVote(Tableau tab,FILE* logfile){
+    fprintf(logfile,"[");
+    for(int i = 0;i<tab->dim-1;i++){
+        fprintf(logfile,"%d-",tab->tableau[i]);
+        
+    }
+    fprintf(logfile,"%d]",tab->tableau[tab->dim-1]);
+
+}
+
 
 void afficher_Tableau(Tableau tab,FILE* logfile){
     for(int j = 0; j < tab->dim;j++){
