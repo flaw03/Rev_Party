@@ -203,7 +203,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
         ListElect* electeur2 = listElect_create();
         electeurs2ndTours2Candidats(electeur2,elem1,elem2,fichier,logfile);
         Resultat gagnant = uninominal_2nd_Tours(electeur2,sec,logfile);
-        printf("Mode de Scrutin : Uninominal à deux tours, 2nd tour : Vainqueur = %s, score : %f %%\n",gagnant.candidat->nom,gagnant.nb);
+        printf("Mode de Scrutin : Uninominal à deux tours, 2nd tour, 2 candidats, %d votants : Vainqueur = %s, score : %f %%\n",electeur2->size,gagnant.candidat->nom,gagnant.nb);
         listElect_delete(electeur2);
     }
     if(sec[1] == NULL){
