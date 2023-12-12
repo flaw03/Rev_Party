@@ -210,7 +210,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
         Candidat* majoritaire = sec[0];
 
         float pourcentage = (majoritaire->vote/nbVotesTotaux)*100;
-         printf("Mode de Scrutin : Uninominal à deux tours , 1er tour, %d candidats,%d votants, vainqueur par majorité absolue = %s, score : %f%%.\n",lstCand->size,lstElect->size,majoritaire->nom,pourcentage);
+         printf("Mode de Scrutin : Uninominal à deux tours, 1er tour, %d candidats,%d votants, vainqueur par majorité absolue = %s, score : %f%%.\n",lstCand->size,lstElect->size,majoritaire->nom,pourcentage);
     }
     listElect_delete(lstElect);
     delete_Tableau(tab);
