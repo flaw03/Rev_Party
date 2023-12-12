@@ -66,7 +66,7 @@ double mediane(Tableau tab) {
 // Fonction pour afficher les détails d'un candidat (vote, médiane)
 void affichage(FILE* logfile, Candidat* c) {
     fprintf(logfile, "Candidat : %s\nvotes : ", c->prenom);
-    afficher_Tableau(c->jugement, logfile);
+    afficherVote(c->jugement, logfile);
     fprintf(logfile, "\nMediane : %f\n\n", mediane(c->jugement));
 }
 
@@ -95,11 +95,10 @@ Candidat* jugementMajoritaire(ListCand* lstCand, ListElect* lstElect, char* fich
     Candidat* gagnant = lstCand->head;
     double medianeGagnant = mediane(gagnant->jugement);
     fprintf(logfile, "\n\nDEBUT VERIFICATION JUGEMENT MAJORITAIRE\n\n");
-    affichage(logfile, gagnant);
-
+    affichage(logfile,gagnant);
     // Comparaison de tous les candidats et de leur médiane, en prenant celui avec la médiane la plus basse (meilleure mention)
     for (Candidat* c = lstCand->head->next; c != NULL; c = c->next) {
-        affichage(logfile, c);
+        affichage(logfile,c);
         double medianeEtudiee = mediane(c->jugement);
 
         if (medianeEtudiee < medianeGagnant) {
