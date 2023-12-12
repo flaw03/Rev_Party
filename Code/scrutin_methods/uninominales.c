@@ -194,10 +194,10 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     Candidat** sec = finalistes_uninominal_deux_tours(lstElect,lstCand,logfile);
 
     if(sec[1]!=NULL){
-        printf("Mode de Scrutin : Uninominal à deux tours, 1er tour, %d candidats, %d votants, vainqueur = %s, score : %f%%\n",lstCand->size,lstElect->size,sec[0]->nom,(sec[0]->vote/nbVotesTotaux)*100);
-        printf("Mode de Scrutin : Uninominal à deux tours, 1er tour, %d candidats, %d votants, vainqueur = %s, score : %f%%\n",lstCand->size,lstElect->size,sec[1]->nom,(sec[1]->vote/nbVotesTotaux)*100);        
         Candidat* elem1 = sec[0];
         Candidat* elem2 = sec[1];
+        printf("Mode de Scrutin : Uninominal à deux tours, 1er tour, %d candidats, %d votants, vainqueur = %s, score : %f%%\n",lstCand->size,lstElect->size,elem1->nom,(elem1->vote/nbVotesTotaux)*100);
+        printf("Mode de Scrutin : Uninominal à deux tours, 1er tour, %d candidats, %d votants, vainqueur = %s, score : %f%%\n",lstCand->size,lstElect->size,elem2->nom,(elem2->vote/nbVotesTotaux)*100);        
         elem1->vote = 0;
         elem2->vote = 0;
         ListElect* electeur2 = listElect_create();
