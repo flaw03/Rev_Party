@@ -163,14 +163,14 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     ListElect* lstElect = listElect_create();
     ListCand* lstCand = listCand_create();
     lstCand = getCandidat(lstCand,fichier);
-    int nb = lstCand->size;
-    int tab[nb];
+    Tableau tab = create_Tableau(lstCand->size);
     lstElect = getElecteur(lstElect,lstCand,fichier,tab);
     lstCand = initVote(lstElect,lstCand,logfile);
     Resultat victorieux = uninominal_un_tour(lstElect,lstCand,logfile);
     printf("Mode de Scrutin : Uninominal un tour :  %d candidats , %d votants",lstCand->size,lstElect->size);
     printf(",Vainqueur = %s, score : %f %%\n",victorieux.candidat->prenom,victorieux.nb);
     listElect_delete(lstElect);
+    delete_Tableau(tab);
     listCand_delete(lstCand);
     return;
     
@@ -184,8 +184,9 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
     ListCand* lstCand = listCand_create();
 
     lstCand = getCandidat(lstCand,fichier);
-    int nb = lstCand->size;
-    int tab[nb];
+
+    Tableau tab = create_Tableau(lstCand->size);
+
 
     lstElect = getElecteur(lstElect,lstCand,fichier,tab);
     lstCand = initVote(lstElect,lstCand,logfile);
@@ -212,6 +213,7 @@ Resultat uninominal_2nd_Tours(ListElect* lstElecteurs, Candidat** finalistes,FIL
         printf("Nous avons un gagnant par majorité absolue ! \nLe gagnant est : %s %s possédant plus de %f%%  votes !.\n",majoritaire->nom,majoritaire->prenom,pourcentage);
     }
     listElect_delete(lstElect);
+    delete_Tableau(tab);
     listCand_delete(lstCand);
     free(sec);
     return;

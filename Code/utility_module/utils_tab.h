@@ -115,4 +115,14 @@ void afficher_Matrice(Matrice matrice, FILE *logfile);
  */
 void afficher_Tableau(Tableau Tableau, FILE *logfile);
 
+/**
+* @brief Fonction : trier
+* @brief Description : Trie un tableau par ordre décroissant.
+* @param tab : Le tableau à trier.
+*/
+void trier_Tableau(Tableau tableau);
+
+
+
+
 #endif

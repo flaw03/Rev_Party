@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "utiles.h"
+#include "utils_tab.h"
 
 
 /********************************************************/
@@ -61,6 +62,7 @@ Candidat* create_candidat(const char* nom, const char* prenom, int age) {
     new->prenom = strdup(prenom);  // Utilisation de strdup pour dupliquer la chaîne
     new->age = age;
     new->next = NULL;
+    new->jugement = NULL;
     new->vote = 0;
     return new;
 }
@@ -78,6 +80,9 @@ void listCand_delete(ListCand* l) {
     Candidat* current = l->head;
     while (current != NULL) {
         Candidat* next = current->next;
+        if (current->jugement != NULL){
+            delete_Tableau(current->jugement);
+        }
         free(current->nom);     // Libération de la mémoire allouée par strdup
         free(current->prenom);  // Libération de la mémoire allouée par strdup
         free(current);
@@ -89,7 +94,7 @@ void listCand_delete(ListCand* l) {
 /********************************************************/
 void tableauDelete(ListCand* l){
   for(Candidat* c = l->head;c!=NULL;c = c->next){
-    free(c->jugement);
+    delete_Tableau(c->jugement);
   }
 
 }
@@ -101,13 +106,13 @@ void printList(ListCand *l){
     }
 }
 /********************************************************/
-int getIndiceVote(int* votes,int taille){
+int getIndiceVote(Tableau tab){
     int cpt = 0;
-    int min = votes[0];
-    for(int i = 0;i<taille;i++){
-        if(votes[i]<min && votes[i] != -1){
+    int min = tab->tableau[0];
+    for(int i = 0;i<tab->dim;i++){
+        if(tab->tableau[i]<min && tab->tableau[i] != -1){
             cpt=i;
-            min = votes[i];
+            min = tab->tableau[i];
         }
     }
     return cpt;
@@ -129,7 +134,7 @@ Candidat* candidatAssocie(int nb,ListCand* lstCand){
 /********************************************************/
 void createTableau(int taille,ListCand* lstCand){
     for(Candidat* c = lstCand->head;c!=NULL;c = c->next){
-        c->jugement = malloc(taille*sizeof(int));
+        c->jugement = create_Tableau(taille);
     }
 }
 /********************************************************/

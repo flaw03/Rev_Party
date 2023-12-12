@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include "condorcet.h"
 #include "../utility_module/utils_tab.h" 
 #include "../utility_module/lecture_csv.h"
 #include "../utility_module/list.h"
 #include "../utility_module/set.h"
-#include "condorcet.h"
 
 
 // renvoie un tableau contenant le pire defaite de chaque candidat
@@ -214,7 +214,6 @@ int resolutionSchulze(ptrList graphe, int nbCandidat, FILE* logfile) {
 
     // Libération de la mémoire
     delete_Tableau(tableauArcEntrant);
-    // Libération de la mémoire pour l'itérateur de la liste
     list_iterator_delete(it);
 
     // Retourne le vainqueur déterminé par la méthode de Schulze
@@ -241,6 +240,7 @@ int condorcet(Matrice matriceDuel, ptrList *graphe,FILE* logfile) {
         return -1; 
     }
 
+    //Affichage du graphe  
     fprintf(logfile,"\nGraphe :\n");
     list_reduce(*graphe, &afficherArc, logfile);
 
@@ -275,7 +275,7 @@ int condorcet(Matrice matriceDuel, ptrList *graphe,FILE* logfile) {
 
 int methode_Minimax(Matrice matriceDuel,FILE* logfile) {
     fprintf(logfile,"---------------------------------------------------------------\n");
-    fprintf(logfile,"Methode Minimax");
+    fprintf(logfile,"Methode Minimax\n");
     // Vérification de la validité de la matrice de duel
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
@@ -312,7 +312,7 @@ int methode_Minimax(Matrice matriceDuel,FILE* logfile) {
         delete_Tableau(pireScore);
     }
 
-    // Libération de la mémoire pour la liste de graphe
+    // Libération de la mémoire
     list_delete(&graphe);
 
     return vainqueur;
@@ -321,7 +321,8 @@ int methode_Minimax(Matrice matriceDuel,FILE* logfile) {
 
 int methode_Rangement_Des_Paires(Matrice matriceDuel,FILE* logfile) {
     fprintf(logfile,"---------------------------------------------------------------\n");
-    fprintf(logfile,"Methode rangement des paires par ordre décroissant");
+    fprintf(logfile,"Methode rangement des paires par ordre décroissant\n");
+    
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
         exit(3); 
@@ -343,7 +344,7 @@ int methode_Rangement_Des_Paires(Matrice matriceDuel,FILE* logfile) {
         fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec la methode rangement des paires par ordre décroissant : Candidat n° %d\n",vainqueur);
     }
 
-    // Libération de la mémoire pour la liste de graphe
+    // Libération de la mémoire
     list_delete(&graphe);
 
     return vainqueur;
@@ -351,7 +352,7 @@ int methode_Rangement_Des_Paires(Matrice matriceDuel,FILE* logfile) {
 
 int methode_Schulze(Matrice matriceDuel,FILE* logfile){
     fprintf(logfile,"---------------------------------------------------------------\n");
-    fprintf(logfile,"Methode Shulze");
+    fprintf(logfile,"Methode Shulze\n");
     if (matriceDuel == NULL) {
         fprintf(stderr, "Erreur : Matrice de duel invalide.\n");
         exit(3); 
@@ -370,6 +371,7 @@ int methode_Schulze(Matrice matriceDuel,FILE* logfile){
         vainqueur = resolutionSchulze(graphe,matriceDuel->nb_colonne,logfile);
         fprintf(logfile,"\nVainqueur apres Resoltion du conflit avec Schulze : Candidat n° %d\n",vainqueur);
     }
+    // Libération de la mémoire
     list_delete(&graphe);
     return vainqueur;
 }

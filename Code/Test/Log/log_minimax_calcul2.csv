@@ -1,5 +1,6 @@
 ---------------------------------------------------------------
 Methode Minimax
+
 Matrice de duel :
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
@@ -41,4 +42,4 @@ Tableau des pire defaites de chaque Candidats
 62  |63  |64  |60  |87  |
 -------------------------
 
-Vainqueur apres Resoltion du conflit avec la methode minimax : 3
+Vainqueur apres Resoltion du conflit avec la methode minimax : Candidat n° 3

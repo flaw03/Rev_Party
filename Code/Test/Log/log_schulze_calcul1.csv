@@ -1,5 +1,6 @@
 ---------------------------------------------------------------
 Methode Shulze
+
 Matrice de duel :
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
@@ -41,7 +42,7 @@ Tableau de scores entrants :
 1   |1   |1   |4   |3   |
 -------------------------
 
-Graphe trié :
+Arc trié par poid croissant :
 Candidat 0 --[6]--> Candidat 1
 Candidat 1 --[12]--> Candidat 2
 Candidat 4 --[20]--> Candidat 3
@@ -58,7 +59,7 @@ Candidat 0 --[6]--> Candidat 1
 Tableau de scores après la réduction :
 0   |1   |2   |3   |4   |
 -------------------------
-1   |1   |1   |4   |3   |
+1   |0   |1   |4   |3   |
 -------------------------
 
 Tableau de scores entrants après la résolution Schulze :
@@ -67,4 +68,4 @@ Tableau de scores entrants après la résolution Schulze :
 1   |0   |1   |4   |3   |
 -------------------------
 
-Vainqueur apres Resoltion du conflit avec Schulze : 1
+Vainqueur apres Resoltion du conflit avec Schulze : Candidat n° 1

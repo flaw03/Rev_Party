@@ -20,11 +20,6 @@
 
 
 /*
-*    Equipe 17 : NDOYE Assane, SMETS Yoann, JOSEPH Wilkens Marc Johnley, MORELLATO Adrian
-*/
-
-
-/*
 *   Fonction pour tester que le fichier en paramètre est bien un csv
 */
 
@@ -333,7 +328,7 @@ void removeNewline(char* str) {
 
 
 
-ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,int* tab) {
+ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,Tableau tab) {
    if(fichierValide(fichier)==1){
         fprintf(stderr,"Fichier transmis non valide,veuillez vérifier la conformité des données\n");
         exit(2);
@@ -372,7 +367,7 @@ ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,int* 
                 if(x==-1){
                     x=10;
                 }
-                tab[cpt] = x;
+                tab->tableau[cpt] = x;
                 cpt++;
         
 
@@ -382,7 +377,7 @@ ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,int* 
             colonneActuelle++;
         }
             cpt = 0;
-            int voteCandidat = getIndiceVote(tab,lstCand->size);
+            int voteCandidat = getIndiceVote(tab);
             Candidat* candidat = candidatAssocie(voteCandidat,lstCand);
             Electeur* e = create_electeur(nom,prenom,candidat);
             list_add_Electeur(lstElect,e);
@@ -397,7 +392,6 @@ ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,int* 
     	exit(1);
     }
     return lstElect;
-    
 }
 
 ListCand* getCandidat(ListCand* lstCand,char* fichier){
@@ -591,7 +585,7 @@ void initJugement(ListCand* lstCand,ListElect* lstElect,char* fichier) {
             if(x==-1){
                 x=10;
             }
-            candidat->jugement[cpt] = x; //Récupère tous les votes pour un candidat et les insère dans le tableau de ce candidat
+            candidat->jugement->tableau[cpt] = x; //Récupère tous les votes pour un candidat et les insère dans le tableau de ce candidat
             candidat = candidat->next;
            }
             token = strtok(NULL, ",");

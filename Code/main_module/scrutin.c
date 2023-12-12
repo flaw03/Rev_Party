@@ -135,20 +135,18 @@ int main(int argc, char** argv) {
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
         optvalide = true;
-
     }
+
     if((strcmp(methode,"jm") == 0 || optionAll) && optionBalot){
         voteJugementMajoritaireBallot(filename,logfile);
         optvalide = true;
     }
-    
+
     if (!optvalide){
         fprintf(stderr, "Usage: %s -i <filename.csv>  | -d <filename.csv> -m {uni1, uni2, cm, cp, cs,jm, all} [-o <log_file>]\n", argv[0]);
         exit(EXIT_FAILURE);
     }
     
-
-
     if(logfile!=stdout){
         fclose(logfile);
     }

@@ -110,7 +110,7 @@ int min_Tableau(Tableau tab,int *colonne, int *valeur) {
 
         // Vérification si l'élément est un candidat pour être le minimum
         if (element >= 0 && element < *valeur) {
-            // Mise à jour des valeurs minimales
+            // Mise à jour des valeurs minimales 
             doublon = 0;
             *valeur = element;
             *colonne = i;
@@ -147,7 +147,6 @@ int max_Tableau(Tableau tab, int *colonne,int * valeur){
             doublon = 1;
         }   
     }
-    // Si aucun minimum n'a été trouvé, la valeur minimale est définie sur -1
     return doublon;
 }
 
@@ -183,4 +182,17 @@ void remplire_Matrice_Duel(Matrice matrice, Tableau tab) {
         min_Tableau(tab, &colonne, &valeur);
     }
 }
+
+void trier_Tableau(Tableau tab) {
+    for (int i = 0; i < tab->dim; i++) {
+        for (int j = 0; j < tab->dim; j++) {
+            if (tab->tableau[i] > tab->tableau[j]) {
+                int temp = tab->tableau[i];
+                tab->tableau[i] = tab->tableau[j];
+                tab->tableau[j] = temp;
+            }
+        }
+    }
+}
+
 

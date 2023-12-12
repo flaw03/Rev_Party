@@ -7,11 +7,6 @@
 #include <stdbool.h>
 
 
-
-
-
-
-
 /** \defgroup Constructors Contructors and destructors of the TAD.
  @{
  */
@@ -79,18 +74,20 @@ int fichierValide(const char* filename);
  * @param filename Le nom du fichier à vérifier.
  */
 void verifFichier(const char* filename);
-/**Fonction créant une liste d'électeurs à partir d'un fichier et du candidat pour lequel il vote.
 
- @param lstElect Liste vide d'électeurs
- @param lstCand Liste de candidats possibles
- @param fichier Fichier contenant les données des électeurs et de leurs votes
- @param tab Tableau qui va contenir les différents votes de l'électeur pour chaque candidat
+
+/**
+ *  @brief Fonction créant une liste d'électeurs à partir d'un fichier et du candidat pour lequel il vote.
+ * 
+ *
+ * @param lstElect Liste vide d'électeurs
+ * @param lstCand Liste de candidats possibles
+ * @param fichier Fichier contenant les données des électeurs et de leurs votes
+ * @param tab Tableau qui va contenir les différents votes de l'électeur pour chaque candidat
 
  @return Une liste d'électeurs initialisée
 */
-
-
-ListElect* getElecteur(ListElect* lstElect, ListCand* lstCand, char* fichier, int* tab);
+ListElect* getElecteur(ListElect* lstElect,ListCand* lstCand,char* fichier,Tableau tab);
 
 /**Fonction créant une liste de candidats à partir d'un fichier.csv
 

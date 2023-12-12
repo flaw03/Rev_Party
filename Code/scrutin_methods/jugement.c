@@ -7,25 +7,14 @@
 
 #include "../utility_module/utiles.h"
 #include "../utility_module/lecture_csv.h"
+#include "../utility_module/utils_tab.h"
 #include "jugement.h"
 
-// Fonction pour trier un tableau d'entiers par ordre décroissant
-void trier(int* tab, int taille) {
-    for (int i = 0; i < taille; i++) {
-        for (int j = 0; j < taille; j++) {
-            if (tab[i] > tab[j]) {
-                int temp = tab[i];
-                tab[i] = tab[j];
-                tab[j] = temp;
-            }
-        }
-    }
-}
 
 // Fonction pour trier les classements de chaque candidat par ordre décroissant
-void trierVotes(ListCand* lstCand, int taille) {
+void trierVotes(ListCand* lstCand) {
     for (Candidat* c = lstCand->head; c != NULL; c = c->next) {
-        trier(c->jugement, taille);
+        trier_Tableau(c->jugement);
     }
 }
 
@@ -41,65 +30,57 @@ int assocMention(int i) {
 }
 
 // Fonction pour calculer le chemin à partir d'un tableau de classements
-int calculerChemin(int *tab, int taille) {
+int calculerChemin(Tableau tab) {
     int mid;
-    if (taille % 2 == 0) {
-        mid = (taille / 2) - 1;
+    if (tab->dim % 2 == 0) {
+        mid = (tab->dim / 2) - 1;
     } else {
-        mid = taille / 2;
+        mid = tab->dim / 2;
     }
-    int mention = tab[mid]; // médiane
+    int mention = tab->tableau[mid]; // médiane
     int addMention = assocMention(mention); // distance jusqu'à la prochaine mention
     int cpt = 0;
     int recherche = mention + addMention;
 
-    while (mention < recherche || cpt == taille) {
+    while (mention < recherche || cpt == tab->dim) {
         mid--;
-        mention = tab[mid];
+        mention = tab->tableau[mid];
         cpt++;
     }
     return cpt;
 }
 
 // Fonction pour calculer la médiane d'un tableau d'entiers
-double mediane(int* tab, int taille) {
-    int verif = taille % 2;
+double mediane(Tableau tab) {
+    int verif = tab->dim % 2;
     if (verif == 0) {
-        int mid = (taille / 2) - 1;
-        return tab[mid];
+        int mid = (tab->dim / 2) - 1;
+        return tab->tableau[mid];
     } else {
-        int mil = (taille / 2);
-        return tab[mil];
+        int mil = (tab->dim / 2);
+        return tab->tableau[mil];
     }
 }
 
-// Fonction pour afficher un vote (tableau de classements)
-void afficherVote(int* tab, int taille, FILE* logfile) {
-    for (int i = 0; i < taille; i++) {
-        fprintf(logfile, "[");
-        fprintf(logfile, "%d", tab[i]);
-        fprintf(logfile, "]");
-    }
-}
 
 // Fonction pour afficher les détails d'un candidat (vote, médiane)
-void affichage(FILE* logfile, Candidat* c, int taille) {
+void affichage(FILE* logfile, Candidat* c) {
     fprintf(logfile, "Candidat : %s\nvotes : ", c->prenom);
-    afficherVote(c->jugement, taille, logfile);
-    fprintf(logfile, "\nMediane : %f\n\n", mediane(c->jugement, taille));
+    afficher_Tableau(c->jugement, logfile);
+    fprintf(logfile, "\nMediane : %f\n\n", mediane(c->jugement));
 }
 
 // Fonction pour gérer le cas des chemins égaux entre deux candidats
-void gererCasCheminsEgaux(Candidat* gagnant, Candidat* candidatCourant, int taille) {
+void gererCasCheminsEgaux(Candidat* gagnant, Candidat* candidatCourant) {
     int cheminGagnantv2, cheminCourantv2;
     double med1, med2;
 
     do {
-        taille--; //Passe au vote de l'électeur d'avant (tableau rangé ordre décroissant)
-        cheminGagnantv2 = calculerChemin(gagnant->jugement, taille); //Recalcule le chemin sans cet electeur
-        cheminCourantv2 = calculerChemin(candidatCourant->jugement, taille);//Recalcule le chemin sans cet electeur
-        med1 = mediane(gagnant->jugement, taille);//Recalcule la mediane sans cet electeur
-        med2 = mediane(candidatCourant->jugement, taille);//Recalcule la mediane sans cet electeur
+        gagnant->jugement->dim--; //Passe au vote de l'électeur d'avant (tableau rangé ordre décroissant)
+        cheminGagnantv2 = calculerChemin(gagnant->jugement); //Recalcule le chemin sans cet electeur
+        cheminCourantv2 = calculerChemin(candidatCourant->jugement);//Recalcule le chemin sans cet electeur
+        med1 = mediane(gagnant->jugement);//Recalcule la mediane sans cet electeur
+        med2 = mediane(candidatCourant->jugement);//Recalcule la mediane sans cet electeur
     } while (med1 == med2 && cheminCourantv2 == cheminGagnantv2); //Jusqu'à trouver une médiane et/ou une distance de chemin différente
 
     if (cheminCourantv2 > cheminGagnantv2 || (med2 < med1 && cheminCourantv2 != cheminGagnantv2)) {
@@ -110,17 +91,16 @@ void gererCasCheminsEgaux(Candidat* gagnant, Candidat* candidatCourant, int tail
 // Fonction principale pour le jugement majoritaire
 Candidat* jugementMajoritaire(ListCand* lstCand, ListElect* lstElect, char* fichier, FILE* logfile) {
     initJugement(lstCand, lstElect, fichier);
-    trierVotes(lstCand, lstElect->size);
+    trierVotes(lstCand);
     Candidat* gagnant = lstCand->head;
-    int taille = lstElect->size;
-    double medianeGagnant = mediane(gagnant->jugement, taille);
+    double medianeGagnant = mediane(gagnant->jugement);
     fprintf(logfile, "\n\nDEBUT VERIFICATION JUGEMENT MAJORITAIRE\n\n");
-    affichage(logfile, gagnant, taille);
+    affichage(logfile, gagnant);
 
     // Comparaison de tous les candidats et de leur médiane, en prenant celui avec la médiane la plus basse (meilleure mention)
     for (Candidat* c = lstCand->head->next; c != NULL; c = c->next) {
-        affichage(logfile, c, taille);
-        double medianeEtudiee = mediane(c->jugement, taille);
+        affichage(logfile, c);
+        double medianeEtudiee = mediane(c->jugement);
 
         if (medianeEtudiee < medianeGagnant) {
             medianeEtudiee = medianeGagnant;
@@ -128,15 +108,15 @@ Candidat* jugementMajoritaire(ListCand* lstCand, ListElect* lstElect, char* fich
         }
         // Égalité entre deux médianes => Calculer le chemin jusqu'à la prochaine pire mention obtenue
         else if (medianeEtudiee == medianeGagnant) {
-            int cheminGagnant = calculerChemin(gagnant->jugement, taille);
-            int cheminCandCourant = calculerChemin(c->jugement, taille);
+            int cheminGagnant = calculerChemin(gagnant->jugement);
+            int cheminCandCourant = calculerChemin(c->jugement);
 
             if (cheminCandCourant > cheminGagnant || (cheminCandCourant == cheminGagnant && medianeEtudiee < medianeGagnant)) {
                 gagnant = c;
                 medianeGagnant = medianeEtudiee;
             } else if (cheminCandCourant == cheminGagnant) {
                 //Égalité entre deux médianes et deux distances => passer à la prochaine mention et recalculer la distance jusqu'à la prochaine pire mention
-                gererCasCheminsEgaux(gagnant, c, taille);
+                gererCasCheminsEgaux(gagnant, c);
             }
         }
     }
@@ -152,13 +132,13 @@ void voteJugementMajoritaireBallot(char* fichier, FILE* logfile) {
     ListCand* lstCand = listCand_create();
     ListElect* lstElect = listElect_create();
     getCandidat(lstCand, fichier);
-    int tab[lstCand->size];
+    Tableau tab = create_Tableau(lstCand->size);
     lstElect = getElecteur(lstElect, lstCand, fichier, tab);
 
     Candidat* gagnant = jugementMajoritaire(lstCand, lstElect, fichier, logfile);
     printf("Mode de Scrutin : Jugement majoritaire %d candidats, %d votants, Vainqueur = %s\n", lstCand->size, lstElect->size, gagnant->prenom);
 
-    tableauDelete(lstCand);
+    delete_Tableau(tab);
     listCand_delete(lstCand);
     listElect_delete(lstElect);
 }

@@ -1,5 +1,6 @@
 ---------------------------------------------------------------
 Methode rangement des paires par ordre décroissant
+
 Matrice de duel :
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
@@ -65,7 +66,7 @@ Arc courrant
 Candidat 2 --[74]--> Candidat 4
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |0   |0   |
@@ -83,7 +84,7 @@ Arc courrant
 Candidat 1 --[52]--> Candidat 4
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |0   |0   |
@@ -101,7 +102,7 @@ Arc courrant
 Candidat 0 --[52]--> Candidat 4
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |0   |1   |
@@ -119,7 +120,7 @@ Arc courrant
 Candidat 0 --[20]--> Candidat 3
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |1   |1   |
@@ -137,7 +138,7 @@ Arc courrant
 Candidat 2 --[20]--> Candidat 0
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |1   |1   |
@@ -155,7 +156,7 @@ Arc courrant
 Candidat 2 --[20]--> Candidat 3
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |1   |1   |
@@ -173,7 +174,7 @@ Arc courrant
 Candidat 1 --[20]--> Candidat 3
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |1   |1   |
@@ -191,7 +192,7 @@ Arc courrant
 Candidat 4 --[20]--> Candidat 3
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |1   |1   |
@@ -209,7 +210,7 @@ Arc courrant
 Candidat 1 --[12]--> Candidat 2
 Pas de cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |1   |1   |
@@ -227,7 +228,7 @@ Arc courrant
 Candidat 0 --[6]--> Candidat 1
 Cycle créé.
 
-Ensemble :
+Ensemble post operation:
 I/I|0   |1   |2   |3   |4   |
 ------------------------------
 0  |0   |0   |0   |1   |1   |
@@ -254,4 +255,4 @@ Candidat 1 --[12]--> Candidat 2
 
 Fin de Kruskal. Racine : 1
 
-Vainqueur apres Resoltion du conflit avec la methode rangement des paires par ordre décroissant : 1
+Vainqueur apres Resoltion du conflit avec la methode rangement des paires par ordre décroissant : Candidat n° 1

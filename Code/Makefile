@@ -106,9 +106,6 @@ clean:
 doc: utility_module/set.h scrutin_methods/condorcet.h scrutin_methods/jugement.h  scrutin_methods/uninominales.h utility_module/utiles.h utility_module/utils_tab.h
 	@doxygen documentation/DOXYFILE
 
-test:
-	Test/test_script.sh Code/module_main/scrutin
-
 DELIVER_FMT=$(shell date "+%d-%m-%y_%Hh%Mm%Ss")
 
 deliver:

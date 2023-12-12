@@ -1,6 +1,6 @@
 #ifndef LISTESUTILES_H
 #define LISTESUTILES_H
-
+#include "utils_tab.h"
 /** 
  * @defgroup Utils Utils 
  * @brief Documentation of utils functions for the project.
@@ -33,7 +33,7 @@ struct s_Candidat {
     char* prenom;
     int age;
     int vote;
-    int* jugement;
+    Tableau jugement;
     struct s_Candidat* next;
 };
 
@@ -125,12 +125,11 @@ void tableauDelete(ListCand* l);
 void printList(ListCand* l);
 
 /**Get the index of the minimal value in the array 
-  @param votes The array of votes
-  @param taille The size of the array
+  @param tab The array of votes
 
   @return The index of the minimal value
 */
-int getIndiceVote(int* votes,int taille);
+int getIndiceVote(Tableau tab);
 
 /**Return the candidat of the given index
   @param nb The index
