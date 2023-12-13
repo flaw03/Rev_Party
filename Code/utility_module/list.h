@@ -1,7 +1,6 @@
 /*-----------------------------------------------------------------*/
 /*
- 
- Interface pour l'implantation du TAD List pour le projet.
+ Interface pour l'implémentation du TAD List pour le projet.
  */
 /*-----------------------------------------------------------------*/
 
@@ -13,195 +12,191 @@
 /*-----------------------------------------------------------------*/
 
 /** \defgroup ADTList List
- Documentation of the implementation of the abstract data type List.
+ Documentation de l'implémentation du type abstrait de données List.
  @{
  */
 
-/** \defgroup Type Type definition.
+/** \defgroup Type Définition du type.
   @{
  */
-/** Opaque definition of type List.
+/** Définition opaque du type List.
  */
 typedef struct s_List List;
-/** Définition of type ptrList : pointer to a List.
+/** Définition du type ptrList : pointeur vers une List.
  */
 typedef List * ptrList;
 
-
-
 typedef struct s_element{
-	int a ;
-	int b;
-	int p;
+    int a ;
+    int b;
+    int p;
 } * Element;
 
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Functors Functions prototypes that could be used with some operators on List.
+/** \defgroup Functors Prototypes des fonctions qui peuvent être utilisées avec certains opérateurs sur List.
  @{
  */
-/** Simple functor to be used with the list_map function.
- This functor receive as argument the value of a list element and must return the eventually modified value of the element.
+/** Foncteur simple à utiliser avec la fonction list_map.
+ Ce foncteur reçoit en argument la valeur d'un élément de la liste et doit retourner éventuellement la valeur modifiée de l'élément.
  */
 typedef int(*SimpleFunctor)(int,int,int);
 
-/** Functor with user data to be used with the list_reduce operator.
-  This functor receive as argument the value of a list element and an opaque pointer to user provided data and must return the eventually modified value of the element.
+/** Foncteur avec des données utilisateur à utiliser avec l'opérateur list_reduce.
+  Ce foncteur reçoit en argument la valeur d'un élément de la liste et un pointeur opaque vers des données fournies par l'utilisateur, et doit retourner éventuellement la valeur modifiée de l'élément.
  */
 typedef int (*ReduceFunctor)(Element,void *);
 
-/** Functor to be used with the list_sort operator.
-   This functor must implement a total ordering function (comp). When calling this functor with two list elements a and b, this functor must return true if (a comp b).
+/** Foncteur à utiliser avec l'opérateur list_sort.
+   Ce foncteur doit implémenter une fonction d'ordonnancement total (comp). Lorsque ce foncteur est appelé avec deux éléments de liste a et b, il doit renvoyer vrai si (a comp b).
  */
 typedef bool(*OrderFunctor)(int, int);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Constructors Contructors and destructors of the TAD.
+/** \defgroup Constructors Constructeurs et destructeurs du TAD.
  @{
  */
-/** Implementation of the the constructor \c list from the specification.
+/** Implémentation du constructeur \c list selon la spécification.
  */
 List *list_create(void);
 
-/** Implementation of the the constructor \c push_back from the specification.
- @param l The list to modify
- @param p The weight of the candidate candidat1.
- @param candidat1 The value of the candidate a.
- @param candidat2 The value of the candidate b.
- @return The modified list
- Add the value v at the end of the list l.
- @note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+/** Implémentation du constructeur \c push_back selon la spécification.
+ @param l La liste à modifier
+ @param p Le poids du candidat candidat1.
+ @param candidat1 La valeur du candidat a.
+ @param candidat2 La valeur du candidat b.
+ @return La liste modifiée
+ Ajoute la valeur v à la fin de la liste l.
+ @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
 
  */
 List *list_push_back(List *l, int p, int candidat1, int candidat2);
 
-/** Destructor.
-	Added by the implementation. Free ressources allocated by constructors.
- 	@param l the adress of the list.
- 	After calling this function, the list l becomes NULL.
+/** Destructeur.
+    Ajouté par l'implémentation. Libère les ressources allouées par les constructeurs.
+    @param l l'adresse de la liste.
+    Après l'appel de cette fonction, la liste l devient NULL.
  */
 void list_delete(ptrList *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup FrontBackOperators Insertion and removal of elements at front or back of the list.
- These operators have a time complexity in O(1).
+/** \defgroup FrontBackOperators Insertion et suppression d'éléments en tête ou en fin de liste.
+ Ces opérateurs ont une complexité temporelle en O(1).
  @{
  */
-/** Add an element at the front of the list.
- 	@param l The list to modify
- 	@param p The weight of the candidate candidat1.
- 	@param candidat1 The value of the candidate a.
- 	@param candidat2 The value of the candidate b.
- 	@return The modified list
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+/** Ajoute un élément en tête de la liste.
+    @param l La liste à modifier
+    @param p Le poids du candidat candidat1.
+    @param candidat1 La valeur du candidat a.
+    @param candidat2 La valeur du candidat b.
+    @return La liste modifiée
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
 */
 List *list_push_front(List *l, int p, int candidat1, int candidat2);
 
-
-
-/** Acces to the element at begining of the list.
- 	@return the value of the front element of l.
-	@pre !empty(l)
+/** Accède à l'élément en début de liste.
+    @return la valeur de l'élément en tête de l.
+    @pre !empty(l)
  */
 int list_front(List *l);
-/** Acces to the element at end of the list.
- 	@return the value of the back element of l.
- 	@pre !empty(l)
+/** Accède à l'élément en fin de liste.
+    @return la valeur de l'élément en fin de l.
+    @pre !empty(l)
  */
 int list_back(List *l);
 
-/** Remove to the element at begining of the list.
- 	@return The modified list
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
-  	@pre !empty(l)
+/** Supprime l'élément en début de liste.
+    @return La liste modifiée
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+    @pre !empty(l)
  */
 List *list_pop_front(List *l);
 
-/** Remove to the element at end of the list.
- 	@return The modified list
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
- 	@pre !empty(l)
+/** Supprime l'élément en fin de liste.
+    @return La liste modifiée
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+    @pre !empty(l)
  */
 List *list_pop_back(List *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup RandomAccessOperators Insertion and removal of elements at any position in the list.
- These operators have a worst case time complexity in O(n), with n the size of the list.
+/** \defgroup RandomAccessOperators Insertion et suppression d'éléments à n'importe quelle position dans la liste.
+ Ces opérateurs ont une complexité temporelle dans le pire des cas en O(n), avec n la taille de la liste.
  @{
  */
-/** Insert an element at a given position.
- 	@param l The list to modify.
- 	@param pos The position to insert.
- 	@param p The weight of the candidate candidat1.
- 	@param candidat1 The value of the candidate a.
- 	@param candidat2 The value of the candidate b.
- 	@return The modified list.
- 	Insert an element in a list so that its position is given by p.
- 	@pre 0 <= p <= list_size(l)
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+/** Insère un élément à une position donnée.
+    @param l La liste à modifier.
+    @param pos La position d'insertion.
+    @param p Le poids du candidat candidat1.
+    @param candidat1 La valeur du candidat a.
+    @param candidat2 La valeur du candidat b.
+    @return La liste modifiée.
+    Insère un élément dans une liste de manière à ce que sa position soit donnée par p.
+    @pre 0 <= p <= list_size(l)
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
  */
 List *list_insert_at(List *l, int pos, int p, int candidat1,int candidat2);
-/** Remove an element at a given position.
-	 @param l The list to modify.
-	 @param p The position of the element to be removed.
-	 @return The modified list.
-	 Remove the element located at position .
-	 @pre 0 <= p < list_size(l)
-	 @note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+/** Supprime un élément à une position donnée.
+     @param l La liste à modifier.
+     @param p La position de l'élément à supprimer.
+     @return La liste modifiée.
+     Supprime l'élément situé à la position p.
+     @pre 0 <= p < list_size(l)
+     @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
  */
 List *list_remove_at(List *l, int p);
-/** Acces to an element at a given position.
-	 @param l The list to acces.
-	 @param p The position to acces.
-	 @return The value of the element at position p.
-	 @pre 0 <= p < list_size(l)
+/** Accède à un élément à une position donnée.
+     @param l La liste à accéder.
+     @param p La position à accéder.
+     @return La valeur de l'élément à la position p.
+     @pre 0 <= p < list_size(l)
  */
 int list_at(List *l, int p);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup UtilityOperators Operators allowing to access some properties or apply some processing on the whole list.
+/** \defgroup UtilityOperators Opérateurs permettant d'accéder à certaines propriétés ou d'appliquer certains traitements sur toute la liste.
  @{
  */
-/** Test if a list is empty.
+/** Teste si une liste est vide.
  */
 bool list_is_empty(List *l);
-/** Give the number of elements of the list.
+/** Donne le nombre d'éléments de la liste.
  */
 int list_size(List *l);
-/** Apply the same operator on each element of the list.
- 	@param l The list to process.
- 	@param f The operator (function) to apply to each element
- 	@see SimpleFunctor
- 	@return The eventually modified list
- 	@note If the elements are modified by the operator f, this function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified bye the function.
- 	This function sequentially apply the operator f on each element of the list, starting from the beginning of the list until the end. The value reurned by the operator when called on an element will replace the element.
+/** Applique le même opérateur sur chaque élément de la liste.
+    @param l La liste à traiter.
+    @param f L'opérateur (fonction) à appliquer à chaque élément
+    @see SimpleFunctor
+    @return La liste éventuellement modifiée
+    @note Si les éléments sont modifiés par l'opérateur f, cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+    Cette fonction applique séquentiellement l'opérateur f sur chaque élément de la liste, en commençant par le début de la liste jusqu'à la fin. La valeur renvoyée par l'opérateur lorsqu'il est appelé sur un élément remplacera l'élément.
 */
 //List * list_map(List *l, SimpleFunctor f);
 
 
-/** Apply the same operator on each element of the list gieven a user define environment.
- @param l The list to process.
- @param f The operator (function) to apply to each element
+/** Applique le même opérateur sur chaque élément de la liste en utilisant un environnement défini par l'utilisateur.
+ @param l La liste à traiter.
+ @param f L'opérateur (fonction) à appliquer à chaque élément
  @see ReduceFunctor
- @return The eventually modified list
- @note If the elements are modified by the operator f, this function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified bye the function.
- This function sequentially apply the operator f on each element of the list with the user supplied environment defined by the abstract pointer userData. The operator is applied starting from the beginning of the list until the end. The value reurned by the operator when called on an element will replace the element.
+ @return La liste éventuellement modifiée
+ @note Si les éléments sont modifiés par l'opérateur f, cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+ Cette fonction applique séquentiellement l'opérateur f sur chaque élément de la liste avec l'environnement fourni par le pointeur abstrait userData. L'opérateur est appliqué en commençant par le début de la liste jusqu'à la fin. La valeur renvoyée par l'opérateur lorsqu'il est appelé sur un élément remplacera l'élément.
 
-Sort the list according to the provided ordering functor.
- @param l The list to sort.
- @param f The order to use
- @return The sorted list.
- @note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+Trie la liste selon l'opérateur d'ordonnancement fourni.
+ @param l La liste à trier.
+ @param f L'ordre à utiliser
+ @return La liste triée.
+ @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
  */
 //List *list_sort(List *l, OrderFunctor f);
 /** @} */
@@ -211,59 +206,56 @@ List *list_reduce(List *l, ReduceFunctor f,void * env);
 /** @} */
 
 /**
- * @brief Sort a list in descending order.
+ * @brief Trie une liste par ordre décroissant.
  *
- * @param l The list to be sorted.
- * @return 1 or -1 depending on whether the list is sorted or not.
+ * @param l La liste à trier.
+ * @return 1 ou -1 en fonction de si la liste est triée ou non.
  */
 int triee_liste_decroissant(List* l);
 
+/* itérateur */
 
-
-/* iterator*/
-
-/// Iterator from the begining to the end
+/// Itérateur du début à la fin
 #define FORWARD_ITERATOR 1
-/// Iterator from the end to the beginning
+/// Itérateur de la fin au début
 #define BACKWARD_ITERATOR 0
 
 
 /**
- *	@brief Opaque definition of the ListIterator abstract data type.
+ *	@brief Définition opaque du type abstrait de données ListIterator.
  */
 typedef struct s_ListIterator *ListIterator;
 
 /**
- *	@brief Constructor of an iterator.
- * @param d the List to iterate
- * @param w the way the iterator will go (FORWARD_ITERATOR or BACKWARD_ITERATOR)
- * @return the correcly initialized iterator
+ *	@brief Constructeur d'un itérateur.
+ * @param d la List à itérer
+ * @param w la direction que prendra l'itérateur (FORWARD_ITERATOR ou BACKWARD_ITERATOR)
+ * @return l'itérateur correctement initialisé
  */
 ListIterator list_iterator_create(List* d, unsigned char w);
 
 /**
- *	@brief Destructor of an iterator.
- *  @param it the iterator to delete
+ *	@brief Destructeur d'un itérateur.
+ *  @param it l'itérateur à supprimer
  */
 void list_iterator_delete(ListIterator it);
 
 /**
- *	@brief Increment the iterator to the next position according to its direction.
- *  @param it the iterator to modify
- *	@return the modified iterator
- *	@note the parameter it is modified by side effect and is returned by the function
+ *	@brief Incrémente l'itérateur à la position suivante selon sa direction.
+ *  @param it l'itérateur à modifier
+ *	@return l'itérateur modifié
+ *	@note le paramètre it est modifié par effet de côté et est retourné par la fonction
  */
 Element list_iterator_next(ListIterator it);
 
 /**
- *	@brief Acces to the value of the iterator.
- *  @param it the iterator to delete
- *  @return the value designed by the iterator
+ *	@brief Accède à la valeur de l'itérateur.
+ *  @param it l'itérateur à supprimer
+ *  @return la valeur désignée par l'itérateur
  */
 Element list_iterator_value(ListIterator it);
 
 int list_iterator_has_next(ListIterator it);
-
 
 ListIterator list_iterator_begin(ListIterator it);
 
@@ -271,7 +263,5 @@ int list_iterator_delete_current(ListIterator it);
 
 int list_iterator_end(ListIterator it);
 
-
 /** @} */
 #endif
-
