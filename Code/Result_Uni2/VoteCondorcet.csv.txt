@@ -1,3 +1,0 @@
-Mode de Scrutin : Uninominal à deux tours, 1er tour, 10 candidats, 39 votants, vainqueur = Q00_Vote->1 - Burger Black Pepper, score : 28.205130%
-Mode de Scrutin : Uninominal à deux tours, 1er tour, 10 candidats, 39 votants, vainqueur = Q00_Vote->7 - Crispy, score : 17.948719%
-Mode de Scrutin : Uninominal à deux tours, 2nd tour, 2 candidats, 39 votants : Vainqueur = Q00_Vote->1 - Burger Black Pepper, score : 58.974359 %
