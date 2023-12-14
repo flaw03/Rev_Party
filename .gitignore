@@ -1,3 +1,4 @@
 Code/obj/*.o
 Code/bin/verify_my_vote
 Code/bin/scrutin
+Code/Test/Log/*.csv

@@ -136,11 +136,14 @@ Vous pouvez consulter la documentation générée en ouvrant le fichier document
 
 ## Test
 Les Test peut être générée en utilisant la commande suivante :
+Le Test, teste toutes les methodes de scrutin
 
 ```bash
-make test
+Test/test_script.sh
 ```
-
+*Note*
+*Assurez vous de donner les perimision pour executer cette commande*
+*Ne fonctionne que linux*
 ## Contributions
 
 Equipe 17 :

@@ -36,7 +36,7 @@ Notez que la commande doit contenir soit -i ou -d, mais pas les deux en même te
  @endcode
  */
 
-//Compile with : make
+//Compile with : make scrutin
 
 
 
