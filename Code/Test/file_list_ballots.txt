@@ -1,2 +1,6 @@
 vote10.csv
 vote100.csv
+jugement.csv
+VoteCondorcet.csv
+testCondorcet.csv
+testCondorcet2.csv
