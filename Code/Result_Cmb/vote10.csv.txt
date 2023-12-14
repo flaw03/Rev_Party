@@ -1,1 +1,0 @@
-Mode de Scrutin : Condorcet Minimax, 5 candidats, 10 votants, vainqueur =  Charlotte aux poires
