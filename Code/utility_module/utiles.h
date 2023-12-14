@@ -2,28 +2,28 @@
 #define LISTESUTILES_H
 #include "utils_tab.h"
 /** 
- * @defgroup Utils Utils 
- * @brief Documentation of utils functions for the project.
+ * @defgroup Utils Utilitaires 
+ * @brief Documentation des fonctions utilitaires pour le projet.
  *@{
  */
 
 /** 
- * @brief Opaque definition of ListCand abstract data type.
+ * @brief Définition opaque du type abstrait de données ListCand.
  */
 typedef struct s_List_Cand ListCand;
 
 /** 
- * @brief Opaque definition of ListElect abstract data type.
+ * @brief Définition opaque du type abstrait de données ListElect.
  */
 typedef struct s_List_Electeur ListElect;
 
 /** 
- * @brief Opaque definition of Candidat abstract data type.
+ * @brief Définition opaque du type abstrait de données Candidat.
  */
 typedef struct s_Candidat Candidat;
 
 /** 
- * @brief Opaque definition of Electeur abstract data type.
+ * @brief Définition opaque du type abstrait de données Electeur.
  */
 typedef struct s_Electeur Electeur;
 
@@ -60,100 +60,94 @@ struct s_List_Cand {
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Constructors Contructors and destructors of the TAD.
+/** \defgroup Constructors Constructeurs et destructeurs du TAD.
  @{
  */
 
-/** Creates a new voter with the specified information.
-    @param nom Last name of the voter.
-    @param prenom First name of the voter.
-    @param candidat Pointer to the candidate chosen by the voter.
-    @return A pointer to the newly created voter.
+/** Crée un nouvel électeur avec les informations spécifiées.
+    @param nom Nom de famille de l'électeur.
+    @param prenom Prénom de l'électeur.
+    @param candidat Pointeur vers le candidat choisi par l'électeur.
+    @return Un pointeur vers le nouvel électeur créé.
 */
 Electeur* create_electeur(const char* nom, const char* prenom, Candidat* candidat);
-/** Creates and initializes an empty list of voters.
-    @return A pointer to the newly created list of voters.
+/** Crée et initialise une liste vide d'électeurs.
+    @return Un pointeur vers la nouvelle liste d'électeurs créée.
 */
 ListElect* listElect_create(void);
 
-/** Adds an electeur to the list of electeurs.
-    @param l The list of electeurs to modify.
-    @param electehr Pointer to the electeur to be added.
-    @return The modified list of electors.
+/** Ajoute un électeur à la liste d'électeurs.
+    @param l La liste d'électeurs à modifier.
+    @param electeur Pointeur vers l'électeur à ajouter.
+    @return La liste d'électeurs modifiée.
 */
 ListElect* list_add_Electeur(ListElect* l, Electeur* electeur);
 
 
-/** Deletes the entire list of electors and frees allocated memory.
-    @param l The list of electeurs to be deleted.
+/** Supprime l'ensemble de la liste d'électeurs et libère la mémoire allouée.
+    @param l La liste d'électeurs à supprimer.
 */
 void listElect_delete(ListElect* l);
 
-/** Creates a new candidate with the specified information.
-    @param nom Last name of the candidate.
-    @param prenom First name of the candidate.
-    @param age Age of the candidate.
-    @return A pointer to the newly created candidate.
+/** Crée un nouveau candidat avec les informations spécifiées.
+    @param nom Nom de famille du candidat.
+    @param prenom Prénom du candidat.
+    @param age Âge du candidat.
+    @return Un pointeur vers le nouveau candidat créé.
 */
 Candidat* create_candidat(const char* nom, const char* prenom, int age);
 
-/** Creates and initializes an empty list of candidates.
-    @return A pointer to the newly created list of candidates.
+/** Crée et initialise une liste vide de candidats.
+    @return Un pointeur vers la nouvelle liste de candidats créée.
 */
 ListCand* listCand_create(void);
 
-/** Adds a candidate to the list of candidates.
-    @param l The list of candidates to modify.
-    @param candidat Pointer to the candidate to be added.
-    @return The modified list of candidates.
+/** Ajoute un candidat à la liste de candidats.
+    @param l La liste de candidats à modifier.
+    @param candidat Pointeur vers le candidat à ajouter.
+    @return La liste de candidats modifiée.
 */
 ListCand* listCand_add(ListCand* l, Candidat* candidat);
 
-/** Deletes the entire list of candidates and frees allocated memory.
-    @param l The list of candidates to be deleted.
+/** Supprime l'ensemble de la liste de candidats et libère la mémoire allouée.
+    @param l La liste de candidats à supprimer.
 */
 void listCand_delete(ListCand* l);
 
-/**Free the array jugement of each candidate
-   @param l The list of candidates to iterate on
+/** Libère la mémoire de chaque tableau présent dans chaque candidat.
+   @param l La liste de candidats à parcourir.
 */
 void tableauDelete(ListCand* l);
-/**Displays all the informations of each candidate in the list.
-    @param l The list of candidates to be displayed.
 
+/** Affiche toutes les informations de chaque candidat dans la liste.
+    @param l La liste de candidats à afficher.
 */
 void printList(ListCand* l);
 
-/**Get the index of the minimal value in the array 
-  @param tab The array of votes
-
-  @return The index of the minimal value
+/** Obtient l'indice de la valeur minimale dans le tableau.
+  @param tab Le tableau de votes.
+  @return L'indice de la valeur minimale.
 */
 int getIndiceVote(Tableau tab);
 
-/**Return the candidat of the given index
-  @param nb The index
-  @param lstCand the list of candidates
-
-  @return The Candidate associated to the given index
+/** Retourne le candidat de l'indice donné.
+  @param nb L'indice.
+  @param lstCand La liste de candidats.
+  @return Le candidat associé à l'indice donné.
 */
-Candidat* candidatAssocie(int nb,ListCand* lstCand);
+Candidat* candidatAssocie(int nb, ListCand* lstCand);
 
-/**Creates and allocate memory of each array present in each candidate
- @param taille The size of the array to allocate
- @param lstCand The list of candidates 
+/** Crée et alloue la mémoire de chaque tableau présent dans chaque candidat.
+ @param taille La taille du tableau à allouer.
+ @param lstCand La liste de candidats.
 */
-void createTableau(int taille,ListCand* lstCand);
+void createTableau(int taille, ListCand* lstCand);
 
-
-/**Iterate on the string chain and verify if it contains any integer
- * @param *str the character string
- * @return 1 if it contains an integer, 0 otherwise
- 
+/** Parcourt la chaîne de caractères et vérifie si elle contient un entier.
+ * @param *str La chaîne de caractères.
+ * @return 1 s'il contient un entier, 0 sinon.
 */
-int isInteger(const char *str);
-
-
+int isInteger(const char* str);
 
 /** @} */
 
