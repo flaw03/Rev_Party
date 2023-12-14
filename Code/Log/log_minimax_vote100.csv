@@ -1,0 +1,50 @@
+---------------------------------------------------------------
+Methode Minimax
+
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |5   |6   |
+----------------------------------------
+0  |0   |52  |59  |57  |50  |57  |49  |
+----------------------------------------
+1  |58  |0   |54  |61  |54  |56  |52  |
+----------------------------------------
+2  |58  |57  |0   |56  |55  |56  |52  |
+----------------------------------------
+3  |56  |58  |52  |0   |56  |57  |52  |
+----------------------------------------
+4  |61  |60  |59  |64  |0   |63  |57  |
+----------------------------------------
+5  |58  |55  |59  |61  |46  |0   |50  |
+----------------------------------------
+6  |62  |58  |58  |62  |62  |65  |0   |
+----------------------------------------
+
+Graphe :
+Candidat 0 --[1]--> Candidat 2
+Candidat 0 --[1]--> Candidat 3
+Candidat 1 --[6]--> Candidat 0
+Candidat 1 --[3]--> Candidat 3
+Candidat 1 --[1]--> Candidat 5
+Candidat 2 --[3]--> Candidat 1
+Candidat 2 --[4]--> Candidat 3
+Candidat 4 --[11]--> Candidat 0
+Candidat 4 --[6]--> Candidat 1
+Candidat 4 --[4]--> Candidat 2
+Candidat 4 --[8]--> Candidat 3
+Candidat 4 --[17]--> Candidat 5
+Candidat 5 --[1]--> Candidat 0
+Candidat 5 --[3]--> Candidat 2
+Candidat 5 --[4]--> Candidat 3
+Candidat 6 --[13]--> Candidat 0
+Candidat 6 --[6]--> Candidat 1
+Candidat 6 --[6]--> Candidat 2
+Candidat 6 --[10]--> Candidat 3
+Candidat 6 --[5]--> Candidat 4
+Candidat 6 --[15]--> Candidat 5
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |5   |6   |
+-----------------------------------
+2   |3   |2   |0   |5   |3   |6   |
+-----------------------------------
+Vainqueur de Condorcet trouvé. Pas de resolution de Conflit
