@@ -1,3 +1,0 @@
-Mode de Scrutin : Uninominal à deux tours, 1er tour, 5 candidats, 100 votants, vainqueur = V, score : 40.000000%
-Mode de Scrutin : Uninominal à deux tours, 1er tour, 5 candidats, 100 votants, vainqueur = X, score : 20.000000%
-Mode de Scrutin : Uninominal à deux tours, 2nd tour, 2 candidats, 100 votants : Vainqueur = X, score : 60.000000 %

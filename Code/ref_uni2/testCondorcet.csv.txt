@@ -1,3 +1,0 @@
-Mode de Scrutin : Uninominal à deux tours, 1er tour, 3 candidats, 60 votants, vainqueur = A, score : 38.333332%
-Mode de Scrutin : Uninominal à deux tours, 1er tour, 3 candidats, 60 votants, vainqueur = B, score : 31.666666%
-Mode de Scrutin : Uninominal à deux tours, 2nd tour, 2 candidats, 60 votants : Vainqueur = B, score : 58.333333 %
