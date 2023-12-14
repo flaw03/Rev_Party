@@ -1,7 +1,6 @@
 /*-----------------------------------------------------------------*/
 /*
- 
- Interface pour l'implantation du TAD List pour le projet.
+ Interface pour l'implémentation du TAD List pour le projet.
  */
 /*-----------------------------------------------------------------*/
 
@@ -17,22 +16,20 @@
  @{
  */
 
-/** \defgroup Type Type definition.
+/** \defgroup Type Définition du type.
   @{
  */
 /** Définition opaque du type List.
  */
 typedef struct s_List List;
-/** Définition du type ptrList : pointeur sur un TAD List.
+/** Définition du type ptrList : pointeur vers une List.
  */
 typedef List * ptrList;
 
-
-
 typedef struct s_element{
-	int a ;
-	int b;
-	int p;
+    int a ;
+    int b;
+    int p;
 } * Element;
 
 /** @} */
@@ -60,104 +57,146 @@ typedef bool(*OrderFunctor)(int, int);
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Constructeurs.
+/** \defgroup Constructors Constructeurs et destructeurs du TAD.
  @{
  */
-/** Implementation du constructor \c list.
+/** Implémentation du constructeur \c list selon la spécification.
  */
 List *list_create(void);
 
-/** Implementation du constructeur \c push_back.
- @param l La liste à modifier.
+/** Implémentation du constructeur \c push_back selon la spécification.
+ @param l La liste à modifier
  @param p Le poids du candidat candidat1.
  @param candidat1 La valeur du candidat a.
- @param candidat2 TLa valeur du candidat b.
- @return La liste modifiée.
+ @param candidat2 La valeur du candidat b.
+ @return La liste modifiée
+ Ajoute la valeur v à la fin de la liste l.
+ @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+
  */
 List *list_push_back(List *l, int p, int candidat1, int candidat2);
 
 /** Destructeur.
-	@brief Libère les ressources allouées par les constructeurs. 
- 	@param l L'adresse de la liste.
+    Ajouté par l'implémentation. Libère les ressources allouées par les constructeurs.
+    @param l l'adresse de la liste.
+    Après l'appel de cette fonction, la liste l devient NULL.
  */
 void list_delete(ptrList *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup FrontBackOperators Insertion et suppression d'éléments au début et à la fin de la liste.
+/** \defgroup FrontBackOperators Insertion et suppression d'éléments en tête ou en fin de liste.
+ Ces opérateurs ont une complexité temporelle en O(1).
  @{
  */
-/** Ajoute un élément au début de la liste.
- 	@param l La liste à modifer.
- 	@param p Le poids du candidat candidat1.
- 	@param candidat1 La valeur du candidat a.
- 	@param candidat2 La valeur du candidat b.
- 	@return La liste modifiée.
+/** Ajoute un élément en tête de la liste.
+    @param l La liste à modifier
+    @param p Le poids du candidat candidat1.
+    @param candidat1 La valeur du candidat a.
+    @param candidat2 La valeur du candidat b.
+    @return La liste modifiée
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
 */
 List *list_push_front(List *l, int p, int candidat1, int candidat2);
 
-/** Supprime un élément au début de la liste.
- 	@return La liste modifiée.
+/** Accède à l'élément en début de liste.
+    @return la valeur de l'élément en tête de l.
+    @pre !empty(l)
+ */
+int list_front(List *l);
+/** Accède à l'élément en fin de liste.
+    @return la valeur de l'élément en fin de l.
+    @pre !empty(l)
+ */
+int list_back(List *l);
+
+/** Supprime l'élément en début de liste.
+    @return La liste modifiée
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+    @pre !empty(l)
  */
 List *list_pop_front(List *l);
 
-/** Supprime un élément à la fin de la liste.
- 	@return La liste modifiée.
+/** Supprime l'élément en fin de liste.
+    @return La liste modifiée
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+    @pre !empty(l)
  */
 List *list_pop_back(List *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Opérateurs d'accès Insertion et suppression d'éléments.
+/** \defgroup RandomAccessOperators Insertion et suppression d'éléments à n'importe quelle position dans la liste.
+ Ces opérateurs ont une complexité temporelle dans le pire des cas en O(n), avec n la taille de la liste.
  @{
  */
-/** Insérer un élément à la position donnée.
- 	@param l La liste à modifier.
- 	@param pos La position de l'élément à insérer.
- 	@param p Le poids du candidat candidat1.
- 	@param candidat1 La valeur du candidat a.
- 	@param candidat2 La valeur du candidat b.
- 	@return La liste modifiée.
+/** Insère un élément à une position donnée.
+    @param l La liste à modifier.
+    @param pos La position d'insertion.
+    @param p Le poids du candidat candidat1.
+    @param candidat1 La valeur du candidat a.
+    @param candidat2 La valeur du candidat b.
+    @return La liste modifiée.
+    Insère un élément dans une liste de manière à ce que sa position soit donnée par p.
+    @pre 0 <= p <= list_size(l)
+    @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
  */
 List *list_insert_at(List *l, int pos, int p, int candidat1,int candidat2);
-
-/** Supprime l'élément à la position donnée.
-	 @param l La liste à modifier.
-	 @param p La position de l'élément à supprimer.
-	 @return La liste modifiée.
+/** Supprime un élément à une position donnée.
+     @param l La liste à modifier.
+     @param p La position de l'élément à supprimer.
+     @return La liste modifiée.
+     Supprime l'élément situé à la position p.
+     @pre 0 <= p < list_size(l)
+     @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
  */
 List *list_remove_at(List *l, int p);
-
+/** Accède à un élément à une position donnée.
+     @param l La liste à accéder.
+     @param p La position à accéder.
+     @return La valeur de l'élément à la position p.
+     @pre 0 <= p < list_size(l)
+ */
+int list_at(List *l, int p);
+/** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup OpérateursUtiles
+/** \defgroup UtilityOperators Opérateurs permettant d'accéder à certaines propriétés ou d'appliquer certains traitements sur toute la liste.
  @{
  */
-/** Vérifie si la liste est vide.
+/** Teste si une liste est vide.
  */
 bool list_is_empty(List *l);
-
-/** Renvoie le nombre d'élements de la liste.
+/** Donne le nombre d'éléments de la liste.
  */
 int list_size(List *l);
+/** Applique le même opérateur sur chaque élément de la liste.
+    @param l La liste à traiter.
+    @param f L'opérateur (fonction) à appliquer à chaque élément
+    @see SimpleFunctor
+    @return La liste éventuellement modifiée
+    @note Si les éléments sont modifiés par l'opérateur f, cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+    Cette fonction applique séquentiellement l'opérateur f sur chaque élément de la liste, en commençant par le début de la liste jusqu'à la fin. La valeur renvoyée par l'opérateur lorsqu'il est appelé sur un élément remplacera l'élément.
+*/
+//List * list_map(List *l, SimpleFunctor f);
 
 
-/** Apply the same operator on each element of the list gieven a user define environment.
- @param l The list to process.
- @param f The operator (function) to apply to each element
+/** Applique le même opérateur sur chaque élément de la liste en utilisant un environnement défini par l'utilisateur.
+ @param l La liste à traiter.
+ @param f L'opérateur (fonction) à appliquer à chaque élément
  @see ReduceFunctor
- @return The eventually modified list
- @note If the elements are modified by the operator f, this function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified bye the function.
- This function sequentially apply the operator f on each element of the list with the user supplied environment defined by the abstract pointer userData. The operator is applied starting from the beginning of the list until the end. The value reurned by the operator when called on an element will replace the element.
+ @return La liste éventuellement modifiée
+ @note Si les éléments sont modifiés par l'opérateur f, cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
+ Cette fonction applique séquentiellement l'opérateur f sur chaque élément de la liste avec l'environnement fourni par le pointeur abstrait userData. L'opérateur est appliqué en commençant par le début de la liste jusqu'à la fin. La valeur renvoyée par l'opérateur lorsqu'il est appelé sur un élément remplacera l'élément.
 
-Sort the list according to the provided ordering functor.
- @param l The list to sort.
- @param f The order to use
- @return The sorted list.
- @note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+Trie la liste selon l'opérateur d'ordonnancement fourni.
+ @param l La liste à trier.
+ @param f L'ordre à utiliser
+ @return La liste triée.
+ @note Cette fonction agit par effet de côté sur le paramètre l. La valeur retournée est la même que le paramètre l qui est modifié par la fonction.
  */
 //List *list_sort(List *l, OrderFunctor f);
 /** @} */
@@ -167,67 +206,70 @@ List *list_reduce(List *l, ReduceFunctor f,void * env);
 /** @} */
 
 /**
- * @brief Sort a list in descending order.
+ * @brief Trie une liste par ordre décroissant.
  *
- * @param l The list to be sorted.
- * @return 1 or -1 depending on whether the list is sorted or not.
+ * @param l La liste à trier.
+ * @return 1 ou -1 en fonction de si la liste est triée ou non.
  */
 int triee_liste_decroissant(List* l);
 
+/* itérateur */
 
-
-/* iterator*/
-
-/// Iterator from the begining to the end
+/// Itérateur du début à la fin
 #define FORWARD_ITERATOR 1
-/// Iterator from the end to the beginning
+/// Itérateur de la fin au début
 #define BACKWARD_ITERATOR 0
 
 
 /**
- *	@brief Opaque definition of the ListIterator abstract data type.
+ *	@brief Définition opaque du type abstrait de données ListIterator.
  */
 typedef struct s_ListIterator *ListIterator;
 
 /**
- *	@brief Constructor of an iterator.
- * @param d the List to iterate
- * @param w the way the iterator will go (FORWARD_ITERATOR or BACKWARD_ITERATOR)
- * @return the correcly initialized iterator
+ *	@brief Constructeur d'un itérateur.
+ * @param d la List à itérer
+ * @param w la direction que prendra l'itérateur (FORWARD_ITERATOR ou BACKWARD_ITERATOR)
+ * @return l'itérateur correctement initialisé
  */
 ListIterator list_iterator_create(List* d, unsigned char w);
 
 /**
- *	@brief Destructor of an iterator.
- *  @param it the iterator to delete
+ *	@brief Destructeur d'un itérateur.
+ *  @param it l'itérateur à supprimer
  */
 void list_iterator_delete(ListIterator it);
 
 /**
- *	@brief Increment the iterator to the next position according to its direction.
- *  @param it the iterator to modify
- *	@return the modified iterator
- *	@note the parameter it is modified by side effect and is returned by the function
+ *	@brief Incrémente l'itérateur à la position suivante selon sa direction.
+ *  @param it l'itérateur à modifier
+ *	@return l'itérateur modifié
+ *	@note le paramètre it est modifié par effet de côté et est retourné par la fonction
  */
 Element list_iterator_next(ListIterator it);
 
 /**
- *	@brief Acces to the value of the iterator.
- *  @param it the iterator to delete
- *  @return the value designed by the iterator
+ *	@brief Accède à la valeur de l'itérateur.
+ *  @param it l'itérateur à supprimer
+ *  @return la valeur désignée par l'itérateur
  */
 Element list_iterator_value(ListIterator it);
 
+/**Renvoie s'il y a encore des éléments à parcourir.
+ */
 int list_iterator_has_next(ListIterator it);
 
-
+/**Renvoie l'élément sur lequel l'itérateur commence à itérer.
+ */ 
 ListIterator list_iterator_begin(ListIterator it);
 
+/**Supprime l'élément courant de l'itérateur.
+ */ 
 int list_iterator_delete_current(ListIterator it);
 
+/**Renvoie si l'itérateur a atteint la fin de la liste.
+ */ 
 int list_iterator_end(ListIterator it);
-
 
 /** @} */
 #endif
-
