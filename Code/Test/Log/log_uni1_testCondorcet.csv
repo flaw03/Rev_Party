@@ -1,0 +1,71 @@
+---------------------------------------------------------------
+Methode Uninomiale a 1 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+
+
+ VERIFICATION UNINOMINAL UN TOUR 
+-Candidat en cours : A A , Nombre de votes pour ce candidat : 23
+Candidat en cours : B B , Nombre de votes pour ce candidat : 19
+Candidat en cours : C C , Nombre de votes pour ce candidat : 18

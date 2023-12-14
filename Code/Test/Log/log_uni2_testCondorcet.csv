@@ -1,0 +1,140 @@
+---------------------------------------------------------------
+Methode Uninomiale a 2 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour A
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour B
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+Electeur : shah a vote pour C
+
+
+VERIFICATION UNINOMINAL DEUX TOURS : 
+Premier tour
+Candidat : A A , nombre de votes : 23
+Candidat : B B , nombre de votes : 19
+Candidat : C C , nombre de votes : 18
+
+
+VERIF 2ND TOUR : 
+Electeur : 0  shah a voté pour A
+Electeur : 1  shah a voté pour A
+Electeur : 2  shah a voté pour A
+Electeur : 3  shah a voté pour A
+Electeur : 4  shah a voté pour A
+Electeur : 5  shah a voté pour A
+Electeur : 6  shah a voté pour A
+Electeur : 7  shah a voté pour A
+Electeur : 8  shah a voté pour A
+Electeur : 9  shah a voté pour A
+Electeur : 10  shah a voté pour A
+Electeur : 11  shah a voté pour A
+Electeur : 12  shah a voté pour A
+Electeur : 13  shah a voté pour A
+Electeur : 14  shah a voté pour A
+Electeur : 15  shah a voté pour A
+Electeur : 16  shah a voté pour A
+Electeur : 17  shah a voté pour A
+Electeur : 18  shah a voté pour A
+Electeur : 19  shah a voté pour A
+Electeur : 20  shah a voté pour A
+Electeur : 21  shah a voté pour A
+Electeur : 22  shah a voté pour A
+Electeur : 23  shah a voté pour B
+Electeur : 24  shah a voté pour B
+Electeur : 25  shah a voté pour B
+Electeur : 26  shah a voté pour B
+Electeur : 27  shah a voté pour B
+Electeur : 28  shah a voté pour B
+Electeur : 29  shah a voté pour B
+Electeur : 30  shah a voté pour B
+Electeur : 31  shah a voté pour B
+Electeur : 32  shah a voté pour B
+Electeur : 33  shah a voté pour B
+Electeur : 34  shah a voté pour B
+Electeur : 35  shah a voté pour B
+Electeur : 36  shah a voté pour B
+Electeur : 37  shah a voté pour B
+Electeur : 38  shah a voté pour B
+Electeur : 39  shah a voté pour B
+Electeur : 40  shah a voté pour B
+Electeur : 41  shah a voté pour B
+Electeur : 42  shah a voté pour B
+Electeur : 43  shah a voté pour B
+Electeur : 44  shah a voté pour B
+Electeur : 45  shah a voté pour B
+Electeur : 46  shah a voté pour B
+Electeur : 47  shah a voté pour B
+Electeur : 48  shah a voté pour B
+Electeur : 49  shah a voté pour B
+Electeur : 50  shah a voté pour B
+Electeur : 51  shah a voté pour B
+Electeur : 52  shah a voté pour B
+Electeur : 53  shah a voté pour B
+Electeur : 54  shah a voté pour B
+Electeur : 55  shah a voté pour B
+Electeur : 56  shah a voté pour B
+Electeur : 57  shah a voté pour B
+Electeur : 58  shah a voté pour A
+Electeur : 59  shah a voté pour A
+
+
+VERIF 2ND TOUR : 
+-Candidat A A a 25 votes
+ Candidat B B a 35 votes

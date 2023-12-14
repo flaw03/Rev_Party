@@ -1,0 +1,24 @@
+---------------------------------------------------------------
+Methode Minimax
+
+Matrice de duel :
+I/I|0   |1   |2   |
+--------------------
+0  |0   |25  |23  |
+--------------------
+1  |35  |0   |19  |
+--------------------
+2  |37  |41  |0   |
+--------------------
+
+Graphe :
+Candidat 1 --[10]--> Candidat 0
+Candidat 2 --[14]--> Candidat 0
+Candidat 2 --[22]--> Candidat 1
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |
+---------------
+0   |1   |2   |
+---------------
+Vainqueur de Condorcet trouvé. Pas de resolution de Conflit

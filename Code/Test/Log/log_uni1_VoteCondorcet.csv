@@ -1,0 +1,57 @@
+---------------------------------------------------------------
+Methode Uninomiale a 1 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur : 35ffa28181e8d8c8b7dec502e8746c624d286e0f532c7401cd54770b2d39edcf a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : c14d386a6736321c300e30e2624b466b65cdc991063dc05b272ccb8ce4874ada a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 18eb6747651fa08b12a64b83151763079cc78401ee13c27a322766cad0614cdd a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 8ad280bec6aa37a79c7196c3cf8e4f80d6af955c7a7802825996a6fa6c3c37fd a vote pour Q00_Vote->7 - Crispy
+Electeur : fa5fd9ce659e1f97807b8785846790d9c739f532ae0ee07801f91e996debaea6 a vote pour Q00_Vote->10 - Country
+Electeur : d292102511d290f82be2497c07006f5596a07847399397adfb412d874e88fbcd a vote pour Q00_Vote->7 - Crispy
+Electeur : f1a3162d5ee572b4f863ced9611ae305d4530b75164e7ad13e5de9fb9ee06c20 a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 51c330e1603224ddfb2db6effbc3392e0fa765c394b1fdcd6b1e32b2d92b8695 a vote pour Q00_Vote->3 - Thai Burger
+Electeur : 3025fa7be805a6ab5d2613694d897373d9660ad04477029fb324dba9b99c12aa a vote pour Q00_Vote->2 - Burger Sud-Ouest
+Electeur : b79f14c39bcae407cd00ec08347eb7170db26f3620ec332788f7e77ad5629df3 a vote pour Q00_Vote->3 - Thai Burger
+Electeur : 837a69f38e548a625a3b0fe57f1ea24bcce08663e5805c959630ee2fea31c9ca a vote pour Q00_Vote->8 - Cheese Burger
+Electeur : e64613b48369e39588f716f05584ab3f78310b7dd07fae5049f89e44fecae4c5 a vote pour Q00_Vote->7 - Crispy
+Electeur : 6098b5612814a1ba3be81cb5947643800e0ba584d9eb0b0ca62abc389882831c a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 448803534b3912addb057b76e31dda8abbb0c857b51d776ab9214c642a8b97be a vote pour Q00_Vote->6 - Roma
+Electeur : 3b2a563e69664bb9eb6da1a37dd7d5fc4521f24aa3e307f4837d8fc8e5e4f381 a vote pour Q00_Vote->10 - Country
+Electeur : 5f46089a4429c5aa5f98f9d3272c7c73a345966cdf3ec490f8b52c56b737d9b3 a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 0dee0f0fefda0e344640502f8af3e8654b8d56b5939187762aa8175e8a79b84f a vote pour Q00_Vote->10 - Country
+Electeur : bf63642d58aecbd3a0996bbcd4ff796026a3b2099f0349a436244b1056696c25 a vote pour Q00_Vote->7 - Crispy
+Electeur : 3d16b9c959a66fc66618282033215276b8ccd5c5586b333811599dc636f0ce44 a vote pour Q00_Vote->2 - Burger Sud-Ouest
+Electeur : 8e4d5bb2e418f9fb29a7f42217bbdaa0d178e608fa4cdc05aa2ff5a128ac3608 a vote pour Q00_Vote->8 - Cheese Burger
+Electeur : 82577e2bbff9001e7fecefda257741b6843c2a74f6de1d5a35d008d355b9db58 a vote pour Q00_Vote->5 - Fire cracker
+Electeur : cbd81d23e3aac0cb6a05183c04d47f164cdd53d6c25635a78ee2435aee7aec3d a vote pour Q00_Vote->8 - Cheese Burger
+Electeur : af2df1daca45b16911f74d1f0ee115f4966ac1ea2afaed1633c720e4873bb354 a vote pour Q00_Vote->4 - Veggie Burger
+Electeur : 4684ef0dbfb060b679ac562b5e4e77c33bb2d39ef65c42473abb4c864194a936 a vote pour Q00_Vote->6 - Roma
+Electeur : 9661532817845ac553455895c731e9391d21f792fdc71edbe25053b996c1f807 a vote pour Q00_Vote->2 - Burger Sud-Ouest
+Electeur : 030d42c92e2d3e37b4991c2c95ed5f2ba600484f2b423dec5c892265ab0066d0 a vote pour Q00_Vote->2 - Burger Sud-Ouest
+Electeur : b71a4c0f8a00ca03d38eafdc7d3650f48bff9c959347075744f23cb9fee95bdc a vote pour Q00_Vote->8 - Cheese Burger
+Electeur : 21215baf4355b10ba4b7a3c1e5f73e1a916ee7c6f8d88d32eeea838aff45e00a a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 5c82a6fda2462e1bec5b88dbd9f83443e4dbf3b14981e1c7cedf88624c9e324c a vote pour Q00_Vote->9 - Burger surprise
+Electeur : 1d59c5428c100c69dd81878c130e37f3cf2fffed798c4b20f38f915c6b800a10 a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 29ba4c7c02f10020ea75acb7603dc73b16c629d3041530031606c50be2c1d98a a vote pour Q00_Vote->5 - Fire cracker
+Electeur : a41b563ccb7d215c3be2f9eb81d7d774f1c58416889667eedd02b992f452210d a vote pour Q00_Vote->6 - Roma
+Electeur : e9ffbd9485710d26b5b6e41267c457ad260edd4865247fb14372079821213217 a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 8c77532ff78087877a08045b0ff34a087fbfe6ced96d15310431482d2a74f66a a vote pour Q00_Vote->6 - Roma
+Electeur : d1d6de86cda04715ee253f3141532e0f83b609fe4719b9f9800605b9b036864d a vote pour Q00_Vote->1 - Burger Black Pepper
+Electeur : 5f57ea5db8c0b32a5f866fcdab0c3b753a1bf20c823cbacf9f909c1c261f399b a vote pour Q00_Vote->7 - Crispy
+Electeur : 6154977b46c23244fa751fb9cd836a9cb0dae7c7524b3deb5d99d5fe37828460 a vote pour Q00_Vote->7 - Crispy
+Electeur : baf4ed3957790195a03ab909fb3f3f799c16b59783c9203e9236dea821d8a80a a vote pour Q00_Vote->7 - Crispy
+Electeur : c04be1902c1c9e76506425f29b658cd2cc1ca2fda5f4cef29d514af59a056b98 a vote pour Q00_Vote->1 - Burger Black Pepper
+
+
+ VERIFICATION UNINOMINAL UN TOUR 
+-Candidat en cours : Q00_Vote->1 - Burger Black Pepper Q00_Vote->1 - Burger Black Pepper , Nombre de votes pour ce candidat : 11
+Candidat en cours : Q00_Vote->2 - Burger Sud-Ouest Q00_Vote->2 - Burger Sud-Ouest , Nombre de votes pour ce candidat : 4
+Candidat en cours : Q00_Vote->3 - Thai Burger Q00_Vote->3 - Thai Burger , Nombre de votes pour ce candidat : 2
+Candidat en cours : Q00_Vote->4 - Veggie Burger Q00_Vote->4 - Veggie Burger , Nombre de votes pour ce candidat : 1
+Candidat en cours : Q00_Vote->5 - Fire cracker Q00_Vote->5 - Fire cracker , Nombre de votes pour ce candidat : 2
+Candidat en cours : Q00_Vote->6 - Roma Q00_Vote->6 - Roma , Nombre de votes pour ce candidat : 4
+Candidat en cours : Q00_Vote->7 - Crispy Q00_Vote->7 - Crispy , Nombre de votes pour ce candidat : 7
+Candidat en cours : Q00_Vote->8 - Cheese Burger Q00_Vote->8 - Cheese Burger , Nombre de votes pour ce candidat : 4
+Candidat en cours : Q00_Vote->9 - Burger surprise Q00_Vote->9 - Burger surprise , Nombre de votes pour ce candidat : 1
+Candidat en cours : Q00_Vote->10 - Country Q00_Vote->10 - Country , Nombre de votes pour ce candidat : 3

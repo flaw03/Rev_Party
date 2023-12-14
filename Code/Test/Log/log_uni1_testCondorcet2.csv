@@ -1,0 +1,113 @@
+---------------------------------------------------------------
+Methode Uninomiale a 1 tours
+
+
+VERIFICATION INITIALISATION DES VOTES 
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour X
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour Y
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour W
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour Z
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+Electeur : shah a vote pour V
+
+
+ VERIFICATION UNINOMINAL UN TOUR 
+-Candidat en cours : V V , Nombre de votes pour ce candidat : 40
+Candidat en cours : W W , Nombre de votes pour ce candidat : 13
+Candidat en cours : X X , Nombre de votes pour ce candidat : 20
+Candidat en cours : Y Y , Nombre de votes pour ce candidat : 16
+Candidat en cours : Z Z , Nombre de votes pour ce candidat : 11
