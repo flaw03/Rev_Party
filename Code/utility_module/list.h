@@ -13,17 +13,17 @@
 /*-----------------------------------------------------------------*/
 
 /** \defgroup ADTList List
- Documentation of the implementation of the abstract data type List.
+ Documentation de l'implémentation du type abstrait de données List.
  @{
  */
 
 /** \defgroup Type Type definition.
   @{
  */
-/** Opaque definition of type List.
+/** Définition opaque du type List.
  */
 typedef struct s_List List;
-/** Définition of type ptrList : pointer to a List.
+/** Définition du type ptrList : pointeur sur un TAD List.
  */
 typedef List * ptrList;
 
@@ -39,154 +39,110 @@ typedef struct s_element{
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Functors Functions prototypes that could be used with some operators on List.
+/** \defgroup Functors Prototypes des fonctions qui peuvent être utilisées avec certains opérateurs sur List.
  @{
  */
-/** Simple functor to be used with the list_map function.
- This functor receive as argument the value of a list element and must return the eventually modified value of the element.
+/** Foncteur simple à utiliser avec la fonction list_map.
+ Ce foncteur reçoit en argument la valeur d'un élément de la liste et doit retourner éventuellement la valeur modifiée de l'élément.
  */
 typedef int(*SimpleFunctor)(int,int,int);
 
-/** Functor with user data to be used with the list_reduce operator.
-  This functor receive as argument the value of a list element and an opaque pointer to user provided data and must return the eventually modified value of the element.
+/** Foncteur avec des données utilisateur à utiliser avec l'opérateur list_reduce.
+  Ce foncteur reçoit en argument la valeur d'un élément de la liste et un pointeur opaque vers des données fournies par l'utilisateur, et doit retourner éventuellement la valeur modifiée de l'élément.
  */
 typedef int (*ReduceFunctor)(Element,void *);
 
-/** Functor to be used with the list_sort operator.
-   This functor must implement a total ordering function (comp). When calling this functor with two list elements a and b, this functor must return true if (a comp b).
+/** Foncteur à utiliser avec l'opérateur list_sort.
+   Ce foncteur doit implémenter une fonction d'ordonnancement total (comp). Lorsque ce foncteur est appelé avec deux éléments de liste a et b, il doit renvoyer vrai si (a comp b).
  */
 typedef bool(*OrderFunctor)(int, int);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup Constructors Contructors and destructors of the TAD.
+/** \defgroup Constructeurs.
  @{
  */
-/** Implementation of the the constructor \c list from the specification.
+/** Implementation du constructor \c list.
  */
 List *list_create(void);
 
-/** Implementation of the the constructor \c push_back from the specification.
- @param l The list to modify
- @param p The weight of the candidate candidat1.
- @param candidat1 The value of the candidate a.
- @param candidat2 The value of the candidate b.
- @return The modified list
- Add the value v at the end of the list l.
- @note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
-
+/** Implementation du constructeur \c push_back.
+ @param l La liste à modifier.
+ @param p Le poids du candidat candidat1.
+ @param candidat1 La valeur du candidat a.
+ @param candidat2 TLa valeur du candidat b.
+ @return La liste modifiée.
  */
 List *list_push_back(List *l, int p, int candidat1, int candidat2);
 
-/** Destructor.
-	Added by the implementation. Free ressources allocated by constructors.
- 	@param l the adress of the list.
- 	After calling this function, the list l becomes NULL.
+/** Destructeur.
+	@brief Libère les ressources allouées par les constructeurs. 
+ 	@param l L'adresse de la liste.
  */
 void list_delete(ptrList *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup FrontBackOperators Insertion and removal of elements at front or back of the list.
- These operators have a time complexity in O(1).
+/** \defgroup FrontBackOperators Insertion et suppression d'éléments au début et à la fin de la liste.
  @{
  */
-/** Add an element at the front of the list.
- 	@param l The list to modify
- 	@param p The weight of the candidate candidat1.
- 	@param candidat1 The value of the candidate a.
- 	@param candidat2 The value of the candidate b.
- 	@return The modified list
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+/** Ajoute un élément au début de la liste.
+ 	@param l La liste à modifer.
+ 	@param p Le poids du candidat candidat1.
+ 	@param candidat1 La valeur du candidat a.
+ 	@param candidat2 La valeur du candidat b.
+ 	@return La liste modifiée.
 */
 List *list_push_front(List *l, int p, int candidat1, int candidat2);
 
-
-
-/** Acces to the element at begining of the list.
- 	@return the value of the front element of l.
-	@pre !empty(l)
- */
-int list_front(List *l);
-/** Acces to the element at end of the list.
- 	@return the value of the back element of l.
- 	@pre !empty(l)
- */
-int list_back(List *l);
-
-/** Remove to the element at begining of the list.
- 	@return The modified list
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
-  	@pre !empty(l)
+/** Supprime un élément au début de la liste.
+ 	@return La liste modifiée.
  */
 List *list_pop_front(List *l);
 
-/** Remove to the element at end of the list.
- 	@return The modified list
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
- 	@pre !empty(l)
+/** Supprime un élément à la fin de la liste.
+ 	@return La liste modifiée.
  */
 List *list_pop_back(List *l);
 /** @} */
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup RandomAccessOperators Insertion and removal of elements at any position in the list.
- These operators have a worst case time complexity in O(n), with n the size of the list.
+/** \defgroup Opérateurs d'accès Insertion et suppression d'éléments.
  @{
  */
-/** Insert an element at a given position.
- 	@param l The list to modify.
- 	@param pos The position to insert.
- 	@param p The weight of the candidate candidat1.
- 	@param candidat1 The value of the candidate a.
- 	@param candidat2 The value of the candidate b.
- 	@return The modified list.
- 	Insert an element in a list so that its position is given by p.
- 	@pre 0 <= p <= list_size(l)
- 	@note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+/** Insérer un élément à la position donnée.
+ 	@param l La liste à modifier.
+ 	@param pos La position de l'élément à insérer.
+ 	@param p Le poids du candidat candidat1.
+ 	@param candidat1 La valeur du candidat a.
+ 	@param candidat2 La valeur du candidat b.
+ 	@return La liste modifiée.
  */
 List *list_insert_at(List *l, int pos, int p, int candidat1,int candidat2);
-/** Remove an element at a given position.
-	 @param l The list to modify.
-	 @param p The position of the element to be removed.
-	 @return The modified list.
-	 Remove the element located at position .
-	 @pre 0 <= p < list_size(l)
-	 @note This function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified by the function.
+
+/** Supprime l'élément à la position donnée.
+	 @param l La liste à modifier.
+	 @param p La position de l'élément à supprimer.
+	 @return La liste modifiée.
  */
 List *list_remove_at(List *l, int p);
-/** Acces to an element at a given position.
-	 @param l The list to acces.
-	 @param p The position to acces.
-	 @return The value of the element at position p.
-	 @pre 0 <= p < list_size(l)
- */
-int list_at(List *l, int p);
-/** @} */
+
 
 /*-----------------------------------------------------------------*/
 
-/** \defgroup UtilityOperators Operators allowing to access some properties or apply some processing on the whole list.
+/** \defgroup OpérateursUtiles
  @{
  */
-/** Test if a list is empty.
+/** Vérifie si la liste est vide.
  */
 bool list_is_empty(List *l);
-/** Give the number of elements of the list.
+
+/** Renvoie le nombre d'élements de la liste.
  */
 int list_size(List *l);
-/** Apply the same operator on each element of the list.
- 	@param l The list to process.
- 	@param f The operator (function) to apply to each element
- 	@see SimpleFunctor
- 	@return The eventually modified list
- 	@note If the elements are modified by the operator f, this function acts by side effect on the parameter l. The returned value is the same as the parameter l that is modified bye the function.
- 	This function sequentially apply the operator f on each element of the list, starting from the beginning of the list until the end. The value reurned by the operator when called on an element will replace the element.
-*/
-//List * list_map(List *l, SimpleFunctor f);
 
 
 /** Apply the same operator on each element of the list gieven a user define environment.

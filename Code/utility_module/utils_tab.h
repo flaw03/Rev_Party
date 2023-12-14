@@ -122,7 +122,12 @@ void afficher_Tableau(Tableau Tableau, FILE *logfile);
 */
 void trier_Tableau(Tableau tableau);
 
-
+/**
+ * @brief Affiche le tableau de vote dans un fichier journal.
+ *
+ * @param Tableau Le tableau de vote à afficher.
+ * @param logfile Pointeur vers le fichier journal.
+ */
 void afficherVote(Tableau tab,FILE* logfile);
 
 
