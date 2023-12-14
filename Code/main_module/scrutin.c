@@ -36,7 +36,7 @@ Notez que la commande doit contenir soit -i ou -d, mais pas les deux en même te
  @endcode
  */
 
-//Compile with : make
+//Compile with : make scrutin
 
 
 
@@ -131,7 +131,7 @@ int main(int argc, char** argv) {
     if(strcmp(methode,"cs") == 0 || optionAll){
         int vainqueur = methode_Schulze(matriceDuel,logfile);
         char * nomVainqueur = obtenir_nom_Candidat(filename,vainqueur,optionBalot);
-        printf("Mode de Scrutin : Condorcet Shulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
+        printf("Mode de Scrutin : Condorcet Schulze, %d candidats, %d votants, vainqueur = %s\n",matriceDuel->nb_colonne,
         nbrElecteur,nomVainqueur);
         free(nomVainqueur);
         optvalide = true;

@@ -1,0 +1,1 @@
+Mode de Scrutin : Condorcet Minimax, 10 candidats, 39 votants, vainqueur = Q00_Vote->1 - Burger Black Pepper

@@ -1,0 +1,45 @@
+---------------------------------------------------------------
+Methode Minimax
+
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |
+------------------------------
+0  |0   |40  |40  |40  |40  |
+------------------------------
+1  |60  |0   |24  |24  |13  |
+------------------------------
+2  |60  |76  |0   |63  |38  |
+------------------------------
+3  |60  |76  |37  |0   |64  |
+------------------------------
+4  |60  |87  |62  |36  |0   |
+------------------------------
+
+Graphe :
+Candidat 1 --[20]--> Candidat 0
+Candidat 2 --[20]--> Candidat 0
+Candidat 2 --[52]--> Candidat 1
+Candidat 2 --[26]--> Candidat 3
+Candidat 3 --[20]--> Candidat 0
+Candidat 3 --[52]--> Candidat 1
+Candidat 3 --[28]--> Candidat 4
+Candidat 4 --[20]--> Candidat 0
+Candidat 4 --[74]--> Candidat 1
+Candidat 4 --[24]--> Candidat 2
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |
+-------------------------
+0   |1   |3   |3   |3   |
+-------------------------
+Aucun vainqueur de Condorcet trouvé.
+
+-- Resoltion du conflit avec la methode minimax --
+
+Tableau des pire defaites de chaque Candidats
+0   |1   |2   |3   |4   |
+-------------------------
+60  |87  |62  |63  |64  |
+-------------------------
+
+Vainqueur apres Resoltion du conflit avec la methode minimax : Candidat n° 0

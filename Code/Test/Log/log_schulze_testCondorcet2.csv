@@ -1,0 +1,95 @@
+---------------------------------------------------------------
+Methode Shulze
+
+Matrice de duel :
+I/I|0   |1   |2   |3   |4   |
+------------------------------
+0  |0   |40  |40  |40  |40  |
+------------------------------
+1  |60  |0   |24  |24  |13  |
+------------------------------
+2  |60  |76  |0   |63  |38  |
+------------------------------
+3  |60  |76  |37  |0   |64  |
+------------------------------
+4  |60  |87  |62  |36  |0   |
+------------------------------
+
+Graphe :
+Candidat 1 --[20]--> Candidat 0
+Candidat 2 --[20]--> Candidat 0
+Candidat 2 --[52]--> Candidat 1
+Candidat 2 --[26]--> Candidat 3
+Candidat 3 --[20]--> Candidat 0
+Candidat 3 --[52]--> Candidat 1
+Candidat 3 --[28]--> Candidat 4
+Candidat 4 --[20]--> Candidat 0
+Candidat 4 --[74]--> Candidat 1
+Candidat 4 --[24]--> Candidat 2
+
+Tableau de score des arcs Sortant :
+0   |1   |2   |3   |4   |
+-------------------------
+0   |1   |3   |3   |3   |
+-------------------------
+Aucun vainqueur de Condorcet trouvé.
+
+-- Resoltion du conflit avec Schulze --
+
+Tableau de scores entrants :
+0   |1   |2   |3   |4   |
+-------------------------
+4   |3   |1   |1   |1   |
+-------------------------
+
+Arc trié par poid croissant :
+Candidat 1 --[20]--> Candidat 0
+Candidat 3 --[20]--> Candidat 0
+Candidat 4 --[20]--> Candidat 0
+Candidat 2 --[20]--> Candidat 0
+Candidat 4 --[24]--> Candidat 2
+Candidat 2 --[26]--> Candidat 3
+Candidat 3 --[28]--> Candidat 4
+Candidat 2 --[52]--> Candidat 1
+Candidat 3 --[52]--> Candidat 1
+Candidat 4 --[74]--> Candidat 1
+
+Arc courant :
+Candidat 1 --[20]--> Candidat 0
+Tableau de scores après la réduction :
+0   |1   |2   |3   |4   |
+-------------------------
+3   |3   |1   |1   |1   |
+-------------------------
+
+Arc courant :
+Candidat 3 --[20]--> Candidat 0
+Tableau de scores après la réduction :
+0   |1   |2   |3   |4   |
+-------------------------
+2   |3   |1   |1   |1   |
+-------------------------
+
+Arc courant :
+Candidat 4 --[20]--> Candidat 0
+Tableau de scores après la réduction :
+0   |1   |2   |3   |4   |
+-------------------------
+1   |3   |1   |1   |1   |
+-------------------------
+
+Arc courant :
+Candidat 2 --[20]--> Candidat 0
+Tableau de scores après la réduction :
+0   |1   |2   |3   |4   |
+-------------------------
+0   |3   |1   |1   |1   |
+-------------------------
+
+Tableau de scores entrants après la résolution Schulze :
+0   |1   |2   |3   |4   |
+-------------------------
+0   |3   |1   |1   |1   |
+-------------------------
+
+Vainqueur apres Resoltion du conflit avec Schulze : Candidat n° 0

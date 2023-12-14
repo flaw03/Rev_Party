@@ -1,0 +1,47 @@
+---------------------------------------------------------------
+Methode Jugement Majoritaire
+
+
+DEBUT VERIFICATION JUGEMENT MAJORITAIRE
+
+Candidat : Q01->1 - Burger Black Pepper
+votes : [6-5-4-4-4-4-3-3-3-2-2-2-2-2-2-2-1-1-1-1-1-1-1-1-1]
+Mediane : 2.000000
+
+Candidat : Q01->2 - Burger Sud-Ouest
+votes : [6-6-5-5-5-5-4-4-3-3-3-3-3-2-2-2-2-2-1-1-1-1-1-1-1]
+Mediane : 3.000000
+
+Candidat : Q01->3 - Thai Burger
+votes : [6-6-6-6-6-5-5-5-4-4-4-4-4-3-3-3-3-3-2-2-2-2-2-2-1]
+Mediane : 4.000000
+
+Candidat : Q01->4 - Veggie Burger
+votes : [6-6-6-6-6-6-5-5-5-5-5-4-4-4-4-4-4-3-3-3-3-3-2-1-1]
+Mediane : 4.000000
+
+Candidat : Q01->5 - Fire cracker
+votes : [6-6-5-4-4-4-4-3-3-3-3-3-3-2-2-2-2-2-2-2-2-1-1-1-1]
+Mediane : 3.000000
+
+Candidat : Q01->6 - Roma
+votes : [10-4-4-4-4-3-3-3-3-3-3-3-3-2-2-2-2-2-2-2-2-2-1-1-1]
+Mediane : 3.000000
+
+Candidat : Q01->7 - Crispy
+votes : [6-5-5-4-4-3-3-3-3-3-3-2-2-2-2-1-1-1-1-1-1-1-1-1-1]
+Mediane : 2.000000
+
+Candidat : Q01->8 - Cheese Burger
+votes : [6-4-4-3-3-3-3-3-2-2-2-2-2-2-2-1-1-1-1-1-1-1-1-1-1]
+Mediane : 2.000000
+
+Candidat : Q01->9 - Burger surprise
+votes : [10-10-10-10-10-6-6-6-6-5-5-5-4-4-4-4-4-4-3-3-2-2-2-1-1]
+Mediane : 4.000000
+
+Candidat : Q01->10 - Country
+votes : [10-6-6-6-5-4-4-4-4-4-4-3-3-3-2-2-2-2-2-2-1-1-1-1-1]
+Mediane : 3.000000
+
+Fin. Candidat majoritairement élu est : Q01->8 - Cheese Burger
