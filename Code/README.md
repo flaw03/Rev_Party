@@ -125,13 +125,7 @@ make all
 
 ## Documentation
 
-La documentation peut être générée en utilisant la commande suivante :
-
-```bash
-make doc
-```
-
-Vous pouvez consulter la documentation générée en ouvrant le fichier documentation/html/index.html dans votre navigateur web.
+Vous pouvez consulter la documentation générée en ouvrant le fichier **Documenation.pdf**.
 
 
 ## Test
